@@ -5,22 +5,8 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
-L.marker([51.5, -0.09]).on('click', function() {
+L.marker([51.5, -0.09]).on('click', function(e) {
     var newElement = document.createElement("p");
-    newElement.innerHTML = "Marker Location";
+    newElement.innerHTML = e.latlng;
     document.getElementById("poiList").appendChild(newElement);
 }).addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-    .openPopup();
-
-
-var popup = L.popup();
-
-function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
-}
-
-map.on('click', onMapClick);
