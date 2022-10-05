@@ -16,3 +16,11 @@ body {
     width: 50rem;
     padding: 1rem;
 }
+
+#poiList p:hover {
+    background-color: white;
+    background-image: url(images/x.png);
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: right;
+}
