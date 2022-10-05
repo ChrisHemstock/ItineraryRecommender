@@ -12,21 +12,19 @@ markerArray.push(
     var newElement = document.createElement("p");
     newElement.innerHTML = e.latlng;
     document.getElementById("poiList").appendChild(newElement);
-    })
+    }).addTo(map)
 )
 
 fetch("nodes.json")
     .then(response => response.json())
     .then(data => {
-        data.features.forEach(element => {
-            L.marker(element.geometry.coordinates).on('click', function(e) {
+        console.log(data)
+        data.elements.forEach(element => {
+            L.marker([element.lat, element.lon]).on('click', function(e) {
                 var newElement = document.createElement("p");
                 newElement.innerHTML = e.latlng;
                 document.getElementById("poiList").appendChild(newElement);
-                })
+                }).addTo(map)
         });
+        
     })
-
-for(let i=0; i<markerArray.length; i++) {
-    markerArray[i].addTo(map)
-}
