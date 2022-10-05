@@ -14,15 +14,9 @@ fetch("nodes.json")
             L.marker([element.lat, element.lon]).on('click', function(e) {
                 let newElement = document.createElement("p");
                 newElement.innerHTML = element.tags.name;
-                newElement.onclick = remove(this)
                 document.getElementById("poiList").appendChild(newElement);
                 }).addTo(map)
         });
         
     })
 //https://www.w3schools.com/howto/howto_js_close_list_items.asp
-
-    function remove(el) {
-        var element = el;
-        element.remove();
-      }

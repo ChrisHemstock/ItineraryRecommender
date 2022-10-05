@@ -18,7 +18,7 @@ body {
 }
 
 #poiList p:hover {
-    background-color: white;
+    background-color: rgb(191, 227, 239);
     background-image: url(images/x.png);
     background-size:contain;
     background-repeat: no-repeat;
