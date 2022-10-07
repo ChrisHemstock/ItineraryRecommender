@@ -1,7 +1,7 @@
 body {
     text-align: center;
 }
-#poiList {
+#poi {
     display: inline-block;
     height: 30rem;
     width: 20rem;
@@ -10,17 +10,39 @@ body {
     padding: 1rem;
     overflow-y: auto;
 }
+
+ul {
+    padding-left: 0rem;
+    padding-right: 0rem;
+    list-style-type: none;
+    display: block;
+    position: relative;
+}
+
+li {
+    margin-bottom: .5rem;
+    font-size: 1rem;
+    padding: .5rem;
+}
+
+.close {
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    font-family: sans-serif;
+}
+
+.close:hover {
+    color: red;
+}
+
+li:hover {
+    background-color: rgb(191, 227, 239);
+}
+
 #map {
     display: inline-block;
     height: 30rem;
     width: 50rem;
     padding: 1rem;
-}
-
-#poiList p:hover {
-    background-color: rgb(191, 227, 239);
-    background-image: url(images/x.png);
-    background-size:contain;
-    background-repeat: no-repeat;
-    background-position: right;
 }
