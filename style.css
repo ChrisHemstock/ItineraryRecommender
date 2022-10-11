@@ -20,9 +20,14 @@ ul {
 }
 
 li {
+    cursor: pointer;
     margin-bottom: .5rem;
     font-size: 1rem;
     padding: .5rem;
+}
+
+.dragging {
+    color: gray;
 }
 
 li a {
