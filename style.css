@@ -20,6 +20,10 @@ ul {
     position: relative;
 }
 
+ul.iteneraryDay {
+    background-color: aqua;
+}
+
 li {
     cursor: pointer;
     margin-bottom: .5rem;
@@ -56,7 +60,7 @@ li a:hover {
     color: red;
 }
 
-#poiList li:hover {
+.iteneraryDay li:hover {
     background-color: rgb(191, 227, 239);
 }
 
