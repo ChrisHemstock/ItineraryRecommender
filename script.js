@@ -6,38 +6,13 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
-
 fetch("nodes.json")
     .then(response => response.json())
     .then(data => {
         data.elements.forEach(element => {
             L.marker([element.lat, element.lon]).on('click', function(e) {
-                //only adds list element if an element with that id doesn't exist
-                if(!document.getElementById(element.id)) {
-                    //adds a list element to the side
-                    var html = '<li id="' + element.id + '" class="draggable" draggable="true">' + element.tags.name + '<span class="close">X</span></li>';
-                    document.getElementById('poiList').insertAdjacentHTML('beforeend', html);
-
-                    let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
-                    newElement.addEventListener('dragstart', () => {
-                        console.log("1")
-                        newElement.classList.add('dragging')
-                    })
-                
-                    newElement.addEventListener('dragend', () => {
-                        console.log("2")
-                        newElement.classList.remove('dragging')
-                    })
-
-
-                    //allows buttons to be closed
-                    let closebtns = document.getElementsByClassName("close");
-                    for (let i = 0; i < closebtns.length; i++) {
-                        closebtns[i].addEventListener("click", function() {
-                            this.parentElement.remove()
-                        });
-                    }
-                }
+                //adds an event to the last day on the itinerary
+                addEvent(element)
             }).bindPopup(element.tags.name).on('mouseover', function (e) {
                 this.openPopup();
             }).on('mouseout', function (e) {
@@ -47,22 +22,18 @@ fetch("nodes.json")
         
     })
 
-const containers = document.querySelectorAll('#poiList')
-
-containers.forEach(container => {
+function containerEvent(container) {
     container.addEventListener('dragover', e => {
         e.preventDefault()
         const afterElement = getDragAfterElement(container, e.clientY)
         const draggable = document.querySelector('.dragging')
         if (afterElement == null) {
-            console.log("3")
             container.appendChild(draggable)
         } else {
-            console.log("4")
             container.insertBefore(draggable, afterElement)
         }
     })
-})
+}
 
 function getDragAfterElement(container, y) {
     const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
@@ -77,4 +48,43 @@ function getDragAfterElement(container, y) {
             return closest
         }
     }, {offset: Number.NEGATIVE_INFINITY}).element
+}
+
+function addDay() {
+    var html = '<ul class="itineraryDay"><li><label>day <input type="date" id="defaultDay" /></label></li></ul>'
+    let day = document.getElementById('poi')
+    day.insertAdjacentHTML('beforeend', html);
+
+    //document.getElementById("poi").innerHTML += '<ul class="itineraryDay"><li>day</li></ul>'
+    let container = [...document.querySelectorAll('.itineraryDay')].pop()
+    containerEvent(container)
+}
+
+function addEvent(element) {
+    if ([...document.querySelectorAll('.itineraryDay')].length > 0) {
+    // if(!document.getElementById(element.id)) {
+    //     let html = '<li id="' + element.id + '" class="draggable" draggable="true">' + element.tags.name + '<span class="close">X</span></li>';
+        let html = '<li class="draggable" draggable="true">' + element.tags.name + '<span class="close">X</span></li>';
+        let day = [...document.querySelectorAll('.itineraryDay')].pop()
+        day.insertAdjacentHTML('beforeend', html);
+
+        let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
+        newElement.addEventListener('dragstart', () => {
+            newElement.classList.add('dragging')
+        })
+    
+        newElement.addEventListener('dragend', () => {
+            newElement.classList.remove('dragging')
+        })
+
+
+        //allows buttons to be closed
+        let closebtns = document.getElementsByClassName("close");
+        for (let i = 0; i < closebtns.length; i++) {
+            closebtns[i].addEventListener("click", function() {
+                this.parentElement.remove()
+            });
+        }
+    // }
+    }
 }
