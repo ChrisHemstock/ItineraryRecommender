@@ -2,7 +2,7 @@ body {
     text-align: center;
 }
 #poi {
-    display: inline-block;
+    display: block;
     height: 30rem;
     width: 20rem;
     background-color: lightblue;
@@ -10,6 +10,20 @@ body {
     padding: 1rem;
     overflow-y: auto;
     border-radius: 5px;
+}
+
+#itenerary {
+    display: inline-block;
+}
+
+#itenerary > input{
+    height: 3rem;
+    width: 22rem;
+    background-color: rgb(131, 181, 197);
+    border-style: none;
+    border-radius: 5px;
+    margin-top: .25rem;
+    font-weight: 800;
 }
 
 ul {
@@ -67,8 +81,7 @@ li a:hover {
 
 #map {
     display: inline-block;
-    height: 30rem;
+    height: 34rem;
     width: 50rem;
-    padding: 1rem;
+    padding: 0rem;
 }
-
