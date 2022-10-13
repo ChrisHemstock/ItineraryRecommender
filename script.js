@@ -6,8 +6,6 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
-containerEvent([...document.querySelectorAll('.iteneraryDay')].pop())
-
 fetch("nodes.json")
     .then(response => response.json())
     .then(data => {
@@ -30,10 +28,8 @@ function containerEvent(container) {
         const afterElement = getDragAfterElement(container, e.clientY)
         const draggable = document.querySelector('.dragging')
         if (afterElement == null) {
-            console.log("3")
             container.appendChild(draggable)
         } else {
-            console.log("4")
             container.insertBefore(draggable, afterElement)
         }
     })
@@ -55,7 +51,7 @@ function getDragAfterElement(container, y) {
 }
 
 function addDay() {
-    var html = '<ul class="iteneraryDay"><li>day<input type="date" /></li></ul>'
+    var html = '<ul class="iteneraryDay"><li><label>day <input type="date" id="defaultDay" /></label></li></ul>'
     let day = document.getElementById('poi')
     day.insertAdjacentHTML('beforeend', html);
 
@@ -65,6 +61,7 @@ function addDay() {
 }
 
 function addEvent(element) {
+    if ([...document.querySelectorAll('.iteneraryDay')].length > 0) {
     // if(!document.getElementById(element.id)) {
     //     let html = '<li id="' + element.id + '" class="draggable" draggable="true">' + element.tags.name + '<span class="close">X</span></li>';
         let html = '<li class="draggable" draggable="true">' + element.tags.name + '<span class="close">X</span></li>';
@@ -73,12 +70,10 @@ function addEvent(element) {
 
         let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
         newElement.addEventListener('dragstart', () => {
-            console.log("1")
             newElement.classList.add('dragging')
         })
     
         newElement.addEventListener('dragend', () => {
-            console.log("2")
             newElement.classList.remove('dragging')
         })
 
@@ -91,4 +86,5 @@ function addEvent(element) {
             });
         }
     // }
+    }
 }

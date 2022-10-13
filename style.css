@@ -20,8 +20,9 @@ ul {
     position: relative;
 }
 
-ul.iteneraryDay {
-    background-color: aqua;
+ul.iteneraryDay li:first-child{
+    text-align: center;
+    border-bottom: .25rem solid black;
 }
 
 li {
