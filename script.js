@@ -11,7 +11,7 @@ fetch("nodes.json")
     .then(data => {
         data.elements.forEach(element => {
             L.marker([element.lat, element.lon]).on('click', function(e) {
-                //adds an event to the last day on the itenerary
+                //adds an event to the last day on the itinerary
                 addEvent(element)
             }).bindPopup(element.tags.name).on('mouseover', function (e) {
                 this.openPopup();
@@ -51,21 +51,21 @@ function getDragAfterElement(container, y) {
 }
 
 function addDay() {
-    var html = '<ul class="iteneraryDay"><li><label>day <input type="date" id="defaultDay" /></label></li></ul>'
+    var html = '<ul class="itineraryDay"><li><label>day <input type="date" id="defaultDay" /></label></li></ul>'
     let day = document.getElementById('poi')
     day.insertAdjacentHTML('beforeend', html);
 
-    //document.getElementById("poi").innerHTML += '<ul class="iteneraryDay"><li>day</li></ul>'
-    let container = [...document.querySelectorAll('.iteneraryDay')].pop()
+    //document.getElementById("poi").innerHTML += '<ul class="itineraryDay"><li>day</li></ul>'
+    let container = [...document.querySelectorAll('.itineraryDay')].pop()
     containerEvent(container)
 }
 
 function addEvent(element) {
-    if ([...document.querySelectorAll('.iteneraryDay')].length > 0) {
+    if ([...document.querySelectorAll('.itineraryDay')].length > 0) {
     // if(!document.getElementById(element.id)) {
     //     let html = '<li id="' + element.id + '" class="draggable" draggable="true">' + element.tags.name + '<span class="close">X</span></li>';
         let html = '<li class="draggable" draggable="true">' + element.tags.name + '<span class="close">X</span></li>';
-        let day = [...document.querySelectorAll('.iteneraryDay')].pop()
+        let day = [...document.querySelectorAll('.itineraryDay')].pop()
         day.insertAdjacentHTML('beforeend', html);
 
         let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()

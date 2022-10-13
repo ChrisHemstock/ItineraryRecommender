@@ -12,11 +12,11 @@ body {
     border-radius: 5px;
 }
 
-#itenerary {
+#itinerary {
     display: inline-block;
 }
 
-#itenerary > input{
+#itinerary > input{
     height: 3rem;
     width: 22rem;
     background-color: rgb(131, 181, 197);
@@ -34,7 +34,7 @@ ul {
     position: relative;
 }
 
-ul.iteneraryDay li:first-child{
+ul.itineraryDay li:first-child{
     text-align: center;
     border-bottom: .25rem solid black;
 }
@@ -75,7 +75,7 @@ li a:hover {
     color: red;
 }
 
-.iteneraryDay li:hover {
+.itineraryDay li:hover {
     background-color: rgb(191, 227, 239);
 }
 
