@@ -51,7 +51,7 @@ function getDragAfterElement(container, y) {
 }
 
 function addDay() {
-    var html = '<ul class="itineraryDay"><li><label>Day <input type="date" class="day" value="' + getDate() + '"/></label></li></ul>'
+    let html = '<ul class="itineraryDay"><li><label>Day <input type="date" class="day" value="' + getDate() + '"/></label></li></ul>'
     let day = document.getElementById('poi')
     day.insertAdjacentHTML('beforeend', html);
 
@@ -60,11 +60,13 @@ function addDay() {
 
     function getDate() {
         let days = [...document.querySelectorAll('.day')]
+        console.log(days)
         if(days.length == 0) {
             let date = new Date()
             return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0')
         } else {
-            let day = days.pop().getAttribute('value').split('-')
+            let day = days.pop().value.split('-')
+            console.log(day)
             let date = new Date(day[0], day[1] - 1, day[2])
             date.setDate(date.getDate() + 1)
             return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0')
