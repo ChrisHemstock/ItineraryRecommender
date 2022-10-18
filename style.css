@@ -4,7 +4,7 @@ body {
 #poi {
     display: block;
     height: 30rem;
-    width: 40rem;
+    width: 42.5rem;
     background-color: lightblue;
     text-align: left;
     padding: 1rem;
@@ -24,6 +24,10 @@ body {
     border-radius: 5px;
     margin-top: .25rem;
     font-weight: 800;
+}
+
+#itinerary > input:hover {
+    background-color: lightblue;
 }
 
 ul {
