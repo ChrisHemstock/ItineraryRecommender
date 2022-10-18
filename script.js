@@ -51,19 +51,34 @@ function getDragAfterElement(container, y) {
 }
 
 function addDay() {
-    var html = '<ul class="itineraryDay"><li><label>Day <input type="date" id="defaultDay" /></label></li></ul>'
+    var html = '<ul class="itineraryDay"><li><label>Day <input type="date" class="day" value="' + getDate() + '"/></label></li></ul>'
     let day = document.getElementById('poi')
     day.insertAdjacentHTML('beforeend', html);
 
     let container = [...document.querySelectorAll('.itineraryDay')].pop()
     containerEvent(container)
+
+    function getDate() {
+        let days = [...document.querySelectorAll('.day')]
+        if(days.length == 0) {
+            let date = new Date()
+            return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0')
+        } else {
+            let day = days.pop().getAttribute('value').split('-')
+            let date = new Date(day[0], day[1] - 1, day[2])
+            date.setDate(date.getDate() + 1)
+            return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0')
+        }
+    }
 }
 
 function addEvent(element) {
     if ([...document.querySelectorAll('.itineraryDay')].length > 0) {
     // if(!document.getElementById(element.id)) {
     //     let html = '<li id="' + element.id + '" class="draggable" draggable="true">' + element.tags.name + '<span class="close">X</span></li>';
-        let html = '<li class="draggable" draggable="true">' + element.tags.name + '<span class="time"><input type="time" class="startEvent" title="Start Time"/><input type="time" class="endEvent" title="End Time"/></span><span class="close">X</span></li>';
+        let html = '<li class="draggable" draggable="true">' + element.tags.name + 
+                    '<span class="time"><input type="time" class="startEvent" title="Start Time"/><input type="time" class="endEvent" title="End Time"/></span>' +
+                    '<span class="close">X</span></li>';
         let day = [...document.querySelectorAll('.itineraryDay')].pop()
         day.insertAdjacentHTML('beforeend', html);
 
