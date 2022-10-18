@@ -2,6 +2,17 @@ body {
     text-align: center;
 }
 
+.close {
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    font-family: sans-serif;
+}
+
+.close:hover {
+    color: red;
+}
+
 /* Home Bar styles */
 li.homeBar {
     display: inline;
@@ -86,20 +97,49 @@ li.dragging {
     color: gray;
 }
 
-.close {
-    cursor: pointer;
-    position: absolute;
-    right: 1rem;
-    font-family: sans-serif;
-}
-
-.close:hover {
-    color: red;
-}
-
 .time {
     position:sticky;
     float: right;
     margin-right: 2rem;
+}
+
+/* trips.html styles */
+#trips {
+    display: inline-block;
+    height: 30rem;
+    width: 50rem;
+    background-color: lightblue;
+    text-align: center;
+    padding: 1rem;
+    overflow-y: auto;
+    border-radius: 5px;
     
+}
+
+#trips ul {
+    text-align: left;
+    list-style : none;
+    width: 47rem;
+    position: relative;
+}
+
+#trips li {
+    margin-bottom: .5rem;
+    font-size: 1rem;
+    padding: .5rem;
+}
+
+#trips li:hover {
+    background-color: rgb(191, 227, 239);
+}
+
+#trips a {
+    text-decoration: none;
+    color: black;
+}
+
+#trips .dates {
+    position:sticky;
+    float: right;
+    margin-right: 5rem;
 }
