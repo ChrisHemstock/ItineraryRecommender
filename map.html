@@ -23,11 +23,12 @@
       <li class="homeBar"><a href="trips.html">Trips</a></li>
       <li class="homeBar"><a href="map.html">Current Trip</a></li>
       <li class="homeBar"><a href="account.php">Account</a></li>
+      <li class="homeBar"><a onclick="loadItinerary()">TEMPERARY LOAD</a></li>
     </ul>
     <div id="itinerary">
       <div id="poi"></div>
       <input type="button" value="Add Day" onclick="addDay()" />
-      <input type="submit" value="Save" />
+      <input type="submit" value="Save" onclick="createItineraryJson()" />
     </div>
     <div id="map"></div>
     <script src="script.js" defer></script>
