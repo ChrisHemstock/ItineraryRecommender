@@ -37,24 +37,6 @@ li.homeBar a:hover {
     display: inline-block;
 }
 
-#poi {
-    display: block;
-    height: 30rem;
-    width: 42.5rem;
-    background-color: lightblue;
-    text-align: left;
-    padding: 1rem;
-    overflow-y: auto;
-    border-radius: 5px;
-}
-
-#map {
-    display: inline-block;
-    height: 34rem;
-    width: 50rem;
-    padding: 0rem;
-}
-
 #itinerary > input{
     height: 3rem;
     width: 22rem;
@@ -69,27 +51,29 @@ li.homeBar a:hover {
     background-color: lightblue;
 }
 
-ul.itineraryDay {
-    padding-left: 0rem;
-    padding-right: 0rem;
-    list-style-type: none;
+ul#poi {
     display: block;
+    height: 30rem;
+    width: 42.5rem;
+    background-color: lightblue;
+    text-align: left;
+    padding: 1rem;
+    overflow-y: auto;
+    border-radius: 5px;
+    list-style: none;
+    padding-right: 0rem;
     position: relative;
+    margin-bottom: 0rem;
 }
 
-ul.itineraryDay li:first-child{
-    text-align: center;
-    border-bottom: .25rem solid black;
-}
-
-ul.itineraryDay li {
+ul#poi li {
     cursor: pointer;
     margin-bottom: .5rem;
     font-size: 1rem;
     padding: .5rem;
 }
 
-ul.itineraryDay li:hover {
+ul#poi li:hover {
     background-color: rgb(191, 227, 239);
 }
 
@@ -101,6 +85,13 @@ li.dragging {
     position:sticky;
     float: right;
     margin-right: 2rem;
+}
+
+#map {
+    display: inline-block;
+    height: 34rem;
+    width: 50rem;
+    padding: 0rem;
 }
 
 /* trips.html styles */
