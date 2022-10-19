@@ -61,23 +61,26 @@ function addEvent(element) {
         poi.insertAdjacentHTML('beforeend', html);
 
         let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
-        newElement.addEventListener('dragstart', () => {
-            newElement.classList.add('dragging')
-        })
-    
-        newElement.addEventListener('dragend', () => {
-            newElement.classList.remove('dragging')
-        })
-
-
-        //allows buttons to be closed
-        let closebtns = document.getElementsByClassName("close");
-        for (let i = 0; i < closebtns.length; i++) {
-            closebtns[i].addEventListener("click", function() {
-                this.parentElement.remove()
-            });
-        }
+        addEventEventListeners(newElement)
     // }
+}
+
+function addEventEventListeners(element) {
+    element.addEventListener('dragstart', () => {
+        element.classList.add('dragging')
+    })
+    
+    element.addEventListener('dragend', () => {
+        element.classList.remove('dragging')
+    })
+
+    //allows buttons to be closed
+    let closebtns = document.getElementsByClassName("close");
+    for (let i = 0; i < closebtns.length; i++) {
+        closebtns[i].addEventListener("click", function() {
+            this.parentElement.remove()
+        });
+    }
 }
 
 function createItineraryJson() {
@@ -103,21 +106,7 @@ function loadItinerary() {
             document.getElementById('poi').insertAdjacentHTML('beforeend', html);
     
             let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
-            newElement.addEventListener('dragstart', () => {
-                newElement.classList.add('dragging')
-            })
-        
-            newElement.addEventListener('dragend', () => {
-                newElement.classList.remove('dragging')
-            })
-    
-            //allows buttons to be closed
-            let closebtns = document.getElementsByClassName("close");
-            for (let i = 0; i < closebtns.length; i++) {
-                closebtns[i].addEventListener("click", function() {
-                    this.parentElement.remove()
-                });
-            }
+            addEventEventListeners(newElement)
         });
     });
 }
