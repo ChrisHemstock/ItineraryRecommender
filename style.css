@@ -1,6 +1,7 @@
 body {
     text-align: center;
 }
+<<<<<<< HEAD
 #poi {
     display: inline-block;
     height: 30rem;
@@ -41,6 +42,8 @@ li a {
   li a:hover {
     background-color: #111;
   }
+=======
+>>>>>>> 8dc8a6940bf5cf721d95edb878267bbfac2786bf
 
 .close {
     cursor: pointer;
@@ -53,14 +56,133 @@ li a {
     color: red;
 }
 
-li:hover {
+/* Home Bar styles */
+li.homeBar {
+    display: inline;
+}
+
+li.homeBar a {
+    display: inline-block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: black;
+    background-color: lightblue;
+    border-radius: 5px;
+  }
+
+li.homeBar a:hover {
     background-color: rgb(191, 227, 239);
+}
+
+/* map.html styles */
+#itinerary {
+    display: inline-block;
+}
+
+#poi {
+    display: block;
+    height: 30rem;
+    width: 42.5rem;
+    background-color: lightblue;
+    text-align: left;
+    padding: 1rem;
+    overflow-y: auto;
+    border-radius: 5px;
 }
 
 #map {
     display: inline-block;
-    height: 30rem;
+    height: 34rem;
     width: 50rem;
-    padding: 1rem;
+    padding: 0rem;
 }
 
+#itinerary > input{
+    height: 3rem;
+    width: 22rem;
+    background-color: rgb(131, 181, 197);
+    border-style: none;
+    border-radius: 5px;
+    margin-top: .25rem;
+    font-weight: 800;
+}
+
+#itinerary > input:hover {
+    background-color: lightblue;
+}
+
+ul.itineraryDay {
+    padding-left: 0rem;
+    padding-right: 0rem;
+    list-style-type: none;
+    display: block;
+    position: relative;
+}
+
+ul.itineraryDay li:first-child{
+    text-align: center;
+    border-bottom: .25rem solid black;
+}
+
+ul.itineraryDay li {
+    cursor: pointer;
+    margin-bottom: .5rem;
+    font-size: 1rem;
+    padding: .5rem;
+}
+
+ul.itineraryDay li:hover {
+    background-color: rgb(191, 227, 239);
+}
+
+li.dragging {
+    color: gray;
+}
+
+.time {
+    position:sticky;
+    float: right;
+    margin-right: 2rem;
+}
+
+/* trips.html styles */
+#trips {
+    display: inline-block;
+    height: 30rem;
+    width: 50rem;
+    background-color: lightblue;
+    text-align: center;
+    padding: 1rem;
+    overflow-y: auto;
+    border-radius: 5px;
+    
+}
+
+#trips ul {
+    text-align: left;
+    list-style : none;
+    width: 47rem;
+    position: relative;
+}
+
+#trips li {
+    margin-bottom: .5rem;
+    font-size: 1rem;
+    padding: .5rem;
+}
+
+#trips li:hover {
+    background-color: rgb(191, 227, 239);
+}
+
+#trips a {
+    text-decoration: none;
+    color: black;
+}
+
+#trips .dates {
+    position:sticky;
+    float: right;
+    margin-right: 5rem;
+}

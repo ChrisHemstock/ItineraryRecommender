@@ -1,57 +1,35 @@
 <?php
+    //connect to mysql db
+    require_once "dbconnect.php";
 
-// overpass query
+    //read the json file contents
 
-// collecting results in JSON format
+    $jsondata = file_get_contents('poiData.json');
+    
+    //convert json object to php associative array
+    $data = json_decode($jsondata, true);
 
-// "true" to get PHP array instead of an object
-$amenity = $_POST["amenity"];
-$overpass = "http://overpass-api.de/api/interpreter?data=[out:json];area(3600046663)->.searchArea;(node['amenity'=$amenity](area.searchArea););out;";
-$html = file_get_contents($overpass);
-$result = json_decode($html, true); 
-
-// elements key contains the array of all required elements
-$data = $result['elements'];
-echo $html;
-
-foreach($data as $key => $row) {
-
-    // latitude
-    $lat = $row['lat'];
-
-    // longitude
-    $lng = $row['lon'];
-}
-
-
-
+    foreach ($data["businesses"] as $row) {
+    //get the POI details
+    $name = $row['name'];
+    $Category = $row['categories'][0]['alias'];
+    $rating = $row['rating'];
+    $num_ratings = $row['review_count'];
+    $address = $row['location']['display_address'][0];
+    $Lng = $row['coordinates']['longitude'];
+    $Lat = $row['coordinates']['latitude'];
+    $phone = $row['phone'];
+    echo $Lng;
+    //insert into mysql table
+    $sql = "INSERT INTO POIs(name, Category, rating, num_ratings, address, Lng, Lat, phone)
+    VALUES('$name', '$Category', '$rating', '$num_ratings', '$address', '$Lng', '$Lat', '$phone')";
+    if ($link->query($sql) === TRUE) {
+        echo "New record created successfully";
+      } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+      }
+    }
+ 
+    
+      
 ?>
-
-<!doctype html>
-    
-<html lang="en">
-
-<form action="TestRequest.php" method="post">
-    
-    <div class="form-group"> 
-        <label for="amenity">Amenity</label> 
-    <input type="text" class="form-control" id="amenity"
-        name="amenity" >    
-    </div>
-
-    <button type="submit" class="btn btn-primary">
-        Submit
-    </button> 
-
-    
-</form> 
-
-
-<?php 
-
-echo $lat;
-echo $lng;
-?>
-
-</html>
-
