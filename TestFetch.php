@@ -7,16 +7,16 @@ $results= $link->query('SELECT * FROM POIs;')->fetch_all();
 
 $data = array();
 foreach ($results as $row) {
-    $id = $row[0];
-    $timestamp = $row[1];
-    $name = $row[2];
-    $description = $row[3];
-    $description = $row[4];
-    $description = $row[5];
-    $description = $row[6];
-    $description = $row[7];
-    $description = $row[8];
-    $data[] = array($id, $timestamp, $name, $description);
+    $Lat = $row[0];
+    $Lng = $row[1];
+    $Category = $row[2];
+    $id = $row[3];
+    $address = $row[4];
+    $phone = $row;
+    $name = $row;
+    $rating = $row[7];
+    $num_ratings = $row[8];
+    $data[] = array($Lat, $Lng, $Category, $id, $address, $phone, $name, $rating, $num_ratings);
 }
  $json = json_encode(array("data" => $data));
 

@@ -4,14 +4,6 @@
 
     //read the json file contents
 
-
-    $someJSON = '[{"name":"Jonathan Suh","gender":"male"},{"name":"William Philbin","gender":"male"},{"name":"Allison McKinnery","gender":"female"}]';
-
-  // Convert JSON string to Array
-  //$someArray = json_decode($someJSON, true);
-  //print_r($someArray);        // Dump all data of the Array
-  //echo $someArray[0]["name"]; // Access Array data
-
     $jsondata = file_get_contents('poiData.json');
     
     //convert json object to php associative array
@@ -27,7 +19,7 @@
     $Lng = $row['coordinates']['longitude'];
     $Lat = $row['coordinates']['latitude'];
     $phone = $row['phone'];
-    //$price = $row['price'];
+    echo $Lng;
     //insert into mysql table
     $sql = "INSERT INTO POIs(name, Category, rating, num_ratings, address, Lng, Lat, phone)
     VALUES('$name', '$Category', '$rating', '$num_ratings', '$address', '$Lng', '$Lat', '$phone')";
