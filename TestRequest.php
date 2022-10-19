@@ -47,7 +47,7 @@ foreach($data as $key => $row) {
 </form> 
 
 
-<?php
+<?php 
 
 echo $lat;
 echo $lng;

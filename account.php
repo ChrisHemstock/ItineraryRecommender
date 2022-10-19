@@ -22,10 +22,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       <li style = "display: inline;"><a href="map.html">Current Trip</a></li>
       <li style = "display: inline;"><a href="account.php">Account</a></li>
     </ul>
-    <h3>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Here is where you will find account information and settings.</h3>
+    <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Here is where you will find account information and settings.</h1>
     <p>
-    <li style = "display: inline;"><a href="reset-password.php" class="btn btn-warning">Reset Your Password</a></li>
-    <li style = "display: inline;"><a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a></li>
+        <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
+        <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
     </p>
 </body>
 </html>
