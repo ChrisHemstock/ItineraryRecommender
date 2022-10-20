@@ -40,6 +40,7 @@ foreach ($results as $row) {
       integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s="
       crossorigin=""
     ></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <title>Trip Recommender</title>
     <script>
         var data ='<?php echo $json; ?>';
@@ -58,7 +59,7 @@ foreach ($results as $row) {
       <input type="submit" value="Save" onclick="createItineraryJson()" />
     </div>
     <div id="map"></div>
-    <script src="script.js" defer></script>
+    <script src="script.js" defer>
+    </script>
   </body>
 </html>
-
