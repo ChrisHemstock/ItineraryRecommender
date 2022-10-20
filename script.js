@@ -74,7 +74,6 @@ function addEvent(element) {
         let timeArray = time.split(':')
         timeArray[0] = Number(timeArray[0])
         timeArray[1] = Number(timeArray[1]) + minutesAdded
-        console.log(timeArray)
         while(timeArray[1] >= 60) {
             timeArray[1] = timeArray[1] - 60;
             timeArray[0] += 1;
@@ -121,7 +120,7 @@ function loadItinerary() {
     .then(response => response.json())
     .then(data => {
         data.pois.forEach(poi => {
-            let html = '<li class="draggable" draggable="true" class="' + element[3] + '">' + poi.poiName + 
+            let html = '<li class="draggable" draggable="true" class="' + poi.poiId + '">' + poi.poiName + 
                         '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + poi.startTime + '"/><input type="time" class="endEvent" title="End Time" value="' + poi.endTime + '"/></span>' +
                         '<span class="close">X</span></li>';
             document.getElementById('poi').insertAdjacentHTML('beforeend', html);
