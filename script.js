@@ -51,7 +51,7 @@ function addEvent(element) {
     // if(!document.getElementById(element.id)) {
     //     let html = '<li id="' + element.id + '" class="draggable" draggable="true">' + element.tags.name + '<span class="close">X</span></li>';
         
-        let html = '<li class="draggable" draggable="true">' + element[6] + 
+        let html = '<li class="draggable ' + element[3] + '" draggable="true">' + element[6] + 
                     '<span class="time"><input type="time" class="startEvent" title="Start Time" value="'+ getStartTime() + 
                     '"/><input type="time" class="endEvent" title="End Time" value="' + incrementTime(getStartTime(), 30) + '"/></span>' +
                     '<span class="close">X</span></li>';
@@ -105,21 +105,15 @@ function addEventEventListeners(element) {
 }
 
 function createItineraryJson() {
-    let dayString = `{ "userId": ${1}, "tripId": ${1}, "tripName": "${"this is a trip name"}", "pois": [`
+
+    let dayString = `{ "userId": ${1}, "tripId": ${1}, "tripName": "${document.getElementById('name').value.replace(/[^a-zA-Z0-9 ]/g, "")}", "pois": [`
     let pois = [...document.getElementsByClassName('draggable')];
     pois.forEach(poi => {
-        dayString += `{"poiId": ${1},"poiName": "${poi.textContent.slice(0, -1)}","startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
+        dayString += `{"poiId": ${poi.className.split(' ')[1]},"poiName": "${poi.textContent.slice(0, -1)}","startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
     });
     dayString = dayString.slice(0, -1)
     dayString += ']}'
     console.log(dayString)
-    $.ajax({
-    url: "tripUpload.php",
-    method: "POST",
-    data: { "tripData": dayString }
-    })
-
-
 }
 
 function loadItinerary() {
@@ -127,7 +121,7 @@ function loadItinerary() {
     .then(response => response.json())
     .then(data => {
         data.pois.forEach(poi => {
-            let html = '<li class="draggable" draggable="true">' + poi.poiName + 
+            let html = '<li class="draggable" draggable="true" class="' + element[3] + '">' + poi.poiName + 
                         '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + poi.startTime + '"/><input type="time" class="endEvent" title="End Time" value="' + poi.endTime + '"/></span>' +
                         '<span class="close">X</span></li>';
             document.getElementById('poi').insertAdjacentHTML('beforeend', html);
