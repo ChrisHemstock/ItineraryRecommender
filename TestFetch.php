@@ -20,6 +20,8 @@ foreach ($results as $row) {
 
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,16 +39,11 @@ foreach ($results as $row) {
       src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"
       integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s="
       crossorigin=""
-      let data = <?php $json = json_encode(array("data" => $data)); ?>
     ></script>
     <title>Trip Recommender</title>
-
-<script>
-var data ='<?php echo $json; ?>';
-</script>
-
-</body>
-</html>
+    <script>
+        var data ='<?php echo $json; ?>';
+    </script>
   </head>
   <body>
     <ul>
@@ -56,13 +53,11 @@ var data ='<?php echo $json; ?>';
       <li class="homeBar"><a onclick="loadItinerary()">TEMPERARY LOAD</a></li>
     </ul>
     <div id="itinerary">
-      <div id="poi"></div>
-      <input type="button" value="Add Day" onclick="addDay()" />
+      <ul id="poi"></ul>
       <input type="submit" value="Save" onclick="createItineraryJson()" />
     </div>
     <div id="map"></div>
-    <script src="script.js" defer> 
-    </script>
+    <script src="script.js" defer></script>
   </body>
 </html>
 
