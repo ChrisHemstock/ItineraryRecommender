@@ -117,6 +117,12 @@ function createItineraryJson() {
     dayString = dayString.slice(0, -1)
     dayString += ']}'
     console.log(dayString)
+    $.ajax({
+    url: "tripUpload.php",
+    method: "POST",
+    data: { "tripData": dayString }
+    })
+
 
 }
 

@@ -1,49 +1,6 @@
 body {
     text-align: center;
 }
-<<<<<<< HEAD
-#poi {
-    display: inline-block;
-    height: 30rem;
-    width: 20rem;
-    background-color: lightblue;
-    text-align: left;
-    padding: 1rem;
-    overflow-y: auto;
-}
-
-ul {
-    padding-left: 0rem;
-    padding-right: 0rem;
-    list-style-type: none;
-    display: block;
-    position: relative;
-}
-
-li {
-    cursor: pointer;
-    margin-bottom: .5rem;
-    font-size: 1rem;
-    padding: .5rem;
-}
-
-.dragging {
-    color: gray;
-}
-
-li a {
-    display: block;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-  /* Change the link color to #111 (black) on hover */
-  li a:hover {
-    background-color: #111;
-  }
-=======
->>>>>>> 8dc8a6940bf5cf721d95edb878267bbfac2786bf
 
 .close {
     cursor: pointer;
