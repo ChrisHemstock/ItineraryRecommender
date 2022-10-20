@@ -2,42 +2,24 @@
     "userId": 1, 
     "tripId": 1, 
     "tripName": "this is a trip name", 
-    "days": [
+    "pois": [
         {
-            "date": {
-                "year": 2022,
-                "month": 10,
-                "day": 18
-            },
-            "pois": [
-                {
-                    "poiId": 1,
-                    "poiName": "Newfields",
-                    "startTime": "22:48",
-                    "endTime": "22:48"
-                },
-                {
-                    "poiId": 1,
-                    "poiName": "Crispus Attucks Museum",
-                    "startTime": "12:48",
-                    "endTime": "12:48"
-                }
-            ] 
+            "poiId": 1,
+            "poiName": "Newfields",
+            "startTime": "20:28",
+            "endTime": "21:28"
         },
         {
-            "date": {
-                "year": 2022,
-                "month": 10,
-                "day": 19
-            },
-            "pois": [
-                {
-                    "poiId": 1,
-                    "poiName": "Indianapolis Fire Fighters Museum",
-                    "startTime": "14:48",
-                    "endTime": "14:48"
-                }
-            ] 
+            "poiId": 1,
+            "poiName": "Crispus Attucks Museum",
+            "startTime": "22:28",
+            "endTime": "23:28"
+        },
+        {
+            "poiId": 1,
+            "poiName": "Indianapolis Fire Fighters Museum",
+            "startTime": "12:28",
+            "endTime": "13:28"
         }
     ] 
 }
