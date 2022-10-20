@@ -33,8 +33,19 @@ li.homeBar a:hover {
 }
 
 /* map.html styles */
+#itineraryName {
+    display:block;
+}
+
+#itineraryName > input#name{
+    height: 2rem;
+    width: 20rem;
+    text-align: center;
+}
+
 #itinerary {
     display: inline-block;
+    margin-bottom: 2rem;
 }
 
 #itinerary > input{

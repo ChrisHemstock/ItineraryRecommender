@@ -53,6 +53,7 @@ foreach ($results as $row) {
       <li class="homeBar"><a href="account.php">Account</a></li>
       <li class="homeBar"><a onclick="loadItinerary()">TEMPERARY LOAD</a></li>
     </ul>
+    <label id="itineraryName"><input type="text" title="name" placeholder="Trip Name" id="name"></label>
     <div id="itinerary">
       <ul id="poi"></ul>
       <input type="submit" value="Save" onclick="createItineraryJson()" />

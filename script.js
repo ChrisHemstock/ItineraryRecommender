@@ -6,22 +6,18 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 containerEvent(document.getElementById('poi'))
+let json = JSON.parse(data)
+json.data.forEach(poi => {
+    L.marker([poi[0], poi[1]]).on('click', function(e) {
+        //adds an event to the last day on the itinerary
+        addEvent(poi)
+    }).bindPopup(poi[6]).on('mouseover', function (e) {
+        this.openPopup();
+    }).on('mouseout', function (e) {
+        this.closePopup();
+    }).addTo(map)
+});
 
-fetch("nodes.json")
-    .then(response => response.json())
-    .then(data => {
-        data.elements.forEach(element => {
-            L.marker([element.lat, element.lon]).on('click', function(e) {
-                //adds an event to the last day on the itinerary
-                addEvent(element)
-            }).bindPopup(element.tags.name).on('mouseover', function (e) {
-                this.openPopup();
-            }).on('mouseout', function (e) {
-                this.closePopup();
-            }).addTo(map)
-        });
-        
-    })
 
 function containerEvent(container) {
     container.addEventListener('dragover', e => {
@@ -55,7 +51,7 @@ function addEvent(element) {
     // if(!document.getElementById(element.id)) {
     //     let html = '<li id="' + element.id + '" class="draggable" draggable="true">' + element.tags.name + '<span class="close">X</span></li>';
         
-        let html = '<li class="draggable" draggable="true">' + element.tags.name + 
+        let html = '<li class="draggable ' + element[3] + '" draggable="true">' + element[6] + 
                     '<span class="time"><input type="time" class="startEvent" title="Start Time" value="'+ getStartTime() + 
                     '"/><input type="time" class="endEvent" title="End Time" value="' + incrementTime(getStartTime(), 30) + '"/></span>' +
                     '<span class="close">X</span></li>';
@@ -109,15 +105,15 @@ function addEventEventListeners(element) {
 }
 
 function createItineraryJson() {
-    let dayString = `{ "userId": ${1}, "tripId": ${1}, "tripName": "${"this is a trip name"}", "pois": [`
+
+    let dayString = `{ "userId": ${1}, "tripId": ${1}, "tripName": "${document.getElementById('name').value.replace(/[^a-zA-Z0-9 ]/g, "")}", "pois": [`
     let pois = [...document.getElementsByClassName('draggable')];
     pois.forEach(poi => {
-        dayString += `{"poiId": ${1},"poiName": "${poi.textContent.slice(0, -1)}","startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
+        dayString += `{"poiId": ${poi.className.split(' ')[1]},"poiName": "${poi.textContent.slice(0, -1)}","startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
     });
     dayString = dayString.slice(0, -1)
     dayString += ']}'
     console.log(dayString)
-
 }
 
 function loadItinerary() {
@@ -125,7 +121,7 @@ function loadItinerary() {
     .then(response => response.json())
     .then(data => {
         data.pois.forEach(poi => {
-            let html = '<li class="draggable" draggable="true">' + poi.poiName + 
+            let html = '<li class="draggable" draggable="true" class="' + element[3] + '">' + poi.poiName + 
                         '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + poi.startTime + '"/><input type="time" class="endEvent" title="End Time" value="' + poi.endTime + '"/></span>' +
                         '<span class="close">X</span></li>';
             document.getElementById('poi').insertAdjacentHTML('beforeend', html);
