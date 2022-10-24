@@ -49,7 +49,7 @@ foreach ($results as $row) {
   <body>
     <ul>
       <li class="homeBar"><a href="trips.html">Trips</a></li>
-      <li class="homeBar"><a href="map.html">Current Trip</a></li>
+      <li class="homeBar"><a href="TestFetch.php">Current Trip</a></li>
       <li class="homeBar"><a href="account.php">Account</a></li>
       <li class="homeBar"><a onclick="loadItinerary()">TEMPERARY LOAD</a></li>
     </ul>

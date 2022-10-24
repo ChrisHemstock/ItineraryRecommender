@@ -145,3 +145,10 @@ li.dragging {
     float: right;
     margin-right: 5rem;
 }
+
+/* account.php styles */
+div#userInfo {
+    display: inline-block;
+    background-color: lightblue;
+    width: 50rem;
+}
