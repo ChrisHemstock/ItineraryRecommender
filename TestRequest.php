@@ -19,7 +19,6 @@
     $Lng = $row['coordinates']['longitude'];
     $Lat = $row['coordinates']['latitude'];
     $phone = $row['phone'];
-    echo $Lng;
     //insert into mysql table
     $sql = "INSERT INTO POIs(name, Category, rating, num_ratings, address, Lng, Lat, phone)
     VALUES('$name', '$Category', '$rating', '$num_ratings', '$address', '$Lng', '$Lat', '$phone')";
@@ -33,3 +32,4 @@
     
       
 ?>
+ 

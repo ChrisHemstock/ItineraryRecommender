@@ -51,7 +51,7 @@ function addEvent(element) {
     // if(!document.getElementById(element.id)) {
     //     let html = '<li id="' + element.id + '" class="draggable" draggable="true">' + element.tags.name + '<span class="close">X</span></li>';
         
-        let html = '<li class="draggable ' + element[3] + '" draggable="true">' + element[6] + 
+        let html = '<li class="draggable" draggable="true">' + element.tags.name + 
                     '<span class="time"><input type="time" class="startEvent" title="Start Time" value="'+ getStartTime() + 
                     '"/><input type="time" class="endEvent" title="End Time" value="' + incrementTime(getStartTime(), 30) + '"/></span>' +
                     '<span class="close">X</span></li>';
@@ -114,6 +114,9 @@ function createItineraryJson() {
     dayString = dayString.slice(0, -1)
     dayString += ']}'
     console.log(dayString)
+    document.location = 'http://localhost:8080/TripRecommender/ItineraryRecommender/TestFetch.php?tripData='+dayString;   
+
+
 }
 
 function loadItinerary() {
@@ -121,7 +124,7 @@ function loadItinerary() {
     .then(response => response.json())
     .then(data => {
         data.pois.forEach(poi => {
-            let html = '<li class="draggable" draggable="true" class="' + element[3] + '">' + poi.poiName + 
+            let html = '<li class="draggable" draggable="true">' + poi.poiName + 
                         '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + poi.startTime + '"/><input type="time" class="endEvent" title="End Time" value="' + poi.endTime + '"/></span>' +
                         '<span class="close">X</span></li>';
             document.getElementById('poi').insertAdjacentHTML('beforeend', html);

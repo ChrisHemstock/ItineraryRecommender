@@ -53,13 +53,50 @@ foreach ($results as $row) {
       <li class="homeBar"><a href="account.php">Account</a></li>
       <li class="homeBar"><a onclick="loadItinerary()">TEMPERARY LOAD</a></li>
     </ul>
-    <label id="itineraryName"><input type="text" title="name" placeholder="Trip Name" id="name"></label>
     <div id="itinerary">
       <ul id="poi"></ul>
-      <input type="submit" value="Save" onclick="createItineraryJson()" />
+      <form method = "post">
+      <input type="submit" name="createItinerary" value="Save" onclick="createItineraryJson()" />
+</form>
     </div>
     <div id="map"></div>
     <script src="script.js" defer>
     </script>
   </body>
-</html>
+</html> 
+<?php
+if(array_key_exists('createItinerary', $_POST)){
+    uploadData();
+}
+function uploadData(){
+  $tripData = $_GET['tripData'];
+  $data = json_decode($tripData, true);
+  var_dump($data);
+ 
+    foreach ($data as $row) {
+    //get the POI details
+    $userID = $row['userId'];
+    $tripID = $row['tripId'];
+    $tripName = $row['tripName'];
+    $POI_ID = $row['pois']['poiId'];
+    $POI_startTime = $row['pois']['startTime'];
+    $POI_endTime = $row['pois']['endTime'];
+ 
+    //insert into mysql table
+    $sql = "INSERT INTO trips(userID, name)
+    VALUES($userID, '$name')";
+    if ($link->query($sql) === TRUE) {
+        echo "New record created successfully";
+      } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+      }
+      $sql2 = "INSERT INTO tripPOIs(POI_ID, startTime, endTime, tripID)
+      VALUES($POI_ID, '$POI_startTime', '$POI_endTime', '$tripID')";
+      if ($link->query($sql2) === TRUE) {
+          echo "New record created successfully";
+        } else {
+          echo "Error: " . $sql2 . "<br>" . $conn->error;
+        }
+    }
+}
+?>
