@@ -1,12 +1,18 @@
 <?php
 // Initialize the session
 session_start();
+
+// Include config file
+require_once "dbconnect.php";
  
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
+
+$row = "false";
+
 ?>
  
 <!DOCTYPE html>
@@ -16,6 +22,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <title>Welcome</title>
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
 </head>
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
 <body>
     <ul style = "list-style-type: none; margin: 0; padding-bottom: 2%;">
       <li style = "display: inline;"><a href="TestFetch.php">Current Trip</a></li>
@@ -28,23 +39,18 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </p>
     <div id='userInfo'>
         <h2>General Info</h2>
-        <form action="">
-            <label for="fName">First Name</label>
-            <input type="text" name="firstName" id="fName">
-            <label for="lName">Last Name</label>
-            <input type="text" name="lastName" id="lName">
-            <br>
+        <form action="account.php" method="post">
             <label for="gender">Gender</label>
-            <select name="gender" id="gender">
-                <option value="blank"></option>
+            <select name="gender" id="gender" required>
+            <option selected disabled value=""></option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
             </select>
             <label for="age">Age</label>
-            <input type="number" name="age" id="age" min="0" max="120">
+            <input type="number" name="age" id="age" min="0" max="120" required = "true">
             <label for="race">Race</label>
-            <select name="race" id="race">
-                <option value="blank"></option>
+            <select name="race" id="race" required>
+            <option selected disabled value=""></option>
                 <option value="americanIndian/alaskaNative">American Indian or Alaska Native</option>
                 <option value="asian">Asian</option>
                 <option value="black">Black or African American</option>
@@ -56,7 +62,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             <br>
             <div id="interests">
                 <h2>Interests</h2>
-                <input type="checkbox" name="artsEntertainment" id="artsEntertainment">
+                <input type="checkbox" name="artsEntertainment" id="artsEntertainment" >
                 <label for="artsEntertainment">Arts & Entertainment</label>
                 <input type="checkbox" name="vehicles" id="vehicles">
                 <label for="vehicles">Autos & Vehicles</label>
@@ -83,7 +89,76 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                 <input type="checkbox" name="jobsEducation" id="jobsEducation">
                 <label for="jobsEducation">Jobs & Education</label>
             </div>
+            <input type="submit" value="Submit">
+
         </form>
     </div>
 </body>
 </html>
+<?php
+$userID = $_SESSION["id"];
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
+
+    if(isset($_POST)){ // Taking all 5 values from the form data(input)
+        $gender =   $_POST['gender'];
+        $race =  $_POST['race'];
+        $age =  $_POST['age'];
+        $artsEntertainment=  (isset($_POST['artsEntertainment'])) ? 1:0;
+        $vehicles=  (isset($_POST['vehicles'])) ? 1:0;
+        $beautyFitness=  (isset($_POST['beautyFitness'])) ? 1:0;
+        $businessIndustrial=  (isset($_POST['businessIndustrial'])) ? 1:0;
+        $electronics=  (isset($_POST['electronics'])) ? 1:0;
+        $finance=  (isset($_POST['finance'])) ? 1:0;
+        $food=  (isset($_POST['food'])) ? 1:0;
+        $games=  (isset($_POST['games'])) ? 1:0;
+        $leisure=  (isset($_POST['leisure'])) ? 1:0;
+        $homeGarden= (isset($_POST['homeGarden'])) ? 1:0;
+        $internetTelecom=  (isset($_POST['internetTelecom'])) ? 1:0;
+        $jobsEducation=  (isset($_POST['jobsEducation'])) ? 1:0;
+        $books=  (isset($_POST['books'])) ? 1:0;;
+
+        
+         
+        // Performing insert query execution
+        // here our table name is college
+   
+        $sql = 
+        "UPDATE users 
+        SET gender = '$gender', age = '$age', race = '$race'
+        WHERE id = '$userID';";
+         $stmt = $sql;
+         if(mysqli_query($link, $sql)){
+            echo "<h3>Your user information has been updated</h3>";
+
+        }else{
+            echo "ERROR: Hush! Sorry $sql. "
+                . mysqli_error($link);
+                echo $userID;
+        }
+    
+        $sql2 = "INSERT INTO interests(userID, artsEntertainment, vehicles, beautyFitness,
+        businessIndustrial, electronics, finance, food,
+        games, leisure, homeGarden, internetTelecom,
+        jobsEducation, books)
+        VALUES ('$userID','$artsEntertainment','$vehicles', '$beautyFitness', 
+        '$businessIndustrial', '$electronics','$finance', '$food', 
+        '$games', '$leisure', '$homeGarden', '$internetTelecom', 
+        '$jobsEducation', '$books') 
+        ON DUPLICATE KEY UPDATE 
+        artsEntertainment = '$artsEntertainment', vehicles = '$vehicles', beautyFitness = '$beautyFitness',
+        businessIndustrial = '$businessIndustrial', electronics = '$electronics', finance = '$finance', food = '$food',
+        games = '$games', leisure = '$leisure', homeGarden = '$homeGarden', internetTelecom = '$internetTelecom',
+        jobsEducation = '$jobsEducation', books = '$books'";
+         $stmt = $sql2;
+         if(mysqli_query($link, $sql2)){
+            echo "<h3>Your interest data has been updated.</h3>";
+
+        }else{
+            echo "ERROR: Hush! Sorry $sql2. "
+                . mysqli_error($link);
+        }
+        }
+    }
+
+         
+?>
