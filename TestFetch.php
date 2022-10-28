@@ -20,8 +20,6 @@ foreach ($results as $row) {
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -55,7 +53,7 @@ foreach ($results as $row) {
     </ul>
     <label id="itineraryName"><input type="text" title="name" placeholder="Trip Name" id="name"></label>
     <div id="itinerary">
-      <ul id="poi"></ul>
+      <ul id="poi" data-starttime='00:00'></ul>
       <input type="submit" value="Save" onclick="createItineraryJson()" />
     </div>
     <div id="map"></div>
