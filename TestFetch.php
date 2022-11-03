@@ -52,7 +52,7 @@ echo "<script>
       integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s="
       crossorigin=""
     ></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Trip Recommender</title>
     <script>
         var data ='<?php echo $json; ?>';
@@ -68,46 +68,10 @@ echo "<script>
     <label id="itineraryName"><input type="text" title="name" placeholder="Trip Name" id="name"></label>
     <div id="itinerary">
       <ul id="poi" data-starttime='00:00'></ul>
-      <input type="submit" value="Save" onclick="createItineraryJson()" />
+      <input type="submit" value="Save" id="save" onclick="createItineraryJson()" />
     </div>
     <div id="map"></div>
     <script src="script.js" defer>
     </script>
   </body>
 </html> 
-<?php
-if(array_key_exists('createItinerary', $_POST)){
-    uploadData();
-}
-function uploadData(){
-  $tripData = $_GET['tripData'];
-  $data = json_decode($tripData, true);
-  var_dump($data);
- 
-    foreach ($data as $row) {
-    //get the POI details
-    $userID = $row['userId'];
-    $tripID = $row['tripId'];
-    $tripName = $row['tripName'];
-    $POI_ID = $row['pois']['poiId'];
-    $POI_startTime = $row['pois']['startTime'];
-    $POI_endTime = $row['pois']['endTime'];
- 
-    //insert into mysql table
-    $sql = "INSERT INTO trips(userID, name)
-    VALUES($userID, '$name')";
-    if ($link->query($sql) === TRUE) {
-        echo "New record created successfully";
-      } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-      }
-      $sql2 = "INSERT INTO tripPOIs(POI_ID, startTime, endTime, tripID)
-      VALUES($POI_ID, '$POI_startTime', '$POI_endTime', '$tripID')";
-      if ($link->query($sql2) === TRUE) {
-          echo "New record created successfully";
-        } else {
-          echo "Error: " . $sql2 . "<br>" . $conn->error;
-        }
-    }
-}
-?>
