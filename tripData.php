@@ -1,4 +1,9 @@
-<?php if(isset($_POST['tripData'])) {
+<?php 
+    require_once "dbconnect.php";
+    session_start();
+    $userID = $_SESSION["id"];
+
+if(isset($_POST['tripData'])) {
     $data = $_POST['tripData'];
     //var_dump($json);
 
@@ -15,22 +20,22 @@
         $tripName = $row['tripName'];
         $POI_ID = $row['pois']['poiId'];
         $POI_startTime = $row['pois']['startTime'];
-        $POI_endTime = $row['pois']['endTime']
+        $POI_endTime = $row['pois']['endTime'];
      
         //insert into mysql table
-        $sql = "INSERT INTO trips(userID, name)
-        VALUES($userID, '$name')";
+        $sql = "INSERT INTO trips(userID, name) 
+        VALUES('$userID', '$name')";
         if ($link->query($sql) === TRUE) {
             echo "New record created successfully";
           } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $sql . "<br>" . $link->error;
           }
           $sql2 = "INSERT INTO tripPOIs(POI_ID, startTime, endTime, tripID)
-          VALUES($POI_ID, '$POI_startTime', '$POI_endTime', '$tripID')";
+          VALUES('$POI_ID', '$POI_startTime', '$POI_endTime', '$tripID')";
           if ($link->query($sql2) === TRUE) {
               echo "New record created successfully";
             } else {
-              echo "Error: " . $sql2 . "<br>" . $conn->error;
+              echo "Error: " . $sql2 . "<br>" . $link->error;
             }
         }
   } else {

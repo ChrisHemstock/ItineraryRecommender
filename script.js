@@ -125,10 +125,10 @@ function addEventEventListeners(element) {
 
 function createItineraryJson() {
 
-    let dayString = `{ "userId": ${1}, "tripId": ${1}, "tripName": "${document.getElementById('name').value.replace(/[^a-zA-Z0-9 ]/g, "")}", "pois": [`
+    let dayString = `{"tripName": "${document.getElementById('name').value.replace(/[^a-zA-Z0-9 ]/g, "")}", "pois": [`
     let pois = [...document.getElementsByClassName('draggable')];
     pois.forEach(poi => {
-        dayString += `{"poiId": ${poi.className.split(' ')[1]},"poiName": "${poi.textContent.slice(0, -1)}","startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
+        dayString += `{"poiId": ${poi.className.split(' ')[1]}, "startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
     });
     dayString = dayString.slice(0, -1)
     dayString += ']}';
