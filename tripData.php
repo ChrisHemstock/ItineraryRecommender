@@ -13,23 +13,35 @@ if(isset($_POST['tripData'])) {
       //$data = json_decode($tripData, true);
       var_dump($data);
      
-        foreach ($data as $row) {
-        //get the POI details
+      $userID = $_SESSION["id"];
+      $tripName = $data['tripName'];
 
-        $userID = $_SESSION["id"];
-        $tripName = $row['tripName'];
-        $POI_ID = $row['pois']['poiId'];
-        $POI_startTime = $row['pois']['startTime'];
-        $POI_endTime = $row['pois']['endTime'];
-     
-        //insert into mysql table
-        $sql = "INSERT INTO trips(userID, name) 
-        VALUES('$userID', '$name')";
-        if ($link->query($sql) === TRUE) {
-            echo "New record created successfully";
-          } else {
-            echo "Error: " . $sql . "<br>" . $link->error;
+      //insert into mysql table
+      $sql = "INSERT INTO trips(userID, name) 
+      VALUES('$userID', '$tripName')";
+      if ($link->query($sql) === TRUE) {
+          echo "New record created successfully";
+        } else {
+          echo "Error: " . $sql . "<br>" . $link->error;
+        }
+
+      $tripIdQuery = "SELECT MAX(id) FROM trips";
+        if(mysqli_query($link, $tripIdQuery)){
+          $response = @mysqli_query($link, $tripIdQuery);
+          while($row = mysqli_fetch_array($response)){
+            $tripID = $row['MAX(id)'];   
           }
+        } else {
+          echo "Error: " . $tripIdQuery . "<br>" . $link->error;
+        }
+    
+
+      foreach ($data['pois'] as $row) {
+        //get the POI details
+        $POI_ID = $row['poiId'];
+        $POI_startTime = $row['startTime'];
+        $POI_endTime = $row['endTime'];
+     
           $sql2 = "INSERT INTO tripPOIs(POI_ID, startTime, endTime, tripID)
           VALUES('$POI_ID', '$POI_startTime', '$POI_endTime', '$tripID')";
           if ($link->query($sql2) === TRUE) {
