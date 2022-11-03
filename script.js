@@ -117,6 +117,9 @@ function createItineraryJson() {
     dayString = dayString.slice(0, -1)
     dayString += ']}'
     console.log(dayString)
+    document.location = 'http://localhost:8080/TripRecommender/ItineraryRecommender/TestFetch.php?tripData='+dayString;   
+
+
 }
 
 function loadItinerary() {
