@@ -20,8 +20,6 @@ foreach ($results as $row) {
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -54,10 +52,8 @@ foreach ($results as $row) {
       <li class="homeBar"><a onclick="loadItinerary()">TEMPERARY LOAD</a></li>
     </ul>
     <div id="itinerary">
-      <ul id="poi"></ul>
-      <form method = "post">
-      <input type="submit" name="createItinerary" value="Save" onclick="createItineraryJson()" />
-</form>
+      <ul id="poi" data-starttime='00:00'></ul>
+      <input type="submit" value="Save" onclick="createItineraryJson()" />
     </div>
     <div id="map"></div>
     <script src="script.js" defer>

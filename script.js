@@ -18,7 +18,6 @@ json.data.forEach(poi => {
     }).addTo(map)
 });
 
-
 function containerEvent(container) {
     container.addEventListener('dragover', e => {
         e.preventDefault()
@@ -47,42 +46,40 @@ function getDragAfterElement(container, y) {
     }, {offset: Number.NEGATIVE_INFINITY}).element
 }
 
-function addEvent(element) {
-    // if(!document.getElementById(element.id)) {
-    //     let html = '<li id="' + element.id + '" class="draggable" draggable="true">' + element.tags.name + '<span class="close">X</span></li>';
-        
-        let html = '<li class="draggable" draggable="true">' + element.tags.name + 
-                    '<span class="time"><input type="time" class="startEvent" title="Start Time" value="'+ getStartTime() + 
-                    '"/><input type="time" class="endEvent" title="End Time" value="' + incrementTime(getStartTime(), 30) + '"/></span>' +
-                    '<span class="close">X</span></li>';
-        let poi = document.getElementById('poi')
-        poi.insertAdjacentHTML('beforeend', html);
+//addEvent adds an Event to the itinerary
+function addEvent(element) {       
+    let html = '<li class="draggable ' + element[3] + '" draggable="true">' + element[6] + 
+                '<span class="time"><input type="time" class="startEvent" title="Start Time" value="'+ getStartTime() + 
+                '"/><input type="time" class="endEvent" title="End Time" value="' + incrementTime(getStartTime(), 30) + '" onchange="updateTimes(0)"/></span>' +
+                '<span class="close">X</span></li>';
+    let poi = document.getElementById('poi')
+    poi.insertAdjacentHTML('beforeend', html);
 
-        let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
-        addEventEventListeners(newElement)
-    // }
+    let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
+    addEventEventListeners(newElement)
 
     function getStartTime() {
         if([...document.querySelectorAll('.draggable:not(.dragging)')].length == 0) {
-            return "00:00"
+            console.log(getItineraryStartTime())
+            return getItineraryStartTime()
         } else {
             return [...document.querySelectorAll('.draggable:not(.dragging)')].pop().querySelector('.endEvent').value
         }
     }
+}
 
-    function incrementTime(time, minutesAdded) {
-        let timeArray = time.split(':')
-        timeArray[0] = Number(timeArray[0])
-        timeArray[1] = Number(timeArray[1]) + minutesAdded
-        while(timeArray[1] >= 60) {
-            timeArray[1] = timeArray[1] - 60;
-            timeArray[0] += 1;
-            if(timeArray[0] > 23) {
-                timeArray[0] = 0
-            }
+function incrementTime(time, minutesAdded) {
+    let timeArray = time.split(':')
+    timeArray[0] = Number(timeArray[0])
+    timeArray[1] = Number(timeArray[1]) + minutesAdded
+    while(timeArray[1] >= 60) {
+        timeArray[1] = timeArray[1] - 60;
+        timeArray[0] += 1;
+        if(timeArray[0] > 23) {
+            timeArray[0] = 0
         }
-        return String(timeArray[0]).padStart(2, '0') + ':' + String(timeArray[1]).padStart(2, '0')
     }
+    return String(timeArray[0]).padStart(2, '0') + ':' + String(timeArray[1]).padStart(2, '0')
 }
 
 function addEventEventListeners(element) {
@@ -91,7 +88,14 @@ function addEventEventListeners(element) {
     })
     
     element.addEventListener('dragend', () => {
+        updateTimes(0)
         element.classList.remove('dragging')
+    })
+
+    element.childNodes[1].firstChild.addEventListener('change', function(e) {
+        console.log('here')
+        setItineraryStartTime(document.getElementById('poi').childNodes[0].childNodes[1].firstChild.value)
+        updateTimes(0)
     })
 
     //allows buttons to be closed
@@ -134,4 +138,53 @@ function loadItinerary() {
     });
 }
 
+function getDuration(startTime, endTime) {
+    startTime = startTime.split(':')
+    endTime = endTime.split(':')
+    for(let i = 0; i < startTime.length; i++) {
+        startTime[i] = Number(startTime[i])
+        endTime[i] = Number(endTime[i])
+    }
+    if(startTime[1] <= endTime[1]) {
+        //st: 2:20 en: 3:30
+        return endTime[1] - startTime[1] + (endTime[0] - startTime[0]) * 60
+    } else {
+        //st: 2:30 en: 3:00
+        return 60 - startTime[1] + endTime[1] + (endTime[0] - startTime[0] - 1) * 60
+    }
+    
+}
+
+function getItineraryStartTime() {
+    return document.getElementById('poi').dataset.starttime
+}
+
+function setItineraryStartTime(value) {
+    if(value != undefined) {
+        document.getElementById('poi').dataset.starttime = document.getElementById('poi').firstChild.childNodes[1].firstChild.value
+    } else {
+        document.getElementById('poi').dataset.starttime = '00:00'
+    }
+}
+
+function updateTimes(indexCurrent) {
+    let list = document.getElementById('poi').childNodes
+
+    if(indexCurrent != list.length) {
+        let startTimeInput = document.getElementById('poi').childNodes[indexCurrent].childNodes[1].firstChild.value
+        let endTimeInput = document.getElementById('poi').childNodes[indexCurrent].childNodes[1].lastChild.value
+        let currentDuration = getDuration(startTimeInput, endTimeInput)
+        if(currentDuration < 0) {
+            currentDuration = 30
+        }
+        if(indexCurrent == 0) {
+            console.log('startTime: ' + getItineraryStartTime())
+            document.getElementById('poi').childNodes[indexCurrent].childNodes[1].firstChild.value = getItineraryStartTime()
+        } else {
+            document.getElementById('poi').childNodes[indexCurrent].childNodes[1].firstChild.value = document.getElementById('poi').childNodes[indexCurrent - 1].childNodes[1].lastChild.value
+        }
+        document.getElementById('poi').childNodes[indexCurrent].childNodes[1].lastChild.value = incrementTime(document.getElementById('poi').childNodes[indexCurrent].childNodes[1].firstChild.value, currentDuration)
+        updateTimes(indexCurrent + 1)
+    }
+}
 
