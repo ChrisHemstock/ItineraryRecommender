@@ -18,6 +18,22 @@ json.data.forEach(poi => {
     }).addTo(map)
 });
 
+$('#save').click(function() {
+    //alert('click')
+    // var tmp = [{"id":21,"children":[{"id":196},{"id":195},{"id":49},{"id":194}]},{"id":29,"children":[{"id":184},{"id":152}]}]
+    // tmp = JSON.stringify(tmp)
+    var tmp = createItineraryJson()
+    $.ajax({
+      type: 'POST',
+      url: 'tripData.php',
+      data: {'tripData': tmp},
+      success: function(msg) {
+        console.log("success")
+        console.log(msg);
+      }
+    });
+  });
+
 function containerEvent(container) {
     container.addEventListener('dragover', e => {
         e.preventDefault()
@@ -115,9 +131,10 @@ function createItineraryJson() {
         dayString += `{"poiId": ${poi.className.split(' ')[1]},"poiName": "${poi.textContent.slice(0, -1)}","startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
     });
     dayString = dayString.slice(0, -1)
-    dayString += ']}'
-    console.log(dayString)
-    document.location = 'http://localhost:8080/TripRecommender/ItineraryRecommender/TestFetch.php?tripData='+dayString;   
+    dayString += ']}';
+    return dayString;
+    //console.log(dayString)
+    //document.location = 'http://localhost:8080/TripRecommender/ItineraryRecommender/TestFetch.php?tripData='+dayString;   
 
 
 }
