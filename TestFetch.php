@@ -65,6 +65,7 @@ echo "<script>
       <li class="homeBar"><a href="account.php">Account</a></li>
       <li class="homeBar"><a onclick="loadItinerary()">TEMPERARY LOAD</a></li>
     </ul>
+    <label id="itineraryName"><input type="text" title="name" placeholder="Trip Name" id="name"></label>
     <div id="itinerary">
       <ul id="poi" data-starttime='00:00'></ul>
       <input type="submit" value="Save" onclick="createItineraryJson()" />
