@@ -17,6 +17,20 @@ foreach ($results as $row) {
     $data[] = array($Lat, $Lng, $Category, $id, $address, $phone, $name, $rating, $num_ratings);
 }
  $json = json_encode(array("data" => $data));
+echo "<script>
+ function createItineraryJson() {
+
+  let dayString = `{ "userId": ${1}, "tripId": ${1}, "tripName": "${document.getElementById('name').value.replace(/[^a-zA-Z0-9 ]/g, "")}", "pois": [`
+  let pois = [...document.getElementsByClassName('draggable')];
+  pois.forEach(poi => {
+      dayString += `{"poiId": ${poi.className.split(' ')[1]},"poiName": "${poi.textContent.slice(0, -1)}","startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
+  });
+  dayString = dayString.slice(0, -1)
+  dayString += ']}'
+  console.log(dayString)
+</script>";
+
+}
 
 ?>
 
