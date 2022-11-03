@@ -1,6 +1,8 @@
 <?php
     //connect to mysql db
     require_once "dbconnect.php";
+    session_start();
+    $userID = $_SESSION["id"];
 
     //read the json file contents
 

@@ -18,6 +18,9 @@ foreach ($results as $row) {
 }
  $json = json_encode(array("data" => $data));
 
+
+
+
 ?>
 
 <!DOCTYPE html>
