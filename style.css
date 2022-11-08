@@ -105,7 +105,7 @@ li.dragging {
     padding: 0rem;
 }
 
-/* trips.html styles */
+/* trips.php styles */
 #trips {
     display: inline-block;
     height: 30rem;
@@ -136,8 +136,10 @@ li.dragging {
 }
 
 #trips a {
+    display: inline-block;
     text-decoration: none;
     color: black;
+    width: 44rem;
 }
 
 #trips .dates {
