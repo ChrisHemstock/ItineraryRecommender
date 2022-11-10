@@ -1,26 +1,26 @@
+
+
 <?php
+  require_once "dbconnect.php";
+  session_start();
+  $userID = $_SESSION["id"];
 
-require_once "dbconnect.php";
-$results= $link->query('SELECT * FROM POIs;')->fetch_all();
+  $results= $link->query('SELECT * FROM POIs;')->fetch_all();
 
-$data = array();
-foreach ($results as $row) {
-    $Lat = $row[0];
-    $Lng = $row[1];
-    $Category = $row[2];
-    $id = $row[3];
-    $address = $row[4];
-    $phone = $row[5];
-    $name = $row[6];
-    $rating = $row[7];
-    $num_ratings = $row[8];
-    $data[] = array($Lat, $Lng, $Category, $id, $address, $phone, $name, $rating, $num_ratings);
-}
- $json = json_encode(array("data" => $data));
-
-
-
-
+  $data = array();
+  foreach ($results as $row) {
+      $Lat = $row[0];
+      $Lng = $row[1];
+      $Category = $row[2];
+      $id = $row[3];
+      $address = $row[4];
+      $phone = $row[5];
+      $name = $row[6];
+      $rating = $row[7];
+      $num_ratings = $row[8];
+      $data[] = array($Lat, $Lng, $Category, $id, $address, $phone, $name, $rating, $num_ratings);
+  }
+  $json = json_encode(array("data" => $data));
 ?>
 
 <!DOCTYPE html>
@@ -46,6 +46,19 @@ foreach ($results as $row) {
     <script>
         var data ='<?php echo $json; ?>';
     </script>
+    <?php
+      //Verifies that the url tripID matches an ID in trips and under the users ID
+      $trips = $link->query('SELECT id FROM trips WHERE userID = ' . $userID . ';')->fetch_all();
+      foreach($trips as $trip) {
+        if($trip[0] == $_GET['trip']) {
+          //If it is a valid URL trip id then get all the pois under that trip and populate the poi list
+          $poiList = $link->query('SELECT POI_ID, startTime, endTime, name FROM trippois, pois WHERE trippois.POI_ID = pois.id and trippois.tripID = ' . $trip[0] . ';')->fetch_all();
+          $jsonPoiList = json_encode($poiList);
+          break;
+        }
+      }
+    ?>
+    <script>var phpPoi = '<?php echo $jsonPoiList?>';</script>
   </head>
   <body>
     <ul>

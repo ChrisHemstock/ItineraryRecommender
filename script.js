@@ -10,12 +10,19 @@ let json = JSON.parse(data)
 json.data.forEach(poi => {
     L.marker([poi[0], poi[1]]).on('click', function(e) {
         //adds an event to the last day on the itinerary
-        addEvent(poi)
+        addEvent(poi[3], poi[6], getStartTime(), incrementTime(getStartTime(), 30))
     }).bindPopup(poi[6]).on('mouseover', function (e) {
         this.openPopup();
     }).on('mouseout', function (e) {
         this.closePopup();
     }).addTo(map)
+});
+
+//Adds the event listeners to the loaded pois in the itinerary
+let jsonPois = JSON.parse(phpPoi)
+jsonPois.forEach(poi => {
+    console.log('HERE in thisLOOP')
+    addEvent(poi[0], poi[3], poi[1], poi[2])
 });
 
 $('#save').click(function() {
@@ -63,24 +70,24 @@ function getDragAfterElement(container, y) {
 }
 
 //addEvent adds an Event to the itinerary
-function addEvent(element) {       
-    let html = '<li class="draggable ' + element[3] + '" draggable="true">' + element[6] + 
-                '<span class="time"><input type="time" class="startEvent" title="Start Time" value="'+ getStartTime() + 
-                '"/><input type="time" class="endEvent" title="End Time" value="' + incrementTime(getStartTime(), 30) + '" onchange="updateTimes(0)"/></span>' +
+function addEvent(poiId, name, startTime, endTime) {       
+    let html = '<li class="draggable ' + poiId + '" draggable="true">' + name + 
+                '<span class="time"><input type="time" class="startEvent" title="Start Time" value="'+ startTime + 
+                '"/><input type="time" class="endEvent" title="End Time" value="' + endTime + '" onchange="updateTimes(0)"/></span>' +
                 '<span class="close">X</span></li>';
     let poi = document.getElementById('poi')
     poi.insertAdjacentHTML('beforeend', html);
 
     let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
     addEventEventListeners(newElement)
+}
 
-    function getStartTime() {
-        if([...document.querySelectorAll('.draggable:not(.dragging)')].length == 0) {
-            console.log(getItineraryStartTime())
-            return getItineraryStartTime()
-        } else {
-            return [...document.querySelectorAll('.draggable:not(.dragging)')].pop().querySelector('.endEvent').value
-        }
+function getStartTime() {
+    if([...document.querySelectorAll('.draggable:not(.dragging)')].length == 0) {
+        console.log(getItineraryStartTime())
+        return getItineraryStartTime()
+    } else {
+        return [...document.querySelectorAll('.draggable:not(.dragging)')].pop().querySelector('.endEvent').value
     }
 }
 
@@ -109,7 +116,6 @@ function addEventEventListeners(element) {
     })
 
     element.childNodes[1].firstChild.addEventListener('change', function(e) {
-        console.log('here')
         setItineraryStartTime(document.getElementById('poi').childNodes[0].childNodes[1].firstChild.value)
         updateTimes(0)
     })
@@ -185,6 +191,7 @@ function setItineraryStartTime(value) {
 }
 
 function updateTimes(indexCurrent) {
+    console.log(indexCurrent)
     let list = document.getElementById('poi').childNodes
 
     if(indexCurrent != list.length) {

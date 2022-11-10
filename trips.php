@@ -34,9 +34,7 @@
         <?php
           foreach ($data as $row) {
             echo '<li>
-                    <a href="TestFetch.php" class="' . $row[1]. '"
-                      >' . $row[2] .
-                      '</a>
+                    <a href="TestFetch.php?trip=' . $row[0] . '">' . $row[2] . '</a>
                     <span class="close">X</span>
                   </li>';
           }
