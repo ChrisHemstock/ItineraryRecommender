@@ -19,11 +19,13 @@ json.data.forEach(poi => {
 });
 
 //Adds the event listeners to the loaded pois in the itinerary
-let jsonPois = JSON.parse(phpPoi)
-jsonPois.forEach(poi => {
-    console.log('HERE in thisLOOP')
-    addEvent(poi[0], poi[3], poi[1], poi[2])
-});
+if (typeof phpPoi !== 'undefined') {
+    let jsonPois = JSON.parse(phpPoi)
+    jsonPois.forEach(poi => {
+        console.log('HERE in thisLOOP')
+        addEvent(poi[0], poi[3], poi[1], poi[2])
+    });
+}
 
 $('#save').click(function() {
     //alert('click')
@@ -37,7 +39,10 @@ $('#save').click(function() {
       success: function(msg) {
         console.log("success")
         console.log(msg);
-      }
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) { 
+        alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+    }
     });
   });
 

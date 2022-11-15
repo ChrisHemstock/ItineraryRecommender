@@ -10,7 +10,9 @@
     $userID = $row[1];
     $name = $row[2];
     $data[] = array($id, $userID, $name);
+    echo 'HERE';
   }
+  echo 'I ran';
 ?>
 
 <!DOCTYPE html>

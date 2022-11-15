@@ -49,6 +49,7 @@
     <?php
       //Verifies that the url tripID matches an ID in trips and under the users ID
       $trips = $link->query('SELECT id FROM trips WHERE userID = ' . $userID . ';')->fetch_all();
+      $jsonPoiList = json_encode(array());
       foreach($trips as $trip) {
         if($trip[0] == $_GET['trip']) {
           //If it is a valid URL trip id then get all the pois under that trip and populate the poi list
