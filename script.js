@@ -135,8 +135,7 @@ function addEventEventListeners(element) {
 }
 
 function createItineraryJson() {
-
-    let dayString = `{"tripName": "${document.getElementById('name').value.replace(/[^a-zA-Z0-9 ]/g, "")}", "pois": [`
+    let dayString = `{"tripId": "${window.location.href.split('=')[1]}", "pois": [`
     let pois = [...document.getElementsByClassName('draggable')];
     pois.forEach(poi => {
         dayString += `{"poiId": ${poi.className.split(' ')[1]}, "startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
@@ -144,10 +143,6 @@ function createItineraryJson() {
     dayString = dayString.slice(0, -1)
     dayString += ']}';
     return dayString;
-    //console.log(dayString)
-    //document.location = 'http://localhost:8080/TripRecommender/ItineraryRecommender/TestFetch.php?tripData='+dayString;   
-
-
 }
 
 function loadItinerary() {

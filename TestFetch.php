@@ -71,7 +71,7 @@
     <label id="itineraryName"><input type="text" title="name" placeholder="Trip Name" id="name"></label>
     <div id="itinerary">
       <ul id="poi" data-starttime='00:00'></ul>
-      <input type="submit" value="Save" id="save" onclick="createItineraryJson()" />
+      <input type="submit" value="Save" id="save"/>
     </div>
     <div id="map"></div>
     <script src="script.js" defer>
