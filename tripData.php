@@ -1,40 +1,27 @@
 <?php 
     require_once "dbconnect.php";
     session_start();
-    $userID = $_SESSION["id"];
+    
 
 if(isset($_POST['tripData'])) {
     $data = $_POST['tripData'];
     //var_dump($json);
 
     $data = json_decode($data, true);
+    $userID = $_SESSION["id"];
+    $tripID = $data['tripId'];
 
-      //$tripData = $_GET['tripData'];
-      //$data = json_decode($tripData, true);
-      var_dump($data);
-     
-      $userID = $_SESSION["id"];
-      $tripName = $data['tripName'];
-
-      //insert into mysql table
-      $sql = "INSERT INTO trips(userID, name) 
-      VALUES('$userID', '$tripName')";
-      if ($link->query($sql) === TRUE) {
-          echo "New record created successfully";
-        } else {
-          echo "Error: " . $sql . "<br>" . $link->error;
-        }
-
-      $tripIdQuery = "SELECT MAX(id) FROM trips";
-        if(mysqli_query($link, $tripIdQuery)){
-          $response = @mysqli_query($link, $tripIdQuery);
-          while($row = mysqli_fetch_array($response)){
-            $tripID = $row['MAX(id)'];   
-          }
-        } else {
-          echo "Error: " . $tripIdQuery . "<br>" . $link->error;
-        }
+    $trips = $link->query('SELECT id FROM trips WHERE userID = ' . $userID . ';')->fetch_all();
+    foreach($trips as $trip) {
+      if($trip[0] == $tripID) {
+        var_dump($data);
     
+      $deleteSQL = "DELETE FROM tripPOIs WHERE tripID = '$tripID'";
+      if ($link->query($deleteSQL) === TRUE) {
+        echo "New record deleted successfully";
+      } else {
+        echo "Error: " . $deleteSQL . "<br>" . $link->error;
+      }
 
       foreach ($data['pois'] as $row) {
         //get the POI details
@@ -50,6 +37,9 @@ if(isset($_POST['tripData'])) {
               echo "Error: " . $sql2 . "<br>" . $link->error;
             }
         }
+        break;
+      }
+    }
   } else {
     echo "Noooooooob";
   }
