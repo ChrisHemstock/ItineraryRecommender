@@ -42,6 +42,26 @@
           }
         ?>
       </ul>
+
+      <?php
+        if(isset($_POST['createTrip'])) {
+          if(isset($_POST['tripName'])) {
+            $tripName = $_POST['tripName'];
+            $sql = "INSERT INTO trips(userID, name) VALUES('$userID', '$tripName')";
+            if ($link->query($sql) === TRUE) {
+              header("Refresh:0");
+            } else {
+              echo "Error: " . $sql . "<br>" . $link->error;
+            }
+          }
+        }
+      ?>
+  
+      <form method="post">
+        <input type="text" name="tripName" placeholder="Trip Name">
+        <input type="submit" name="createTrip" class="button" value="Create Trip" />
+      </form>
     </div>
+
   </body>
 </html>
