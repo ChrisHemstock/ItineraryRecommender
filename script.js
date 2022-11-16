@@ -8,7 +8,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 containerEvent(document.getElementById('poi'))
 let json = JSON.parse(data)
 json.data.forEach(poi => {
-    L.marker([poi[0], poi[1]]).on('click', function(e) {
+    L.marker([poi[0], poi[1]]).on('click', function (e) {
         //adds an event to the last day on the itinerary
         addEvent(poi[3], poi[6], getStartTime(), incrementTime(getStartTime(), 30))
     }).bindPopup(poi[6]).on('mouseover', function (e) {
@@ -27,24 +27,24 @@ if (typeof phpPoi !== 'undefined') {
     });
 }
 
-$('#save').click(function() {
+$('#save').click(function () {
     //alert('click')
     // var tmp = [{"id":21,"children":[{"id":196},{"id":195},{"id":49},{"id":194}]},{"id":29,"children":[{"id":184},{"id":152}]}]
     // tmp = JSON.stringify(tmp)
     var tmp = createItineraryJson()
     $.ajax({
-      type: 'POST',
-      url: 'tripData.php',
-      data: {'tripData': tmp},
-      success: function(msg) {
-        console.log("success")
-        console.log(msg);
-      },
-      error: function(XMLHttpRequest, textStatus, errorThrown) { 
-        alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-    }
+        type: 'POST',
+        url: 'tripData.php',
+        data: { 'tripData': tmp },
+        success: function (msg) {
+            console.log("success")
+            console.log(msg);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Status: " + textStatus); alert("Error: " + errorThrown);
+        }
     });
-  });
+});
 
 function containerEvent(container) {
     container.addEventListener('dragover', e => {
@@ -66,20 +66,20 @@ function getDragAfterElement(container, y) {
         const box = child.getBoundingClientRect()
         const offset = y - box.top - box.height / 2
         if (offset < 0 && offset > closest.offset) {
-            return {offset: offset, element: child}
-        
+            return { offset: offset, element: child }
+
         } else {
             return closest
         }
-    }, {offset: Number.NEGATIVE_INFINITY}).element
+    }, { offset: Number.NEGATIVE_INFINITY }).element
 }
 
 //addEvent adds an Event to the itinerary
-function addEvent(poiId, name, startTime, endTime) {       
-    let html = '<li class="draggable ' + poiId + '" draggable="true">' + name + 
-                '<span class="time"><input type="time" class="startEvent" title="Start Time" value="'+ startTime + 
-                '"/><input type="time" class="endEvent" title="End Time" value="' + endTime + '" onchange="updateTimes(0)"/></span>' +
-                '<span class="close">X</span></li>';
+function addEvent(poiId, name, startTime, endTime) {
+    let html = '<li class="draggable ' + poiId + '" draggable="true">' + name +
+        '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + startTime +
+        '"/><input type="time" class="endEvent" title="End Time" value="' + endTime + '" onchange="updateTimes(0)"/></span>' +
+        '<span class="close">X</span></li>';
     let poi = document.getElementById('poi')
     poi.insertAdjacentHTML('beforeend', html);
 
@@ -88,7 +88,7 @@ function addEvent(poiId, name, startTime, endTime) {
 }
 
 function getStartTime() {
-    if([...document.querySelectorAll('.draggable:not(.dragging)')].length == 0) {
+    if ([...document.querySelectorAll('.draggable:not(.dragging)')].length == 0) {
         console.log(getItineraryStartTime())
         return getItineraryStartTime()
     } else {
@@ -100,10 +100,10 @@ function incrementTime(time, minutesAdded) {
     let timeArray = time.split(':')
     timeArray[0] = Number(timeArray[0])
     timeArray[1] = Number(timeArray[1]) + minutesAdded
-    while(timeArray[1] >= 60) {
+    while (timeArray[1] >= 60) {
         timeArray[1] = timeArray[1] - 60;
         timeArray[0] += 1;
-        if(timeArray[0] > 23) {
+        if (timeArray[0] > 23) {
             timeArray[0] = 0
         }
     }
@@ -114,13 +114,13 @@ function addEventEventListeners(element) {
     element.addEventListener('dragstart', () => {
         element.classList.add('dragging')
     })
-    
+
     element.addEventListener('dragend', () => {
         updateTimes(0)
         element.classList.remove('dragging')
     })
 
-    element.childNodes[1].firstChild.addEventListener('change', function(e) {
+    element.childNodes[1].firstChild.addEventListener('change', function (e) {
         setItineraryStartTime(document.getElementById('poi').childNodes[0].childNodes[1].firstChild.value)
         updateTimes(0)
     })
@@ -128,7 +128,7 @@ function addEventEventListeners(element) {
     //allows buttons to be closed
     let closebtns = document.getElementsByClassName("close");
     for (let i = 0; i < closebtns.length; i++) {
-        closebtns[i].addEventListener("click", function() {
+        closebtns[i].addEventListener("click", function () {
             this.parentElement.remove()
         });
     }
@@ -147,35 +147,35 @@ function createItineraryJson() {
 
 function loadItinerary() {
     fetch("test.json")
-    .then(response => response.json())
-    .then(data => {
-        data.pois.forEach(poi => {
-            let html = '<li class="draggable" draggable="true" class="' + poi.poiId + '">' + poi.poiName + 
-                        '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + poi.startTime + '"/><input type="time" class="endEvent" title="End Time" value="' + poi.endTime + '"/></span>' +
-                        '<span class="close">X</span></li>';
-            document.getElementById('poi').insertAdjacentHTML('beforeend', html);
-    
-            let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
-            addEventEventListeners(newElement)
+        .then(response => response.json())
+        .then(data => {
+            data.pois.forEach(poi => {
+                let html = '<li class="draggable" draggable="true" class="' + poi.poiId + '">' + poi.poiName +
+                    '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + poi.startTime + '"/><input type="time" class="endEvent" title="End Time" value="' + poi.endTime + '"/></span>' +
+                    '<span class="close">X</span></li>';
+                document.getElementById('poi').insertAdjacentHTML('beforeend', html);
+
+                let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
+                addEventEventListeners(newElement)
+            });
         });
-    });
 }
 
 function getDuration(startTime, endTime) {
     startTime = startTime.split(':')
     endTime = endTime.split(':')
-    for(let i = 0; i < startTime.length; i++) {
+    for (let i = 0; i < startTime.length; i++) {
         startTime[i] = Number(startTime[i])
         endTime[i] = Number(endTime[i])
     }
-    if(startTime[1] <= endTime[1]) {
+    if (startTime[1] <= endTime[1]) {
         //st: 2:20 en: 3:30
         return endTime[1] - startTime[1] + (endTime[0] - startTime[0]) * 60
     } else {
         //st: 2:30 en: 3:00
         return 60 - startTime[1] + endTime[1] + (endTime[0] - startTime[0] - 1) * 60
     }
-    
+
 }
 
 function getItineraryStartTime() {
@@ -183,7 +183,7 @@ function getItineraryStartTime() {
 }
 
 function setItineraryStartTime(value) {
-    if(value != undefined) {
+    if (value != undefined) {
         document.getElementById('poi').dataset.starttime = document.getElementById('poi').firstChild.childNodes[1].firstChild.value
     } else {
         document.getElementById('poi').dataset.starttime = '00:00'
@@ -194,14 +194,14 @@ function updateTimes(indexCurrent) {
     console.log(indexCurrent)
     let list = document.getElementById('poi').childNodes
 
-    if(indexCurrent != list.length) {
+    if (indexCurrent != list.length) {
         let startTimeInput = document.getElementById('poi').childNodes[indexCurrent].childNodes[1].firstChild.value
         let endTimeInput = document.getElementById('poi').childNodes[indexCurrent].childNodes[1].lastChild.value
         let currentDuration = getDuration(startTimeInput, endTimeInput)
-        if(currentDuration < 0) {
+        if (currentDuration < 0) {
             currentDuration = 30
         }
-        if(indexCurrent == 0) {
+        if (indexCurrent == 0) {
             console.log('startTime: ' + getItineraryStartTime())
             document.getElementById('poi').childNodes[indexCurrent].childNodes[1].firstChild.value = getItineraryStartTime()
         } else {

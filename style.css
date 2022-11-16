@@ -26,7 +26,7 @@ li.homeBar a {
     color: black;
     background-color: lightblue;
     border-radius: 5px;
-  }
+}
 
 li.homeBar a:hover {
     background-color: rgb(191, 227, 239);
@@ -34,10 +34,10 @@ li.homeBar a:hover {
 
 /* map.html styles */
 #itineraryName {
-    display:block;
+    display: block;
 }
 
-#itineraryName > input#name{
+#itineraryName>input#name {
     height: 2rem;
     width: 20rem;
     text-align: center;
@@ -48,7 +48,7 @@ li.homeBar a:hover {
     margin-bottom: 2rem;
 }
 
-#itinerary > input{
+#itinerary>input {
     height: 3rem;
     width: 22rem;
     background-color: rgb(131, 181, 197);
@@ -58,7 +58,7 @@ li.homeBar a:hover {
     font-weight: 800;
 }
 
-#itinerary > input:hover {
+#itinerary>input:hover {
     background-color: lightblue;
 }
 
@@ -93,7 +93,7 @@ li.dragging {
 }
 
 .time {
-    position:sticky;
+    position: sticky;
     float: right;
     margin-right: 2rem;
 }
@@ -115,12 +115,12 @@ li.dragging {
     padding: 1rem;
     overflow-y: auto;
     border-radius: 5px;
-    
+
 }
 
 #trips ul {
     text-align: left;
-    list-style : none;
+    list-style: none;
     width: 47rem;
     position: relative;
 }
@@ -143,7 +143,7 @@ li.dragging {
 }
 
 #trips .dates {
-    position:sticky;
+    position: sticky;
     float: right;
     margin-right: 5rem;
 }
