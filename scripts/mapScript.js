@@ -34,7 +34,7 @@ $('#save').click(function () {
     var tmp = createItineraryJson()
     $.ajax({
         type: 'POST',
-        url: 'tripData.php',
+        url: 'resources/tripData.php',
         data: { 'tripData': tmp },
         success: function (msg) {
             console.log("success")
@@ -135,7 +135,7 @@ function addEventEventListeners(element) {
 }
 
 function createItineraryJson() {
-    let dayString = `{"tripId": "${window.location.href.split('=')[1]}", "pois": [`
+    let dayString = `{"tripId": "${window.location.href.split('=')[1]}", "pois": [ `
     let pois = [...document.getElementsByClassName('draggable')];
     pois.forEach(poi => {
         dayString += `{"poiId": ${poi.className.split(' ')[1]}, "startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;

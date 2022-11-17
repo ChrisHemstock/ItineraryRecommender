@@ -1,5 +1,5 @@
 <?php
-require_once "dbconnect.php";
+require_once "includes/dbconnect.php";
 session_start();
 $userID = $_SESSION["id"];
 
@@ -25,17 +25,14 @@ foreach ($results as $row) {
 </head>
 
 <body>
-  <ul>
-    <li class="homeBar"><a href="trips.php">Trips</a></li>
-    <li class="homeBar"><a href="account.php">Account</a></li>
-  </ul>
+  <?php include 'includes/homebar.php' ?>
   <div id="trips">
     <h1>Saved Trips</h1>
     <ul>
       <?php
       foreach ($data as $row) {
         echo '<li>
-                    <a href="TestFetch.php?trip=' . $row[0] . '">' . $row[2] . '</a>
+                    <a href="map.php?trip=' . $row[0] . '">' . $row[2] . '</a>
                     <span class="close">X</span>
                   </li>';
       }

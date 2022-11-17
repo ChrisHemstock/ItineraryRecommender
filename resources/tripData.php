@@ -1,12 +1,11 @@
 <?php
-require_once "dbconnect.php";
+require_once "../includes/dbconnect.php";
 session_start();
 
 
 if (isset($_POST['tripData'])) {
   $data = $_POST['tripData'];
-  //var_dump($json);
-
+  //var_dump($data);
   $data = json_decode($data, true);
   $userID = $_SESSION["id"];
   $tripID = $data['tripId'];
