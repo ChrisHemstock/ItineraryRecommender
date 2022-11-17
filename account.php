@@ -8,7 +8,7 @@ $getInterestInfo =
     "SELECT * FROM interests WHERE userID = '$userID';";
 
 // Include config file
-require_once "dbconnect.php";
+require_once "includes/dbconnect.php";
 
 // Check if the user is logged in, if not then redirect him to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
@@ -108,10 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 </script>
 
 <body>
-<ul>
-    <li class="homeBar"><a href="trips.php">Trips</a></li>
-    <li class="homeBar"><a href="account.php">Account</a></li>
-  </ul>
+    <?php include 'includes/homebar.php' ?>
     <h1>Hi, <b>
             <?php echo htmlspecialchars($_SESSION["username"]); ?>
         </b>. Here is where you will find account information and settings.</h1>

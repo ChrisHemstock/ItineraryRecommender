@@ -1,6 +1,6 @@
 <?php
 //connect to mysql db
-require_once "dbconnect.php";
+require_once "../includes/dbconnect.php";
 session_start();
 $userID = $_SESSION["id"];
 

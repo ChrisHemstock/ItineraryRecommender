@@ -1,5 +1,5 @@
 <?php
-require_once "dbconnect.php";
+require_once "includes/dbconnect.php";
 session_start();
 $userID = $_SESSION["id"];
 
@@ -25,36 +25,33 @@ foreach ($results as $row) {
 </head>
 
 <body>
-  <ul>
-    <li class="homeBar"><a href="trips.html">Trips</a></li>
-    <li class="homeBar"><a href="account.php">Account</a></li>
-  </ul>
+  <?php include 'includes/homebar.php' ?>
   <div id="trips">
     <h1>Saved Trips</h1>
     <ul>
       <?php
-        foreach ($data as $row) {
-          echo '<li>
-                    <a href="TestFetch.php?trip=' . $row[0] . '">' . $row[2] . '</a>
+      foreach ($data as $row) {
+        echo '<li>
+                    <a href="map.php?trip=' . $row[0] . '">' . $row[2] . '</a>
                     <span class="close">X</span>
                   </li>';
-        }
-        ?>
+      }
+      ?>
     </ul>
 
     <?php
-      if (isset($_POST['createTrip'])) {
-        if (isset($_POST['tripName'])) {
-          $tripName = $_POST['tripName'];
-          $sql = "INSERT INTO trips(userID, name) VALUES('$userID', '$tripName')";
-          if ($link->query($sql) === TRUE) {
-            header("Refresh:0");
-          } else {
-            echo "Error: " . $sql . "<br>" . $link->error;
-          }
+    if (isset($_POST['createTrip'])) {
+      if (isset($_POST['tripName'])) {
+        $tripName = $_POST['tripName'];
+        $sql = "INSERT INTO trips(userID, name) VALUES('$userID', '$tripName')";
+        if ($link->query($sql) === TRUE) {
+          header("Refresh:0");
+        } else {
+          echo "Error: " . $sql . "<br>" . $link->error;
         }
       }
-      ?>
+    }
+    ?>
 
     <form method="post">
       <input required type="text" name="tripName" placeholder="Trip Name">
