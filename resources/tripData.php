@@ -10,11 +10,14 @@ if (isset($_POST['tripData'])) {
   $userID = $_SESSION["id"];
   $tripID = $data['tripId'];
 
+  //Get all the trips under the user and loop through the trips
   $trips = $link->query('SELECT id FROM trips WHERE userID = ' . $userID . ';')->fetch_all();
   foreach ($trips as $trip) {
+    //if the trip is the desired trip then do stuff
     if ($trip[0] == $tripID) {
-      var_dump($data);
+      //var_dump($data);
 
+      //delete all the pois under that trip id
       $deleteSQL = "DELETE FROM tripPOIs WHERE tripID = '$tripID'";
       if ($link->query($deleteSQL) === TRUE) {
         echo "New record deleted successfully";
@@ -22,6 +25,7 @@ if (isset($_POST['tripData'])) {
         echo "Error: " . $deleteSQL . "<br>" . $link->error;
       }
 
+      //add all the pois in the json back to the database
       foreach ($data['pois'] as $row) {
         //get the POI details
         $POI_ID = $row['poiId'];

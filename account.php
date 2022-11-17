@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
-    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="styles/style.css?v=<?php echo time(); ?>">
 </head>
 <script>
     if (window.history.replaceState) {

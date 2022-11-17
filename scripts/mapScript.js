@@ -28,13 +28,10 @@ if (typeof phpPoi !== 'undefined') {
 }
 
 $('#save').click(function () {
-    //alert('click')
-    // var tmp = [{"id":21,"children":[{"id":196},{"id":195},{"id":49},{"id":194}]},{"id":29,"children":[{"id":184},{"id":152}]}]
-    // tmp = JSON.stringify(tmp)
     var tmp = createItineraryJson()
     $.ajax({
         type: 'POST',
-        url: 'resources/tripData.php',
+        url: 'resources/tripData.php', //Not sure why this is working it should be ../resources/tripData.php
         data: { 'tripData': tmp },
         success: function (msg) {
             console.log("success")
