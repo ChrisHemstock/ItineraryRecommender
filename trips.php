@@ -35,7 +35,7 @@ foreach ($results as $row) {
       foreach ($data as $row) {
         echo '<li>
                     <a href="map.php?trip=' . $row[0] . '">' . $row[2] . '</a>
-                    <span class="close">X</span>
+                    <span class="close ' . $row[0] . '">X</span>
                   </li>';
       }
       ?>
