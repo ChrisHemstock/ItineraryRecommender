@@ -35,11 +35,7 @@ foreach ($results as $row) {
       foreach ($data as $row) {
         echo '<li>
                     <a href="map.php?trip=' . $row[0] . '">' . $row[2] . '</a>
-<<<<<<< HEAD
-                    <span onclick ="addEventEventListeners("close")" class="close">X</span>
-=======
                     <span class="close ' . $row[0] . '">X</span>
->>>>>>> 5d9d39a5a61a92b78f1c6adfa0d8fcff048a4faf
                   </li>';
       }
       ?>
