@@ -21,9 +21,9 @@ if(isset($_POST["Submit"])){
     makeRequest();
 }
 function makeRequest(){
-    require_once "includes/dbconnect.php";
+    require_once "../includes/dbconnect.php";
     session_start();
-require_once('vendor/autoload.php');
+require_once('../vendor/autoload.php');
 $client = new \GuzzleHttp\Client();
 
 

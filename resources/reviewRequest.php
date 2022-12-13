@@ -1,5 +1,5 @@
 <?php
-require_once('vendor/autoload.php');
+require_once('../vendor/autoload.php');
 
 $client = new \GuzzleHttp\Client();
 
@@ -14,10 +14,16 @@ $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/UFCN0bYd
 //$data = $response->getBody();
 $data = json_decode($response->getBody(), true);
 
+$rake = rake($data["reviews"], 3);
+$phrases = $rake->getPhrases();
+foreach ($phrases as $phrase) {
+  echo $phrase . '\n';
+}
+
 foreach ($data["reviews"] as $row) {
   //get the POI details
   $review = $row['text'];
-  echo $review;
+  echo '\n' . '\n' . '\n' . $review;
 }
 
 ?>
