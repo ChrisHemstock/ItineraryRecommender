@@ -1,0 +1,10 @@
+{
+    "config": {
+
+        "platform-check": false
+    },
+    "require": {
+        "yooper/php-text-analysis": "^1.8",
+        "guzzlehttp/guzzle": "7.0"
+    }
+}
