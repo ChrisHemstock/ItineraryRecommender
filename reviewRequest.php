@@ -1,6 +1,5 @@
 <?php
 require_once('vendor/autoload.php');
-
 $client = new \GuzzleHttp\Client();
 
 $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/UFCN0bYdHroPKu6KV5CJqg/reviews?limit=20&sort_by=yelp_sort', [
@@ -11,7 +10,7 @@ $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/UFCN0bYd
 ]);
 
 //echo $response->getBody();
-//$data = $response->getBody();
+$data = $response->getBody();
 $data = json_decode($response->getBody(), true);
 
 foreach ($data["reviews"] as $row) {
