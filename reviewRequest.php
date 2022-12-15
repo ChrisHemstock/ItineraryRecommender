@@ -1,10 +1,6 @@
 <?php
-<<<<<<< HEAD:reviewRequest.php
 require_once('vendor/autoload.php');
-=======
-require_once('../vendor/autoload.php');
 
->>>>>>> 55fd5b4fbde94a46dd41758d858154ffc51d1d98:resources/reviewRequest.php
 $client = new \GuzzleHttp\Client();
 
 $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/UFCN0bYdHroPKu6KV5CJqg/reviews?limit=20&sort_by=yelp_sort', [

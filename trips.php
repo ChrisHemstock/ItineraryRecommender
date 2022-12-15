@@ -34,7 +34,7 @@ foreach ($results as $row) {
       <?php
       foreach ($data as $row) {
         echo '<li>
-                    <a href="map.php?trip=' . $row[0] . '">' . $row[2] . '</a>
+                    <a href="map.php?trip=' . $row[0] . '&name=' . $row[2] . '">' . $row[2] . '</a>
                     <span class="close ' . $row[0] . '">X</span>
                   </li>';
       }
@@ -55,9 +55,9 @@ foreach ($results as $row) {
     }
     ?>
 
-    <form method="post">
+    <form  method="post">
       <input required type="text" name="tripName" placeholder="Trip Name">
-      <input type="submit" name="createTrip" class="button" value="Create Trip" />
+      <input type="submit" name="createTrip" class="button" value="Create Trip"/>
     </form>
   </div>
 
