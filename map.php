@@ -42,6 +42,7 @@ $json = createMapPoisJson($link);
     </script>
   </div>
   <div id="map"></div>
+  
   <script src="scripts/mapScript.js" defer>
   </script>
 </body>
