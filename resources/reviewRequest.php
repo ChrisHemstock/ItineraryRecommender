@@ -168,28 +168,12 @@ function getRecommendations($link, $userID) {
     $tokens = new TokensDocument(tokenize('art fitness book industrial electronic finance food game garden communicate educate leisure vehicle'));
     $docs['interests'] = $tokens;
 
-    $client = new \GuzzleHttp\Client();
 
-    $api_id = $link->query('SELECT id, API_ID FROM POIs')->fetch_all();
-    foreach ($api_id as $id) {
-      sleep(1);
-      $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/' . $id[1] . '/reviews?limit=20&sort_by=yelp_sort', [
-        'headers' => [
-          'Authorization' => 'Bearer FPHBQC5fbtVpUqt4lQtAmTPXNWzDKblHryRIRIfoL5PYHgLmW109muvBkAqYyscdeNerih_ZQrxs4WGnp-xf4pgyBDbEmO36NlUS8MB6GvgJp52qoqW_nUdvG9uOY3Yx',
-          'accept' => 'application/json',
-        ],
-      ]);
-      $data = json_decode($response->getBody(), true);
-
-      $review = '';
-
-      foreach($data["reviews"] as $row) {
-        $text = strtolower(preg_replace('/[^A-Za-z0-9\- ]/', '', $row['text']));
-        $review .= ' ' . $text;
-      }
-      //$tokens->applyStemmer(new DictionaryStemmer(new EnchantAdapter(), new SnowballStemmer()));
-      $tokens = new TokensDocument(tokenize($review));
-      $docs[$id[0]] = $tokens;
+    $POI_reviews = $link->query('SELECT reviews, id FROM POIs')->fetch_all();
+    foreach ($POI_reviews as $review) {
+      $tokens = new TokensDocument(tokenize($review[0]));
+      $docs[$review[1]] = $tokens;
+      //var_dump($review);
     }
 
 
