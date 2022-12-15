@@ -22,7 +22,7 @@ json.data.forEach(poi => {
 if (typeof phpPoi !== 'undefined') {
     let jsonPois = JSON.parse(phpPoi)
     jsonPois.forEach(poi => {
-        console.log('HERE in thisLOOP')
+        //console.log('HERE in thisLOOP')
         addEvent(poi[0], poi[3], poi[1], poi[2])
     });
 }

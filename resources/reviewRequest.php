@@ -220,7 +220,7 @@ function getRecommendations($link, $userID) {
     }
     asort($poisLiked);
     array_pop($poisLiked);
-    return json_encode(array_reverse($poisLiked, true));
+    return json_encode(array_slice(array_reverse($poisLiked, true), 0, 10, true));
 
 
 
