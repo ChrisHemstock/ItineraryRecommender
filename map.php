@@ -51,7 +51,7 @@ $json = createMapPoisJson($link);
   <div id="recommendations">
       <ul id="poiRecommendations"></ul>
   </div>
-  <button onclick="return displayRecommendations(recommendations);">Recommend</button>
+  <button onclick="return displayRecommendations(recommendations, data);">Recommend</button>
   <script>
     let map = L.map('map').setView([39.80924029431849, -86.16061656273943], 13);
 
@@ -62,6 +62,7 @@ $json = createMapPoisJson($link);
 
     containerEvent(document.getElementById('poi'))
     let json = JSON.parse(data)
+    console.log(json.data)
     json.data.forEach(poi => {
         L.marker([poi[0], poi[1]]).on('click', function (e) {
             //adds an event to the last day on the itinerary
@@ -265,12 +266,23 @@ $json = createMapPoisJson($link);
     }
 
 
-    function displayRecommendations(recommendationList) {
+    function displayRecommendations(recommendationList, data) {
       console.log(recommendationList)
       let json = JSON.parse(recommendationList)
       console.log(json)
       let poiIds = Object.keys(json)
       console.log(poiIds)
+
+      let poiJson = JSON.parse(data)
+      for(let i = 0; i < poiJson.data.length; i++) {
+        console.log(poiJson.data[i]);
+        for(let j = 0; j < poiIds.length; j++) {
+          if(poiJson.data[i][3] == poiIds[j]) {
+            addEvent(poiIds[j], poiJson.data[i][6], '00:00', '00:30')
+            updateTimes(1)
+          }
+        }
+      }
     }
   </script>
   <!-- <script src="scripts/mapScript.js" defer></script> -->
