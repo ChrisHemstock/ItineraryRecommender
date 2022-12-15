@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
         $gender = $_POST['gender'];
         $race = $_POST['race'];
         $age = $_POST['age'];
+        $interestDataUpdated = NULL;
 
         // update user info
         $sql =
@@ -79,11 +80,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
         }
     }
     if ($userDataUpdated == true && $interestDataUpdated == true) {
-        echo "<h3> Your Profile has been updated! ";
+        echo "<h3> Your Profile has been updated! </h3>";
     } else if ($userDataUpdated == true && $interestDataUpdated == false) {
-        echo "Your General Info been updated!";
+        echo "<h3> Your General Info been updated! </h3>";
     } else if ($userDataUpdated == false && $interestDataUpdated == true) {
-        echo "Your Interests have been updated!";
+        echo "<h3> Your Interests have been updated! </h3>";
     }
 
 }
