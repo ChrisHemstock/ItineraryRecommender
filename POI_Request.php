@@ -23,11 +23,15 @@ if(isset($_POST["Submit"])){
 function makeRequest(){
     require_once "../includes/dbconnect.php";
     session_start();
+<<<<<<< HEAD
 <<<<<<< HEAD:resources/POI_Request.php
 require_once('..vendor/autoload.php');
 =======
 require_once('../vendor/autoload.php');
 >>>>>>> 000418a18953a7819f0a8f7c0e6e9bae81c58553:POI_Request.php
+=======
+require_once('..vendor/autoload.php');
+>>>>>>> 000418a18953a7819f0a8f7c0e6e9bae81c58553
 $client = new \GuzzleHttp\Client();
 
 

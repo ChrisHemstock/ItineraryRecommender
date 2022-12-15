@@ -55,9 +55,9 @@ foreach ($results as $row) {
     }
     ?>
 
-    <form method="post">
+    <form  method="post">
       <input required type="text" name="tripName" placeholder="Trip Name">
-      <input type="submit" name="createTrip" class="button" value="Create Trip" />
+      <input type="submit" name="createTrip" class="button" value="Create Trip"/>
     </form>
   </div>
 

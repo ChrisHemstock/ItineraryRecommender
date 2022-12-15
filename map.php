@@ -36,7 +36,7 @@ $json = createMapPoisJson($link);
 </head>
 
 <body>
-  <?php include 'includes/homebar.php' ?>
+  <?php include 'includes/homebar.php'; ?>
   <div id="itinerary">
   <?php echo "<h2>" . $_GET['name'] . "</h2>"; ?>
     <ul id="poi" data-starttime='00:00'></ul>
