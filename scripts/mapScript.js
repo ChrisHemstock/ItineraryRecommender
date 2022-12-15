@@ -208,4 +208,3 @@ function updateTimes(indexCurrent) {
         updateTimes(indexCurrent + 1)
     }
 }
-

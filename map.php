@@ -1,7 +1,10 @@
 <?php
-include 'includes/functions.php';
-include 'includes/dbconnect.php';
+include_once 'includes/functions.php';
+include_once 'includes/dbconnect.php';
+include_once 'resources/reviewRequest.php';
 session_start();
+set_time_limit(360);
+$userID = $_SESSION["id"];
 $json = createMapPoisJson($link);
 ?>
 
@@ -25,7 +28,11 @@ $json = createMapPoisJson($link);
   <?php
   $jsonPoiList = populateSavedPois($link);
   ?>
-  <script>var phpPoi = '<?php echo $jsonPoiList ?>';</script>
+  <script>
+    var phpPoi = '<?php echo $jsonPoiList ?>';
+    var recommendations = '<?php echo getRecommendations($link, $userID)?>';
+  </script>
+  
 </head>
 
 <body>
@@ -41,9 +48,13 @@ $json = createMapPoisJson($link);
     </script>
   </div>
   <div id="map"></div>
-  
-  <script src="scripts/mapScript.js" defer>
+  <button onclick="return displayRecommendations(recommendations);">Recommend</button>
+  <script>
+    function displayRecommendations(recommendationList) {
+      console.log(recommendationList)
+    }
   </script>
+  <script src="scripts/mapScript.js" defer></script>
 </body>
 
 </html>
