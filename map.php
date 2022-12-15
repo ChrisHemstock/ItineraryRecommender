@@ -31,6 +31,7 @@ $json = createMapPoisJson($link);
 <body>
   <?php include 'includes/homebar.php' ?>
   <div id="itinerary">
+  <?php echo "<h2>" . $_GET['name'] . "</h2>"; ?>
     <ul id="poi" data-starttime='00:00'></ul>
     <input type="submit" value="Save" id="save" onclick="return feedback();" />
     <script>
