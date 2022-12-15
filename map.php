@@ -38,6 +38,7 @@ $json = createMapPoisJson($link);
 <body>
   <?php include 'includes/homebar.php' ?>
   <div id="itinerary">
+    <?php echo "<h2>". $_GET['name'] ."</h3>";?>
     <ul id="poi" data-starttime='00:00'></ul>
     <input type="submit" value="Save" id="save" onclick="return feedback();" />
     <script>
@@ -279,7 +280,7 @@ $json = createMapPoisJson($link);
         for(let j = 0; j < poiIds.length; j++) {
           if(poiJson.data[i][3] == poiIds[j]) {
             addEvent(poiIds[j], poiJson.data[i][6], '00:00', '00:30')
-            updateTimes(1)
+            updateTimes(0)
           }
         }
       }

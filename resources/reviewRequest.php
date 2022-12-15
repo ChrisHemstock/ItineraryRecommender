@@ -168,12 +168,12 @@ function getRecommendations($link, $userID) {
     $tokens = new TokensDocument(tokenize('art fitness book industrial electronic finance food game garden communicate educate leisure vehicle'));
     $docs['interests'] = $tokens;
 
-    $client = new \GuzzleHttp\Client();
 
-    $POI_reviews = $link->query('SELECT reviews FROM POIs')->fetch_all();
+    $POI_reviews = $link->query('SELECT reviews, id FROM POIs')->fetch_all();
     foreach ($POI_reviews as $review) {
-      $tokens = new TokensDocument(tokenize($review));
-      $docs[$review[0]] = $tokens;
+      $tokens = new TokensDocument(tokenize($review[0]));
+      $docs[$review[1]] = $tokens;
+      //var_dump($review);
     }
 
 
