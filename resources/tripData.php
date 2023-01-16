@@ -1,8 +1,8 @@
 <?php
-require_once "includes/dbconnect.php";
+require_once "../includes/dbconnect.php";
 session_start();
 
-
+//condition based on if trip data has been set
 if (isset($_POST['tripData'])) {
   $data = $_POST['tripData'];
   //var_dump($data);
