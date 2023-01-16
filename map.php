@@ -190,7 +190,7 @@ $json = createMapPoisJson($link);
     }
 
     function createItineraryJson() {
-        let dayString = `{"tripId": "${window.location.href.split('=')[1]}", "pois": [ `
+        let dayString = `{"tripId": "${window.location.href.split('&')[0].split('=')[1]}", "pois": [ `
         let pois = [...document.getElementsByClassName('draggable')];
         pois.forEach(poi => {
             dayString += `{"poiId": ${poi.className.split(' ')[1]}, "startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
