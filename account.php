@@ -24,7 +24,8 @@ $row = "false";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 
-    if (isset($_POST)) { // Taking all 5 values from the form data(input)
+    if (isset($_POST)) { 
+        // Taking all 5 values from the form data(input)
         $gender = $_POST['gender'];
         $race = $_POST['race'];
         $age = $_POST['age'];
@@ -119,6 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
     </p>
 
     <?
+    //Get current user data
     $getUserInfo = 
     "SELECT * FROM users WHERE id = '$userID';";
      if(mysqli_query($link, $getUserInfo)){
