@@ -41,6 +41,8 @@ $json = createMapPoisJson($link);
     <?php echo "<h2>". $_GET['name'] ."</h3>";?>
     <ul id="poi" data-starttime='00:00'></ul>
     <input type="submit" value="Save" id="save" onclick="return feedback();" />
+    <input type="button" value = "Make Recommendations" onclick="return displayRecommendations(recommendations, data);"/>
+
     <script>
       function feedback() {
         alert("Trip data Entered!");
@@ -52,7 +54,6 @@ $json = createMapPoisJson($link);
   <div id="recommendations">
       <ul id="poiRecommendations"></ul>
   </div>
-  <button onclick="return displayRecommendations(recommendations, data);">Recommend</button>
   <script>
     let map = L.map('map').setView([39.80924029431849, -86.16061656273943], 13);
 
@@ -286,7 +287,7 @@ $json = createMapPoisJson($link);
       }
     }
   </script>
-  <!-- <script src="scripts/mapScript.js" defer></script> -->
+   <script src="scripts/mapScript.js" defer></script>
 </body>
 
 </html>
