@@ -3,6 +3,7 @@ require_once "includes/dbconnect.php";
 session_start();
 $userID = $_SESSION["id"];
 
+//Get trips for current user
 $results = $link->query('SELECT * FROM trips WHERE userID = ' . $userID . ';')->fetch_all();
 $data = array();
 foreach ($results as $row) {
@@ -32,6 +33,7 @@ foreach ($results as $row) {
     <h1>Saved Trips</h1>
     <ul>
       <?php
+      //Loop through trip data
       foreach ($data as $row) {
         echo '<li>
                     <a href="map.php?trip=' . $row[0] . '&name=' . $row[2] . '">' . $row[2] . '</a>
@@ -42,6 +44,7 @@ foreach ($results as $row) {
     </ul>
 
     <?php
+    //Save trip
     if (isset($_POST['createTrip'])) {
       if (isset($_POST['tripName'])) {
         $tripName = $_POST['tripName'];

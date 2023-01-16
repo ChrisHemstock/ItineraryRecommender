@@ -2,7 +2,6 @@
 require_once "../includes/dbconnect.php";
 session_start();
 
-
 if (isset($_POST['tripID'])) {
     $tripID = $_POST['tripID'];
 

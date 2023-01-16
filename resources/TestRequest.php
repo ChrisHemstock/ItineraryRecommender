@@ -11,6 +11,7 @@ $jsondata = file_get_contents('poiData.json');
 //convert json object to php associative array
 $data = json_decode($jsondata, true);
 
+//Loops through the business data
 foreach ($data["businesses"] as $row) {
   //get the POI details
   $name = $row['name'];
