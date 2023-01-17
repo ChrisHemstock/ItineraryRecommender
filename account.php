@@ -217,49 +217,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
             
 
             ?>
-            <div id="interests">
-                <h2>Interests</h2>
-                <input <? if(strpos($description, 'artsEntertainment' ) !==false) { ?> checked = "checked"
-                <? } ?> type="checkbox" name="interests[]" value = "artsEntertainment" id="artsEntertainment">
-                <label for="artsEntertainment">Arts & Entertainment</label>
-                <input <? if(strpos($description, 'vehicles' ) !==false) { ?> checked = "checked"
-                <? } ?>type="checkbox" name="interests[]" id="vehicles" value = "vehicles">
-                <label for="vehicles">Autos & Vehicles</label>
-                <input <? if(strpos($description, 'beautyFitness' ) !==false) { ?> checked = "checked"
-                <? } ?>type="checkbox" name="interests[]" id="beautyFitness" value = "beautyFitness">
-                <label for="beautyFitness">Beauty & Fitness</label>
-                <input <? if(strpos($description, 'books' ) !==false) { ?> checked = "books"
-                <? } ?>type="checkbox" name="interests[]" id="books" value = "books">
-                <label for="books">Books & Literature</label>
-                <input <? if(strpos($description, 'businessIndustrial' ) !==false) { ?> checked = "checked"
-                <? } ?>type="checkbox" name="interests[]" id="businessIndustrial" value="businessIndustrial">
-                <label for="businessIndustrial">Business & Industrial</label>
-                <input <? if(strpos($description, 'electronics' ) !==false) { ?> checked = "checked"
-                <? } ?>type="checkbox" name="interests[]" id="electronics" value="electronics">
-                <label for="electronics">Computers & Electronics</label>
-                <input <? if(strpos($description, 'finance' ) !==false) { ?> checked = "checked"
-                <? } ?>type="checkbox" name="interests[]" id="finance" value="finance">
-                <label for="finance">Finance</label>
-                <input <? if(strpos($description, 'food' ) !==false) { ?> checked = "checked"
-                <? } ?>type="checkbox" name="interests[]" id="food" value="food" >
-                <label for="food">Food & Drink</label>
-                <input <? if(strpos($description, 'games' ) !==false) { ?> checked = "checked"
-                <? } ?>type="checkbox" name="interests[]" id="games" value="games">
-                <label for="games">Games</label>
-                <input <? if(strpos($description, 'leisure' ) !==false) { ?> checked = "checked"
-                <? } ?>type="checkbox" name="interests[]" id="leisure" value="leisure">
-                <label for="leisure">Hobbies & Leisure</label>
-                <input <? if(strpos($description, 'homeGarden' ) !==false) { ?> checked = "checked"
-                <? } ?>type="checkbox" name="interests[]" id="homeGarden" value="homeGarden">
-                <label for="homeGarden">Home & Garden</label>
-                <input <? if(strpos($description, 'internetTelecom' ) !==false) { ?> checked = "checked"
-                <? } ?>type="checkbox" name="interests[]" id="internetTelecom" value="internetTelecom">
-                <label for="internetTelecom">Internet & Telecom</label>
-                <input <? if(strpos($description, 'jobsEducation' ) !==false) { ?> checked = "checked"
-                <? } ?>type="checkbox" name="interests[]" id="jobsEducation" value="jobsEducation">
-                <label for="jobsEducation">Jobs & Education</label>
 
-            </div>
             <input type="submit" value="Submit">
 
         </form>
