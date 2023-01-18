@@ -24,17 +24,18 @@ $row = "false";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 
-    if (isset($_POST)) { 
+    if (isset($_POST)) {
         // Taking all 5 values from the form data(input)
         $gender = $_POST['gender'];
         $race = $_POST['race'];
-        $age = $_POST['age'];
+        $birthday = $_POST['birthDay'];
+        $age = floor((time() - strtotime($birthday)) / 31556926);
         $interestDataUpdated = NULL;
 
         // update user info
         $sql =
             "UPDATE users 
-        SET gender = '$gender', age = '$age', race = '$race'
+        SET gender = '$gender', age = '$age', race = '$race', birthday = '$birthday'
         WHERE id = '$userID';";
         $stmt = $sql;
         if (mysqli_query($link, $sql)) {
@@ -129,6 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
             $ageCurrent = $row['age'];
             $raceCurrent = $row['race'];
             $genderCurrent = $row['gender'];
+            $birthdayCurrent = $row['birthday'];
 
         }
     }else{
@@ -162,8 +164,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
                         }
             ?>
             </select>
-            <label for="age">Age</label>
-            <input type="number" name="age" id="age" min="0" max="120" required="true" value=<?echo $ageCurrent;?>>
+            <label for="age">Birth Day:</label>
+            <input type="date" value = <? echo $birthdayCurrent; ?> required="true" id="birthDay" name="birthDay">
             <label for="race">Race</label>
             <select name="race" id="race" required>
                 <option selected disabled value></option>
@@ -217,6 +219,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
             
 
             ?>
+            <br>
 
             <input type="submit" value="Submit">
 
