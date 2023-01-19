@@ -220,7 +220,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 
             ?>
             <br>
-
+            <a href="poiChoice.html">Choose Interested Points of Interest</a>
             <input type="submit" value="Submit">
 
         </form>
