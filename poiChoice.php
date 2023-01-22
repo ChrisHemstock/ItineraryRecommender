@@ -3,16 +3,6 @@
     session_start();
     $userID = $_SESSION["id"];
 
-    
-    //Get trips for current user
-    $results = $link->query('SELECT * FROM trips WHERE userID = ' . $userID . ';')->fetch_all();
-
-    //id, name
-    $data = array();
-    foreach ($results as $row) {
-
-    }
-
     //Takes an array of POI IDs and a position and echos the html for that id
     //When the button is clicked the next poi is echoed
     //Also removes all markup within the div #choice
