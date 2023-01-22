@@ -56,9 +56,11 @@ foreach ($data["businesses"] as $row) {
   $Lat = $row['coordinates']['latitude'];
   $phone = $row['phone'];
   $API_KEY = $row['id'];
+  $image_url = $row['image_url'];
+
   //insert into mysql table
- $sql = "INSERT INTO POIs(name, Category, rating, num_ratings, address, Lng, Lat, phone, API_ID)
-    VALUES('$name', '$Category', '$rating', '$num_ratings', '$address', '$Lng', '$Lat', '$phone', '$API_KEY')";
+ $sql = "INSERT INTO POIs(name, Category, rating, num_ratings, address, Lng, Lat, phone, API_ID, image_url)
+    VALUES('$name', '$Category', '$rating', '$num_ratings', '$address', '$Lng', '$Lat', '$phone', '$API_KEY', '$image_url')";
   if ($link->query($sql) === TRUE) {
     $created = true;
   } else {
