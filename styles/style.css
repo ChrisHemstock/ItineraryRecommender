@@ -154,3 +154,16 @@ div#userInfo {
     background-color: lightblue;
     width: 50rem;
 }
+
+/* poiChoice.html styles */
+#choice {
+    display: inline-block;
+    height: 30rem;
+    width: 50rem;
+    background-color: lightblue;
+    text-align: center;
+    padding: 1rem;
+    overflow-y: auto;
+    border-radius: 5px;
+
+}
