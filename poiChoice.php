@@ -8,10 +8,11 @@
     //Also removes all markup within the div #choice
     function getPoiInfo($link, $ids, $pos, $likes) {
         $id = $ids[$pos];
-        $results = $link->query('SELECT name FROM pois WHERE id = ' . $id . ';')->fetch_all();
+        $results = $link->query('SELECT name, image_url FROM pois WHERE id = ' . $id . ';')->fetch_all();
 
         foreach ($results as $row) {
             $name = $row[0];
+            $image_url = $row[1];
             // echo '<script>
             //         document.getElementById("choice").innerHTML = "";
             //         </script>';
@@ -20,7 +21,7 @@
                     <form method="post">
                         <button type="submit" name="Like' . $pos . '" value="' . $likes . ' ' . $id . '">Like</button>
                         <button type="submit" name="Dislike' . $pos . '" value="' . $likes . '">Dislike</button>
-                        <img src="" alt="">
+                        <img src="'. $image_url . '" alt="'. $image_url . '">
                     </form>
                   </div>';
         }
@@ -64,10 +65,23 @@
             } else {
                 $likes = $_POST['Dislike' . $i];
             }
-            //Insert the id's in $likes into the database here
-            //Likes is a string of id's seperated by spaces
 
+            $poi_ids = explode(" ", $likes);
+            var_dump($likes);
 
+        foreach ($poi_ids as $poi_id) {
+            $sql2 = "INSERT INTO interests(userID, POI_ID)
+            VALUES ('$userID','$poi_id') 
+            ON DUPLICATE KEY UPDATE 
+            POI_ID = '$poi_id'";
+                $stmt = $sql2;
+                if (mysqli_query($link, $sql2)) {
+                    $interestDataUpdated = true;
+                } else {
+                    echo "ERROR: Hush! Sorry $sql2. "
+                        . mysqli_error($link);
+                }
+        }
 
 
             header("Location: account.php");
