@@ -11,44 +11,44 @@ set_time_limit(360);
 //$userID = $_SESSION["id"];
 
 
-//get user interests
-function userInterests($userID) {
-  global $link;
-  $interests = $link->query('SELECT Description FROM interests WHERE userID = ' . $userID . ' ;')->fetch_all();
-  $likes = array();
-  foreach($interests as $interest) {
-    $txt = '';
-    if($interest[0] == 'artsEntertainment') {
-      $txt = 'art';
-    } else if($interest[0] == 'beautyFitness') {
-      $txt = 'fitness';
-    } else if($interest[0] == 'books') {
-      $txt = 'book';
-    } else if($interest[0] == 'businessIndustrial') {
-      $txt = 'industrial';
-    } else if($interest[0] == 'electronics') {
-      $txt = 'electronic';
-    } else if($interest[0] == 'finance') {
-      $txt = 'finance';
-    } else if($interest[0] == 'food') {
-      $txt = 'food';
-    } else if($interest[0] == 'games') {
-      $txt = 'game';
-    } else if($interest[0] == 'homeGarden') {
-      $txt = 'garden';
-    } else if($interest[0] == 'internetTelecom') {
-      $txt = 'communicate';
-    } else if($interest[0] == 'jobsEducation') {
-      $txt = 'educate';
-    } else if($interest[0] == 'leisure') {
-      $txt = 'leisure';
-    } else if($interest[0] == 'vehicles') {
-      $txt = 'vehicle';
-    }
-    array_push($likes, $txt);
-  }
-  return $likes;
-}
+// //get user interests
+// function userInterests($userID) {
+//   global $link;
+//   $interests = $link->query('SELECT Description FROM interests WHERE userID = ' . $userID . ' ;')->fetch_all();
+//   $likes = array();
+//   foreach($interests as $interest) {
+//     $txt = '';
+//     if($interest[0] == 'artsEntertainment') {
+//       $txt = 'art';
+//     } else if($interest[0] == 'beautyFitness') {
+//       $txt = 'fitness';
+//     } else if($interest[0] == 'books') {
+//       $txt = 'book';
+//     } else if($interest[0] == 'businessIndustrial') {
+//       $txt = 'industrial';
+//     } else if($interest[0] == 'electronics') {
+//       $txt = 'electronic';
+//     } else if($interest[0] == 'finance') {
+//       $txt = 'finance';
+//     } else if($interest[0] == 'food') {
+//       $txt = 'food';
+//     } else if($interest[0] == 'games') {
+//       $txt = 'game';
+//     } else if($interest[0] == 'homeGarden') {
+//       $txt = 'garden';
+//     } else if($interest[0] == 'internetTelecom') {
+//       $txt = 'communicate';
+//     } else if($interest[0] == 'jobsEducation') {
+//       $txt = 'educate';
+//     } else if($interest[0] == 'leisure') {
+//       $txt = 'leisure';
+//     } else if($interest[0] == 'vehicles') {
+//       $txt = 'vehicle';
+//     }
+//     array_push($likes, $txt);
+//   }
+//   return $likes;
+// }
 
 function getReviewsArray() {
   global $link;
@@ -127,84 +127,61 @@ function poiRecommendArray($docs, $likes, $tfidf, $userProfile) {
 
 
 function getRecommendations($link, $userID) {
-  $interests = $link->query('SELECT Description FROM interests WHERE userID = ' . $userID . ' ;')->fetch_all();
-  if(count($interests) > 0) {
-    $likes = array();
-    foreach($interests as $interest) {
-      $txt = '';
-      if($interest[0] == 'artsEntertainment') {
-        $txt = 'art';
-      } else if($interest[0] == 'beautyFitness') {
-        $txt = 'fitness';
-      } else if($interest[0] == 'books') {
-        $txt = 'book';
-      } else if($interest[0] == 'businessIndustrial') {
-        $txt = 'industrial';
-      } else if($interest[0] == 'electronics') {
-        $txt = 'electronic';
-      } else if($interest[0] == 'finance') {
-        $txt = 'finance';
-      } else if($interest[0] == 'food') {
-        $txt = 'food';
-      } else if($interest[0] == 'games') {
-        $txt = 'game';
-      } else if($interest[0] == 'homeGarden') {
-        $txt = 'garden';
-      } else if($interest[0] == 'internetTelecom') {
-        $txt = 'communicate';
-      } else if($interest[0] == 'jobsEducation') {
-        $txt = 'educate';
-      } else if($interest[0] == 'leisure') {
-        $txt = 'leisure';
-      } else if($interest[0] == 'vehicles') {
-        $txt = 'vehicle';
+  $liked_POIs = $link->query('SELECT POI_ID FROM likes WHERE userID = ' . $userID . ' ;')->fetch_all();
+  if(count($liked_POIs) > 0) {
+    foreach ($liked_POIs as $POIs) {
+      foreach ($POIs as $POI_ID) {
+        //var_dump($POI_ID);
+        $liked_reviews = $link->query('SELECT reviews FROM POIs WHERE API_ID = "' . $POI_ID . '" ;')->fetch_all();
+        foreach ($liked_reviews as $review) {
+          $reviewText = $review;
+         // var_dump($reviewText);
+        }
       }
-      array_push($likes, $txt);
     }
-
 
     //Get reviews      returns an array of reviews
-    $docs = [];
-    $tokens = new TokensDocument(tokenize('art fitness book industrial electronic finance food game garden communicate educate leisure vehicle'));
-    $docs['interests'] = $tokens;
+    //$docs = [];
+    //$tokens = new TokensDocument(tokenize('art fitness book industrial electronic finance food game garden communicate educate leisure vehicle'));
+    //$docs['interests'] = $tokens;
 
 
-    $POI_reviews = $link->query('SELECT reviews, id FROM POIs')->fetch_all();
-    foreach ($POI_reviews as $review) {
-      $tokens = new TokensDocument(tokenize($review[0]));
-      $docs[$review[1]] = $tokens;
-      //var_dump($review);
-    }
+    // $POI_reviews = $link->query('SELECT reviews, id FROM POIs')->fetch_all();
+    // foreach ($POI_reviews as $review) {
+    //   $tokens = new TokensDocument(tokenize($review[0]));
+    //   $docs[$review[1]] = $tokens;
+    //   //var_dump($review);
+    // }
 
 
 
 
-    $docsCollection = new DocumentArrayCollection($docs);
-    $tfidf = new TfIdf($docsCollection);
+    // $docsCollection = new DocumentArrayCollection($docs);
+    // $tfidf = new TfIdf($docsCollection);
 
 
-    //creates the user profile vector
-    $userProfile = [];
-    foreach($likes as $like) {
-      array_push($userProfile, $tfidf->getTfIdf($docs['interests'], $like, 3));
-    }
+    // //creates the user profile vector
+    // $userProfile = [];
+    // foreach($likes as $like) {
+    //   array_push($userProfile, $tfidf->getTfIdf($docs['interests'], $like, 3));
+    // }
 
 
-    //returns an ordered list of POIs to recommend
-    $poisLiked = [];
-    foreach($docs as $key=>$poi) {
-      $vector = [];
-      foreach($likes as $like) {
-        array_push($vector, $tfidf->getTfIdf($poi, $like, 3));
-      }
-      $similarity = cosineSimilarity($userProfile, $vector);
-      if($similarity != -2) {
-        $poisLiked[$key] = $similarity;
-      }
-    }
-    asort($poisLiked);
-    array_pop($poisLiked);
-    return json_encode(array_slice(array_reverse($poisLiked, true), 0, 10, true));
+    // //returns an ordered list of POIs to recommend
+    // $poisLiked = [];
+    // foreach($docs as $key=>$poi) {
+    //   $vector = [];
+    //   foreach($likes as $like) {
+    //     array_push($vector, $tfidf->getTfIdf($poi, $like, 3));
+    //   }
+    //   $similarity = cosineSimilarity($userProfile, $vector);
+    //   if($similarity != -2) {
+    //     $poisLiked[$key] = $similarity;
+    //   }
+    // }
+    // asort($poisLiked);
+    // array_pop($poisLiked);
+    // return json_encode(array_slice(array_reverse($poisLiked, true), 0, 10, true));
 
 
 
