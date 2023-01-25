@@ -17,12 +17,14 @@ $jsonPoiList = populateSavedPois($link);
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css"
-    integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
   <link rel="stylesheet" href="styles/style.css" />
 
-  <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"
-    integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <script src="scripts/mapFunctions.js"></script>
@@ -34,19 +36,20 @@ $jsonPoiList = populateSavedPois($link);
     //creates javascript variables from php variables
     var data = '<?php echo $json; ?>';
     var phpPoi = '<?php echo $jsonPoiList ?>';
-    var recommendations = '<?php echo getRecommendations($link, $userID)?>';
+    //var recommendations = '<?php //echo getRecommendations($link, $userID)?>';
   </script>
 </head>
 
 <body>
   <?php include 'includes/homebar.php' ?>
   <div id="itinerary">
-    <?php echo "<h2>". $_GET['name'] ."</h3>";?>
+    <?php echo "<h2>". $_GET['name'] ."</h2>";?>
     <ul id="poi" data-starttime='00:00'></ul>
     <input type="submit" value="Save" id="save" onclick="return feedback();" />
     <input type="button" value = "Make Recommendations" onclick="return displayRecommendations(recommendations, data);"/>
   </div>
   <div id="map"></div>
+  <script>console.log("did I win")</script>
   <div id="recommendations">
       <ul id="poiRecommendations"></ul>
   </div>
