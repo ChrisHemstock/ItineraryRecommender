@@ -41,6 +41,7 @@
         $ids = ['F5n57w6RaOCAB4bivNSs8A', 'E5cecsuxC11xDO9E3c93lA', '6x6rR-SErwOo3xF2AzXVHA', 'VEGvvazGmbukHqZyToVvYw'];
         $likes = '';
         $start = true;
+        
         for ($i = 0; $i < (sizeof($ids) - 1); $i++) {
             if(isset($_POST['Like' . $i]) or isset($_POST['Dislike' . $i])) {
                 $start = false;
@@ -55,6 +56,7 @@
             
         }
 
+        //adds the liked poi keys to the database
         if(isset($_POST['Like' . (sizeof($ids) - 1)]) or isset($_POST['Dislike' . (sizeof($ids) - 1)])) {
             $start = false;
             if(isset($_POST['Like' . $i])) {
@@ -64,27 +66,28 @@
             }
 
             $poi_ids = explode(" ", $likes);
-        var_dump($poi_ids);
+            var_dump($poi_ids);
             var_dump($likes);
 
-        foreach ($poi_ids as $poi_id) {
-            $sql2 = "INSERT INTO likes(userID, POI_ID)
-            VALUES ('$userID','$poi_id') 
-            ON DUPLICATE KEY UPDATE 
-            POI_ID = '$poi_id'";
-                $stmt = $sql2;
-                if (mysqli_query($link, $sql2)) {
-                    $interestDataUpdated = true;
-                } else {
-                    echo "ERROR: Hush! Sorry $sql2. "
-                        . mysqli_error($link);
-                }
-        }
-
+            foreach ($poi_ids as $poi_id) {
+                $sql2 = "INSERT INTO likes(userID, POI_ID)
+                VALUES ('$userID','$poi_id') 
+                ON DUPLICATE KEY UPDATE 
+                POI_ID = '$poi_id'";
+                    $stmt = $sql2;
+                    if (mysqli_query($link, $sql2)) {
+                        $interestDataUpdated = true;
+                    } else {
+                        echo "ERROR: Hush! Sorry $sql2. "
+                            . mysqli_error($link);
+                    }
+            }
 
             header("Location: account.php");
             exit();
         }
+
+        //starts the survey
         if($start) {
             getPoiInfo($link, $ids, 0, $likes); 
         }
