@@ -2,6 +2,7 @@
 // Initialize the session
 session_start();
 $userID = $_SESSION["id"];
+echo $userID;
 $description = "";
 $value = 0;
 $getInterestInfo =
@@ -30,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
         $race = $_POST['race'];
         $birthday = $_POST['birthDay'];
         $age = floor((time() - strtotime($birthday)) / 31556926);
-        $interestDataUpdated = NULL;
+        //$interestDataUpdated = NULL;
 
         // update user info
         $sql =
@@ -45,47 +46,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
                 . mysqli_error($link);
             echo $userID;
         }
-        // if current values are set, clear data
-        if (mysqli_query($link, $getInterestInfo)) {
-            $clearData = "DELETE FROM interests WHERE userID = '$userID'";
-            if (mysqli_query($link, $clearData)) {
-                $userDataCleared = true;
-            } else {
-                echo "ERROR: Hush! Sorry $clearData. "
-                    . mysqli_error($clearData);
-                echo $userID;
-            }
+        // // if current values are set, clear data
+        // if (mysqli_query($link, $getInterestInfo)) {
+        //     $clearData = "DELETE FROM interests WHERE userID = '$userID'";
+        //     if (mysqli_query($link, $clearData)) {
+        //         $userDataCleared = true;
+        //     } else {
+        //         echo "ERROR: Hush! Sorry $clearData. "
+        //             . mysqli_error($clearData);
+        //         echo $userID;
+        //     }
 
-        } else {
-            echo "ERROR: Hush! Sorry $getInterestInfo. "
-                . mysqli_error($link);
-        }
+        // } else {
+        //     echo "ERROR: Hush! Sorry $getInterestInfo. "
+        //         . mysqli_error($link);
+        // }
 
-        // insert or update interests
-        if (isset($_POST['interests'])) {
-            foreach ($_POST['interests'] as $key => $value) {
-                $description = $value;
-                $value = 1;
-                $sql2 = "INSERT INTO interests(userID, description, value)
-            VALUES ('$userID','$description', '$value') 
-            ON DUPLICATE KEY UPDATE 
-            description = '$description', value = '$value'";
-                $stmt = $sql2;
-                if (mysqli_query($link, $sql2)) {
-                    $interestDataUpdated = true;
-                } else {
-                    echo "ERROR: Hush! Sorry $sql2. "
-                        . mysqli_error($link);
-                }
-            }
+        // // insert or update interests
+        // if (isset($_POST['interests'])) {
+        //     foreach ($_POST['interests'] as $key => $value) {
+        //         $description = $value;
+        //         $value = 1;
+        //         $sql2 = "INSERT INTO interests(userID, description, value)
+        //     VALUES ('$userID','$description', '$value') 
+        //     ON DUPLICATE KEY UPDATE 
+        //     description = '$description', value = '$value'";
+        //         $stmt = $sql2;
+        //         if (mysqli_query($link, $sql2)) {
+        //             $interestDataUpdated = true;
+        //         } else {
+        //             echo "ERROR: Hush! Sorry $sql2. "
+        //                 . mysqli_error($link);
+        //         }
+        //     }
 
-        }
+        // }
     }
-    if ($userDataUpdated == true && $interestDataUpdated == true) {
+    if ($userDataUpdated == true) {
         echo "<h3> Your Profile has been updated! </h3>";
-    } else if ($userDataUpdated == true && $interestDataUpdated == false) {
-        echo "<h3> Your General Info been updated! </h3>";
-    } else if ($userDataUpdated == false && $interestDataUpdated == true) {
+    }
+    else if ($userDataUpdated == false) {
         echo "<h3> Your Interests have been updated! </h3>";
     }
 
@@ -206,16 +206,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
             <br>
 
             <? 
-            $description;
-            if(mysqli_query($link, $getInterestInfo)){
-                $response = @mysqli_query($link, $getInterestInfo);
-                while($row = mysqli_fetch_array($response)){
-                    $description .= $row['Description'];
-                }
-            }else{
-                echo "ERROR: Hush! Sorry $getInterestInfo. "
-                    . mysqli_error($link);
-            }
+            //$description;
+            // if(mysqli_query($link, $getInterestInfo)){
+            //     $response = @mysqli_query($link, $getInterestInfo);
+            //     while($row = mysqli_fetch_array($response)){
+            //         $description .= $row['Description'];
+            //     }
+            // }else{
+            //     echo "ERROR: Hush! Sorry $getInterestInfo. "
+            //         . mysqli_error($link);
+            // }
             
 
             ?>

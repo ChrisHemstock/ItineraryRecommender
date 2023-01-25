@@ -8,14 +8,11 @@
     //Also removes all markup within the div #choice
     function getPoiInfo($link, $ids, $pos, $likes) {
         $id = $ids[$pos];
-        $results = $link->query('SELECT name, image_url FROM pois WHERE id = ' . $id . ';')->fetch_all();
+        $results = $link->query('SELECT name, image_url FROM pois WHERE API_ID = "' . $id . '";')->fetch_all();
 
         foreach ($results as $row) {
             $name = $row[0];
             $image_url = $row[1];
-            // echo '<script>
-            //         document.getElementById("choice").innerHTML = "";
-            //         </script>';
             echo '<div id="' . $id . '">
                     <h1 class=' . $id . '>' . $name . '</h1>
                     <form method="post">
@@ -36,16 +33,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
-    <title>Select Interests</title>
+    <title>POI Survey</title>
 </head>
 <body>
     <div id="choice">
     <?php
-        $ids = [1119, 1198, 1028, 1062];
+        $ids = ['F5n57w6RaOCAB4bivNSs8A', 'E5cecsuxC11xDO9E3c93lA', '6x6rR-SErwOo3xF2AzXVHA', 'VEGvvazGmbukHqZyToVvYw'];
         $likes = '';
         $start = true;
-        for ($i = 0; $i < sizeof($ids) - 1; $i++) {
-            echo 'here:' . $i . '<br>';
+        
+        for ($i = 0; $i < (sizeof($ids) - 1); $i++) {
             if(isset($_POST['Like' . $i]) or isset($_POST['Dislike' . $i])) {
                 $start = false;
                 if(isset($_POST['Like' . $i])) {
@@ -58,7 +55,9 @@
             }
             
         }
-        if(isset($_POST['Like' . sizeof($ids) - 1]) or isset($_POST['Dislike' . sizeof($ids) - 1])) {
+
+        //adds the liked poi keys to the database
+        if(isset($_POST['Like' . (sizeof($ids) - 1)]) or isset($_POST['Dislike' . (sizeof($ids) - 1)])) {
             $start = false;
             if(isset($_POST['Like' . $i])) {
                 $likes = $_POST['Like' . $i];
@@ -67,28 +66,29 @@
             }
 
             $poi_ids = explode(" ", $likes);
+            var_dump($poi_ids);
             var_dump($likes);
 
-        foreach ($poi_ids as $poi_id) {
-            $sql2 = "INSERT INTO interests(userID, POI_ID)
-            VALUES ('$userID','$poi_id') 
-            ON DUPLICATE KEY UPDATE 
-            POI_ID = '$poi_id'";
-                $stmt = $sql2;
-                if (mysqli_query($link, $sql2)) {
-                    $interestDataUpdated = true;
-                } else {
-                    echo "ERROR: Hush! Sorry $sql2. "
-                        . mysqli_error($link);
-                }
-        }
-
+            foreach ($poi_ids as $poi_id) {
+                $sql2 = "INSERT INTO likes(userID, POI_ID)
+                VALUES ('$userID','$poi_id') 
+                ON DUPLICATE KEY UPDATE 
+                POI_ID = '$poi_id'";
+                    $stmt = $sql2;
+                    if (mysqli_query($link, $sql2)) {
+                        $interestDataUpdated = true;
+                    } else {
+                        echo "ERROR: Hush! Sorry $sql2. "
+                            . mysqli_error($link);
+                    }
+            }
 
             header("Location: account.php");
             exit();
         }
+
+        //starts the survey
         if($start) {
-            echo 'here:-1<br>';
             getPoiInfo($link, $ids, 0, $likes); 
         }
     ?>
