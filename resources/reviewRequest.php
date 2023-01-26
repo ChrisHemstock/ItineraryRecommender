@@ -11,84 +11,84 @@ set_time_limit(360);
 //$userID = $_SESSION["id"];
 
 
-//get user interests
-function userInterests($userID) {
-  global $link;
-  $poiReviews = $link->query('SELECT reviews FROM likes, pois WHERE userID = ' . $userID . ' AND pois.API_ID = likes.POI_ID ;')->fetch_all();
-  $likes = array();
-  foreach($poiReviews as $poiReview) {
-    array_push($likes, $poiReview);
-  }
-  return $likes;
-}
+// //get user interests
+// function userInterests($userID) {
+//   global $link;
+//   $poiReviews = $link->query('SELECT reviews FROM likes, pois WHERE userID = ' . $userID . ' AND pois.API_ID = likes.POI_ID ;')->fetch_all();
+//   $likes = array();
+//   foreach($poiReviews as $poiReview) {
+//     array_push($likes, $poiReview);
+//   }
+//   return $likes;
+// }
 
-function getReviewsArray() {
-  global $link;
-  $docs = [];
-  $tokens = new TokensDocument(tokenize('art fitness book industrial electronic finance food game garden communicate educate leisure vehicle'));
-  $docs['interests'] = $tokens;
+// function getReviewsArray() {
+//   global $link;
+//   $docs = [];
+//   $tokens = new TokensDocument(tokenize('art fitness book industrial electronic finance food game garden communicate educate leisure vehicle'));
+//   $docs['interests'] = $tokens;
 
-  $client = new \GuzzleHttp\Client();
+//   $client = new \GuzzleHttp\Client();
 
-  $api_id = $link->query('SELECT id, API_ID FROM POIs')->fetch_all();
-  foreach ($api_id as $id) {
-    sleep(1);
-    $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/' . $id[1] . '/reviews?limit=20&sort_by=yelp_sort', [
-      'headers' => [
-        'Authorization' => 'Bearer FPHBQC5fbtVpUqt4lQtAmTPXNWzDKblHryRIRIfoL5PYHgLmW109muvBkAqYyscdeNerih_ZQrxs4WGnp-xf4pgyBDbEmO36NlUS8MB6GvgJp52qoqW_nUdvG9uOY3Yx',
-        'accept' => 'application/json',
-      ],
-    ]);
-    $data = json_decode($response->getBody(), true);
+//   $api_id = $link->query('SELECT id, API_ID FROM POIs')->fetch_all();
+//   foreach ($api_id as $id) {
+//     sleep(1);
+//     $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/' . $id[1] . '/reviews?limit=20&sort_by=yelp_sort', [
+//       'headers' => [
+//         'Authorization' => 'Bearer FPHBQC5fbtVpUqt4lQtAmTPXNWzDKblHryRIRIfoL5PYHgLmW109muvBkAqYyscdeNerih_ZQrxs4WGnp-xf4pgyBDbEmO36NlUS8MB6GvgJp52qoqW_nUdvG9uOY3Yx',
+//         'accept' => 'application/json',
+//       ],
+//     ]);
+//     $data = json_decode($response->getBody(), true);
 
-    $review = '';
+//     $review = '';
 
-    foreach($data["reviews"] as $row) {
-      $text = strtolower(preg_replace('/[^A-Za-z\ ]/', '', $row['text']));
-      $review .= ' ' . $text;
-    }
+//     foreach($data["reviews"] as $row) {
+//       $text = strtolower(preg_replace('/[^A-Za-z\ ]/', '', $row['text']));
+//       $review .= ' ' . $text;
+//     }
 
-    //push review to database here ********** this could be up to three reviews concat. together
+//     //push review to database here ********** this could be up to three reviews concat. together
 
-    $tokens = new TokensDocument(tokenize($review));
-    $docs[$id[0]] = $tokens;
-  }
+//     $tokens = new TokensDocument(tokenize($review));
+//     $docs[$id[0]] = $tokens;
+//   }
 
-  return $docs;
-}
+//   return $docs;
+// }
 
-//  $likes = the array returned from userInterests
-//  $tfidf = a tfidf object
-//  $docs = the array from getReviewsArray
-function createUserVector($likes, $tfidf, $docs) {
-  $userProfile = [];
-  foreach($likes as $like) {
-    array_push($userProfile, $tfidf->getTfIdf($docs['interests'], $like, 3));
-  }
+// //  $likes = the array returned from userInterests
+// //  $tfidf = a tfidf object
+// //  $docs = the array from getReviewsArray
+// function createUserVector($likes, $tfidf, $docs) {
+//   $userProfile = [];
+//   foreach($likes as $like) {
+//     array_push($userProfile, $tfidf->getTfIdf($docs['interests'], $like, 3));
+//   }
 
-  return $userProfile;
-}
+//   return $userProfile;
+// }
 
-//  $docs = the array from getReviewsArray
-//  $likes = the array returned from userInterests
-//  $tfidf = a tfidf object
-//  $userProfile = What is returned from create UserVector
-function poiRecommendArray($docs, $likes, $tfidf, $userProfile) {
-  $poisLiked = [];
-  foreach($docs as $key=>$poi) {
-    $vector = [];
-    foreach($likes as $like) {
-      array_push($vector, $tfidf->getTfIdf($poi, $like, 3));
-    }
-    $similarity = cosineSimilarity($userProfile, $vector);
-    if($similarity != -2) {
-      $poisLiked[$key] = $similarity;
-    }
-  }
-  asort($poisLiked);
-  array_pop($poisLiked);
-  $poisLiked = array_reverse($poisLiked, true);
-}
+// //  $docs = the array from getReviewsArray
+// //  $likes = the array returned from userInterests
+// //  $tfidf = a tfidf object
+// //  $userProfile = What is returned from create UserVector
+// function poiRecommendArray($docs, $likes, $tfidf, $userProfile) {
+//   $poisLiked = [];
+//   foreach($docs as $key=>$poi) {
+//     $vector = [];
+//     foreach($likes as $like) {
+//       array_push($vector, $tfidf->getTfIdf($poi, $like, 3));
+//     }
+//     $similarity = cosineSimilarity($userProfile, $vector);
+//     if($similarity != -2) {
+//       $poisLiked[$key] = $similarity;
+//     }
+//   }
+//   asort($poisLiked);
+//   array_pop($poisLiked);
+//   $poisLiked = array_reverse($poisLiked, true);
+// }
 
 
 
