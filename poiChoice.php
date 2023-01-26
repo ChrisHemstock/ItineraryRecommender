@@ -73,28 +73,27 @@
                 $likes = $_POST['Dislike' . $i];
             }
 
-            $poi_ids = explode(" ", ltrim($likes, ' '));
+            $poi_ids = explode(" ", $likes);
             var_dump($poi_ids);
             var_dump($likes);
 
 
-
-        var_dump($sqlClear);
-
-            foreach ($poi_ids as $poi_id) {
+        //var_dump($sqlClear);
+        foreach ($poi_ids as $poi_id) {
+            if ($poi_id != "") {
                 $sql2 = "INSERT INTO likes(userID, POI_ID)
                 VALUES ('$userID','$poi_id') 
                 ON DUPLICATE KEY UPDATE 
                 POI_ID = '$poi_id'";
-                    $stmt = $sql2;
-                    if (mysqli_query($link, $sql2)) {
-                        $interestDataUpdated = true;
-                    } else {
-                        echo "ERROR: Hush! Sorry $sql2. "
-                            . mysqli_error($link);
-                    }
+                $stmt = $sql2;
+                if (mysqli_query($link, $sql2)) {
+                    $interestDataUpdated = true;
+                } else {
+                    echo "ERROR: Hush! Sorry $sql2. "
+                        . mysqli_error($link);
+                }
             }
-
+        }
             header("Location: account.php");
             exit();
         }
