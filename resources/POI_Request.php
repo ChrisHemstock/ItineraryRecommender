@@ -63,6 +63,28 @@ foreach ($data["businesses"] as $row) {
     VALUES('$name', '$Category', '$rating', '$num_ratings', '$address', '$Lng', '$Lat', '$phone', '$API_KEY', '$image_url')";
   if ($link->query($sql) === TRUE) {
     $created = true;
+    $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/' . $API_KEY . '/reviews?limit=20&sort_by=yelp_sort', [
+      'headers' => [
+        'Authorization' => 'Bearer FPHBQC5fbtVpUqt4lQtAmTPXNWzDKblHryRIRIfoL5PYHgLmW109muvBkAqYyscdeNerih_ZQrxs4WGnp-xf4pgyBDbEmO36NlUS8MB6GvgJp52qoqW_nUdvG9uOY3Yx',
+        'accept' => 'application/json',
+      ],
+    ]);
+    $data = json_decode($response->getBody(), true);
+
+    $review = '';
+
+    foreach($data["reviews"] as $row) {
+      $text = strtolower(preg_replace('/[^A-Za-z0-9\- ]/', '', $row['text']));
+      $review .= ' ' . $text;
+    }
+    
+      //insert into mysql table
+     $sql = "UPDATE POIs SET reviews = '$review' WHERE API_ID = '$API_KEY'";
+      if ($link->query($sql) === TRUE) {
+        echo "New record created successfully";
+      } else {
+        echo "Error: " . $sql . "<br>" . $link->error;
+      }
   } else {
       $created = false;
     //echo "Error: " . $sql . "<br>" . $link->error;

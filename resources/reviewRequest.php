@@ -11,16 +11,44 @@ set_time_limit(360);
 //$userID = $_SESSION["id"];
 
 
-//get user interests
-function userInterests($userID) {
-  global $link;
-  $poiReviews = $link->query('SELECT reviews FROM likes, pois WHERE userID = ' . $userID . ' AND pois.API_ID = likes.POI_ID ;')->fetch_all();
-  $likes = array();
-  foreach($poiReviews as $poiReview) {
-    array_push($likes, $poiReview);
-  }
-  return $likes;
-}
+// //get user interests
+// function userInterests($userID) {
+//   global $link;
+//   $interests = $link->query('SELECT Description FROM interests WHERE userID = ' . $userID . ' ;')->fetch_all();
+//   $likes = array();
+//   foreach($interests as $interest) {
+//     $txt = '';
+//     if($interest[0] == 'artsEntertainment') {
+//       $txt = 'art';
+//     } else if($interest[0] == 'beautyFitness') {
+//       $txt = 'fitness';
+//     } else if($interest[0] == 'books') {
+//       $txt = 'book';
+//     } else if($interest[0] == 'businessIndustrial') {
+//       $txt = 'industrial';
+//     } else if($interest[0] == 'electronics') {
+//       $txt = 'electronic';
+//     } else if($interest[0] == 'finance') {
+//       $txt = 'finance';
+//     } else if($interest[0] == 'food') {
+//       $txt = 'food';
+//     } else if($interest[0] == 'games') {
+//       $txt = 'game';
+//     } else if($interest[0] == 'homeGarden') {
+//       $txt = 'garden';
+//     } else if($interest[0] == 'internetTelecom') {
+//       $txt = 'communicate';
+//     } else if($interest[0] == 'jobsEducation') {
+//       $txt = 'educate';
+//     } else if($interest[0] == 'leisure') {
+//       $txt = 'leisure';
+//     } else if($interest[0] == 'vehicles') {
+//       $txt = 'vehicle';
+//     }
+//     array_push($likes, $txt);
+//   }
+//   return $likes;
+// }
 
 function getReviewsArray() {
   global $link;

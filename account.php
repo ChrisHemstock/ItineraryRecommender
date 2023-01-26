@@ -2,7 +2,7 @@
 // Initialize the session
 session_start();
 $userID = $_SESSION["id"];
-echo $userID;
+//echo $userID;
 $description = "";
 $value = 0;
 $getInterestInfo =
@@ -220,7 +220,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 
             ?>
             <br>
-            <a href="poiChoice.php">Choose Interested Points of Interest</a>
+            <h3> <a href="poiChoice.php">Take Points of Interest Survey</a> </h3>
+            <br></br>
             <input type="submit" value="Submit">
 
         </form>
