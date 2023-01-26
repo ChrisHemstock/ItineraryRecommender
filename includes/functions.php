@@ -46,9 +46,9 @@ function cosineSimilarity($list1, $list2) {
     $mag1 = 0;
     $mag2 = 0;
     for($i = 0; $i < count($list1); $i++) {
-        $dotSum += $list1[$i] * $list2[$i];
-        $mag1 += $list1[$i] ** 2;
-        $mag2 += $list2[$i] ** 2;
+            $dotSum += $list1[$i] * $list2[$i];
+            $mag1 += $list1[$i] ** 2;
+            $mag2 += $list2[$i] ** 2;
     }
 
     if($mag1 == 0 || $mag2 == 0) {

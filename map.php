@@ -36,7 +36,7 @@ $jsonPoiList = populateSavedPois($link);
     //creates javascript variables from php variables
     var data = '<?php echo $json; ?>';
     var phpPoi = '<?php echo $jsonPoiList ?>';
-    //var recommendations = '<?php //echo getRecommendations($link, $userID)?>';
+    var recommendations = '<?php echo getRecommendations($link, $userID)?>';
   </script>
 </head>
 
@@ -49,7 +49,6 @@ $jsonPoiList = populateSavedPois($link);
     <input type="button" value = "Make Recommendations" onclick="return displayRecommendations(recommendations, data);"/>
   </div>
   <div id="map"></div>
-  <script>console.log("did I win")</script>
   <div id="recommendations">
       <ul id="poiRecommendations"></ul>
   </div>
