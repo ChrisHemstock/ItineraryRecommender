@@ -73,7 +73,7 @@
                 $likes = $_POST['Dislike' . $i];
             }
 
-            $poi_ids = explode(" ", $likes);
+            $poi_ids = explode(" ", ltrim($likes, ' '));
             var_dump($poi_ids);
             var_dump($likes);
 
