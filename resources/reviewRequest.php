@@ -134,7 +134,7 @@ function getRecommendations($link, $userID) {
         //var_dump($POI_ID);
         $liked_reviews = $link->query('SELECT reviews FROM POIs WHERE API_ID = "' . $POI_ID . '" ;')->fetch_all();
         foreach ($liked_reviews as $review) {
-          $reviewText = $review;
+          $likes = $review;
          // var_dump($reviewText);
         }
       }
