@@ -58,6 +58,14 @@
 
         //adds the liked poi keys to the database
         if(isset($_POST['Like' . (sizeof($ids) - 1)]) or isset($_POST['Dislike' . (sizeof($ids) - 1)])) {
+            $sqlClear = "DELETE FROM likes WHERE userID = $userID";
+            $stmt = $sqlClear;
+                if (mysqli_query($link, $sqlClear)) {
+                    $interestDataUpdated = true;
+                } else {
+                    echo "ERROR: Hush! Sorry $sqlClear. "
+                        . mysqli_error($link);
+                }
             $start = false;
             if(isset($_POST['Like' . $i])) {
                 $likes = $_POST['Like' . $i];
@@ -68,6 +76,10 @@
             $poi_ids = explode(" ", $likes);
             var_dump($poi_ids);
             var_dump($likes);
+
+
+
+        var_dump($sqlClear);
 
             foreach ($poi_ids as $poi_id) {
                 $sql2 = "INSERT INTO likes(userID, POI_ID)
