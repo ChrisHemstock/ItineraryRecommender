@@ -22,6 +22,7 @@ set_time_limit(360);
 //   return $likes;
 // }
 
+
 // function getReviewsArray() {
 //   global $link;
 //   $docs = [];
@@ -47,6 +48,7 @@ set_time_limit(360);
 //       $text = strtolower(preg_replace('/[^A-Za-z\ ]/', '', $row['text']));
 //       $review .= ' ' . $text;
 //     }
+
 
 //     //push review to database here ********** this could be up to three reviews concat. together
 
