@@ -8,8 +8,6 @@ require_once 'vendor/autoload.php';
 
 require_once "includes/dbconnect.php";
 set_time_limit(360);
-<<<<<<< HEAD
-=======
 //$userID = $_SESSION["id"];
 
 
@@ -101,7 +99,6 @@ set_time_limit(360);
 
 
 
->>>>>>> 5299122a4cd46d51e54b7a6f9f9258cfdde29956
 
 function getRecommendations($link, $userID) {
 

@@ -8,17 +8,21 @@
     //Also removes all markup within the div #choice
     function getPoiInfo($link, $ids, $pos, $likes) {
         $id = $ids[$pos];
-        $results = $link->query('SELECT name, image_url FROM pois WHERE API_ID = "' . $id . '";')->fetch_all();
-
+        //US 11: Add picture to POI choice
+        $results = $link->query('SELECT name, image_url, rating, url FROM pois WHERE API_ID = "' . $id . '";')->fetch_all();
         foreach ($results as $row) {
             $name = $row[0];
             $image_url = $row[1];
+            $rating = $row[2];
+            $url = $row[3];
             echo '<div id="' . $id . '">
-                    <h1 class=' . $id . '>' . $name . '</h1>
+                    <h1 class=' . $id . '>' . $name .': ' . $rating . '&#9734; </h1>
                     <form method="post">
-                        <button type="submit" name="Like' . $pos . '" value="' . $likes . ' ' . $id . '">Like</button>
-                        <button type="submit" name="Dislike' . $pos . '" value="' . $likes . '">Dislike</button>
-                        <img src="'. $image_url . '" alt="'. $image_url . '">
+                        <button type="submit" name="Like' . $pos . '" value="' . $likes . ' ' . $id . '">&#128077;</button>
+                        <button type="submit" name="Dislike' . $pos . '" value="' . $likes . '">&#128078;</button>
+                        <br> <br>
+                        <p><a href= ' . $url .' target="_blank" ><img src='. $image_url . ' style="width="300" height="300""></a></p>
+
                     </form>
                   </div>';
         }
