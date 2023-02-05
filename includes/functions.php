@@ -45,11 +45,19 @@ function cosineSimilarity($list1, $list2) {
     $dotSum = 0;
     $mag1 = 0;
     $mag2 = 0;
-    for($i = 0; $i < count($list1); $i++) {
-            $dotSum += $list1[$i] * $list2[$i];
-            $mag1 += $list1[$i] ** 2;
-            $mag2 += $list2[$i] ** 2;
+    // for($i = 0; $i < count($list1); $i++) {
+    //         $dotSum += $list1[$i] * $list2[$i];
+    //         $mag1 += $list1[$i] ** 2;
+    //         $mag2 += $list2[$i] ** 2;
+    // }
+
+    foreach($list1 as $word => $value) {
+        $dotSum += $list1[$word] * $list2[$word];
+        $mag1 += $list1[$word] ** 2;
+        $mag2 += $list2[$word] ** 2;
     }
+
+
 
     if($mag1 == 0 || $mag2 == 0) {
         return -2;
