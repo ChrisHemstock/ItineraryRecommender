@@ -167,3 +167,7 @@ div#userInfo {
     border-radius: 5px;
 
 }
+
+#choice_map { 
+    height: 180px; 
+}
