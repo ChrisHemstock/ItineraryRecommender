@@ -4,7 +4,7 @@ use TextAnalysis\Documents\TokensDocument;
 use TextAnalysis\Indexes\TfIdf;
 include_once 'includes/functions.php';
 
-require_once 'vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 require_once "includes/dbconnect.php";
 set_time_limit(360);
