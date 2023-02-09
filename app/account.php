@@ -17,11 +17,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     exit;
 }
 
-
-
-
 $row = "false";
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 

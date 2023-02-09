@@ -108,8 +108,6 @@
             var_dump($poi_ids);
             var_dump($likes);
 
-
-        //var_dump($sqlClear);
         foreach ($poi_ids as $poi_id) {
             if ($poi_id != "") {
                 $sql2 = "INSERT INTO likes(userID, POI_ID)

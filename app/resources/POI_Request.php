@@ -36,8 +36,6 @@ $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/search?l
     ],
   ]);
   
-  //echo $response->getBody();
-
 //read the json file contents
 
 $jsondata = $response->getBody();
@@ -89,7 +87,6 @@ foreach ($data["businesses"] as $row) {
       }
   } else {
       $created = false;
-    //echo "Error: " . $sql . "<br>" . $link->error;
   }
 }
 

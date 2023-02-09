@@ -97,15 +97,10 @@ set_time_limit(360);
 
 //Functions above are for use later
 
-
-
-
 function getRecommendations($link, $userID) {
 
-  //
   // Get all the tokens for the likes in one document
-  //
-  //
+
   $poiReviews = $link->query('SELECT reviews FROM likes, pois WHERE userID = ' . $userID . ' AND pois.API_ID = likes.POI_ID ;')->fetch_all();
   if(count($poiReviews) > 0) {
     $likes = array();
@@ -116,19 +111,14 @@ function getRecommendations($link, $userID) {
 
       $likes = array_merge($likes, $review);
     }
-    //var_dump($likes);
 
     $docs = [];
     $tokens = new TokensDocument($likes);
     $docs['likes'] = $tokens;
-    //var_dump($docs['likes']);
     
 
-
-    //
     // Get all review tokens in one document
-    //
-    //
+
     $POI_reviews = $link->query('SELECT reviews, id FROM POIs')->fetch_all();
     $allReviews = array();
     foreach($POI_reviews as $poiReview) {      
@@ -140,13 +130,7 @@ function getRecommendations($link, $userID) {
     $allReviews = array_unique($allReviews);
     $allReviewTokens = new TokensDocument($allReviews);
     $docs['all'] = $allReviewTokens;
-    //var_dump($allReviews);
-    //
     // Get all review tokens in one document per poi
-    //
-    //
-
-
 
     $POI_reviews = $link->query('SELECT reviews, id FROM POIs')->fetch_all();
     //$poiDocs = array();
@@ -219,16 +203,9 @@ function getRecommendations($link, $userID) {
     asort($poisLiked);
     array_pop($poisLiked);
 
-   // var_dump($poisLiked);
-
     //returns an ordered list of POIs to recommend
-    
-    
     return json_encode(array_slice(array_reverse($poisLiked, true), 0, 5, true));
     
-
-
-
     
   }
 }
