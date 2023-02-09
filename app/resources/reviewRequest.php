@@ -2,13 +2,9 @@
 use TextAnalysis\Collections\DocumentArrayCollection;
 use TextAnalysis\Documents\TokensDocument;
 use TextAnalysis\Indexes\TfIdf;
-include_once 'includes/functions.php';
+include_once __DIR__.'/../includes/functions.php';
 
-require_once '../vendor/autoload.php';
-
-require_once "includes/dbconnect.php";
-set_time_limit(360);
-//$userID = $_SESSION["id"];
+require_once __DIR__.'/../../vendor/autoload.php';
 
 //Good resource on TFIDF
 //https://janav.wordpress.com/2013/10/27/tf-idf-and-cosine-similarity/
@@ -25,7 +21,7 @@ function makeWordArray($reviewString) {
 function getUserLikes($link, $userID) {
 
   $query = $link->query('SELECT reviews FROM likes, pois WHERE userID = ' . $userID . ' AND pois.API_ID = likes.POI_ID ;')->fetch_all();
-  $likes = array();
+  $likes = [];
   if (count($query) > 0) {
     foreach ($query as $poiReview) {
       $poiReview = $poiReview[0];
@@ -38,9 +34,22 @@ function getUserLikes($link, $userID) {
   return $likes;
 }
 
+function addDocument($document, $key, $wordList) {
+  $tokens = new TokensDocument($wordList);
+  $document[$key] = $tokens;
+  return $document;
+}
+
+function makeVector($tfidf, $allWordsList, $document) {
+  $vector = [];
+  foreach($allWordsList as $word) {
+      $vector[$word] = $tfidf->getTfIdf($document, $word, 3);
+  }
+  return $vector;
+}
 
 
-function getRecommendations($link, $userID) {
+function getRecommendations($link, $userID, $amount) {
 
   $docs = [];
 
@@ -48,18 +57,19 @@ function getRecommendations($link, $userID) {
   // gets all the reviews that the user likes into one document
   //
   $likes = getUserLikes($link, $userID);
-  $tokens = new TokensDocument($likes);
-  $docs['likes'] = $tokens;
+  if(count($likes) == 0) {
+    $topArray = topPoiJson($link, $amount);
+    return $topArray;
+  }
+  $docs = addDocument($docs, 'likes', $likes);
     
-
-
   //
   // Get all review tokens in one document
   // Build all review documents
   //
-  $POI_reviews = $link->query('SELECT reviews, id FROM POIs')->fetch_all();
-  $allReviews = array();
-  foreach($POI_reviews as $poiReview) {
+  $reviewsQuery = $link->query('SELECT reviews, id FROM POIs')->fetch_all();
+  $allReviews = [];
+  foreach($reviewsQuery as $poiReview) {
     $review = $poiReview[0];
     $poiID = $poiReview[1];
     if($review != Null) {
@@ -69,8 +79,7 @@ function getRecommendations($link, $userID) {
       $allReviews = array_merge($allReviews, $reviewArray);
 
       //Adds a new vector for the current poi
-      $tokens = new TokensDocument($reviewArray);
-      $docs[$poiID] = $tokens;
+      $docs = addDocument($docs, $poiID, $reviewArray);
     }
   }
   //Makes a big array with one of every word from the reviews. - 2081 total words
@@ -92,20 +101,17 @@ function getRecommendations($link, $userID) {
   // Creates all the vectors for the POIs and one for the user
   //
   $vectorCollection = [];
-  $vector = [];
   foreach($docs as $key => $values) {
-    foreach($allReviews as $word) {
-      $vector[$word] = $userTfidf->getTfIdf($values, $word, 3);
-    }
+    $vector = makeVector($userTfidf, $allReviews, $values);
     $vectorCollection[$key] = $vector;
   }
   //var_dump($vectorCollection['likes']);
 
 
   $poisLiked = [];
-  foreach($vectorCollection as $key => $vector) {
+  foreach($vectorCollection as $id => $vector) {
     $similarity = cosineSimilarity($vectorCollection['likes'], $vector);
-    $poisLiked[$key] = $similarity;
+    $poisLiked[$id] = $similarity;
   }
   unset($poisLiked['likes']);
   asort($poisLiked);
@@ -114,7 +120,7 @@ function getRecommendations($link, $userID) {
   //var_dump($poisLiked);
 
   //returns an ordered list of POIs to recommend
-  return json_encode(array_slice($poisLiked, 0, 5, true));
+  return json_encode(array_slice($poisLiked, 0, $amount, true));
 }
 //}
 ?>
