@@ -9,10 +9,8 @@
     function getPoiInfo($link, $ids, $pos, $likes) {
         $id = $ids[$pos];
         $results = $link->query('SELECT name, image_url, Lat, Lng FROM pois WHERE API_ID = "' . $id . '";')->fetch_all();
-        $leafletLink = "'http://www.openstreetmap.org/copyright'";
         foreach ($results as $row) {
             $name = $row[0];
-            $image_url = $row[1];
             $Lat = $row[2];
             $Lng = $row[3];
             echo '<div id="' . $id . '">
@@ -22,15 +20,21 @@
                         <button type="submit" name="Dislike' . $pos . '" value="' . $likes . '">Dislike</button>
                         <div id="choice_map"></div>
                         <script>                  
-                        var map = L.map("choice_map").setView([' . $Lat . ', ' . $Lng . '], 13);
+                        var map = L.map("choice_map",{
+                            center: ['. $Lat . ', '. $Lng . '],
+                            zoom: 15
+                           });
                         L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
                             maxZoom: 25,
-                            attribution: "&copy; <a href= ' . $leafletLink . '>OpenStreetMap</a>"
+                            attribution: "&copy; <a href= http://www.openstreetmap.org/copyright>OpenStreetMap</a>"
                         }).addTo(map);
+                        setInterval(function () {
+                            map.invalidateSize();
+                         }, 100);
                         var marker = L.marker([' . $Lat . ', ' . $Lng . ']).addTo(map);
                         </script>
                         <style> 
-                        #choice_map { height: 350px; width: 300px; }
+                        #choice_map { height: 375px; width: 300px; }
                         </style>
                     </form>
                   </div>';
