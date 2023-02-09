@@ -1,9 +1,8 @@
 <?php
 
-$servername = "localhost";
+$servername = "localhost:80";
 $username = "root";
 $password = "";
-
 $database = "ItineraryRecommender";
 
 // Create a connection 

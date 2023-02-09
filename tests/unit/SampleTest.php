@@ -16,10 +16,10 @@
             // Tests no data in likes - should return a json string with top 5 most rated pois
             $this->assertEquals(getRecommendations($link, USER_ID, 5), topPoiJson($link, 5));
 
-            addLikes($link, USER_ID, 'vP_Rkh68ohANnCL-nXED6Q'); // Union 50
+            addLikes($link, USER_ID, 'kzxpl9HidQVMEuUoRVB7nA'); // Victory Field
 
             // Tests 1 entry in likes - should return a json with 1 entry with a value of 1
-            $this->assertEquals(getRecommendations($link, USER_ID, 1), '{"991":1}');
+            $this->assertEquals(getRecommendations($link, USER_ID, 1), '{"1248":0.9999999999999999}');
 
             addLikes($link, USER_ID, 'UFCN0bYdHroPKu6KV5CJqg'); // The Eagle
 
