@@ -1,0 +1,1321 @@
+{
+  "id": "d3515623-5866-49bc-a8d3-192b5640e2ae",
+  "version": "2.0",
+  "name": "TripRecommender",
+  "url": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/login.php",
+  "tests": [{
+    "id": "7047d02d-cf74-4c35-b832-376b945c05c7",
+    "name": "map_all_likes",
+    "commands": [{
+      "id": "80994fef-03ae-43a5-8ed0-0bf72bdcea72",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "53bd5ccb-2bbd-4e9c-a2e4-7be7f63b9abb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-out > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-out > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "baa3f75c-e8b5-41b8-80c6-9d2ae27e1ef0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-out > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-out > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "733058a9-6bef-430b-8d79-71267d77b10a",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.leaflet-control-zoom-out > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-out > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6fec945a-b80c-4131-b38a-6e6720485404",
+      "comment": "",
+      "command": "click",
+      "target": "name=Like0",
+      "targets": [
+        ["name=Like0", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like0']", "xpath:attributes"],
+        ["xpath=//div[@id='F5n57w6RaOCAB4bivNSs8A']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "106afb43-0804-4aa4-a337-25a4065fe30e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-in > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-in > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "21b3a414-9301-49a1-bac8-8261beac6be2",
+      "comment": "",
+      "command": "click",
+      "target": "name=Like1",
+      "targets": [
+        ["name=Like1", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like1']", "xpath:attributes"],
+        ["xpath=//div[@id='E5cecsuxC11xDO9E3c93lA']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4f4b2bc9-53e4-4668-85ce-ffd5a9b67524",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-out > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-out > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5cad9b0b-17f1-49e6-926b-91ee803760df",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-out > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-out > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "053fd99e-5cb4-40be-855a-70800c4d179e",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.leaflet-control-zoom-out > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-out > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7669f758-85ab-4ae4-8f73-f69f393ab125",
+      "comment": "",
+      "command": "click",
+      "target": "name=Like2",
+      "targets": [
+        ["name=Like2", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like2']", "xpath:attributes"],
+        ["xpath=//div[@id='6x6rR-SErwOo3xF2AzXVHA']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6393551f-d7d5-4fdb-a1ef-e1786c3477cf",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-in > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-in > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "516d121a-5bc2-46ad-aca8-af611f4bbc8f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-in > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-in > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f09b5b71-d234-434c-b6fe-bd2556897b11",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.leaflet-control-zoom-in > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-in > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7259b3cf-5626-438f-8f12-453a8dcd6bc2",
+      "comment": "",
+      "command": "click",
+      "target": "name=Like3",
+      "targets": [
+        ["name=Like3", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like3']", "xpath:attributes"],
+        ["xpath=//div[@id='VEGvvazGmbukHqZyToVvYw']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "128b87df-42eb-4ba7-aedc-42e4eed43e7b",
+    "name": "map_all_dislikes",
+    "commands": [{
+      "id": "676bfadb-c7a9-4d98-9e27-972625eb21f5",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "30917e51-0b33-42a7-9d39-afd1210db8ca",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-in > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-in > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6af63ada-5d7a-4430-a648-b50a42ab285b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-in > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-in > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "dd5f32d2-205b-458d-98e7-3da3f07f0d0e",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.leaflet-control-zoom-in > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-in > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1b21b3cd-91e2-4bd8-9fec-856d5da2419c",
+      "comment": "",
+      "command": "click",
+      "target": "name=Dislike0",
+      "targets": [
+        ["name=Dislike0", "name"],
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@name='Dislike0']", "xpath:attributes"],
+        ["xpath=//div[@id='F5n57w6RaOCAB4bivNSs8A']/form/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'👎')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "19366fde-58c6-47d1-bb45-fccd522b4df2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-out > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-out > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5fd5104b-a800-4453-a449-cd0e4e9fe6e0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-out > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-out > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e1afe705-2a53-4b25-be0e-c22b5aebbf07",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.leaflet-control-zoom-out > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-out > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0c993855-7dc7-4dd1-adb5-d45672cd8fe0",
+      "comment": "",
+      "command": "click",
+      "target": "name=Dislike1",
+      "targets": [
+        ["name=Dislike1", "name"],
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@name='Dislike1']", "xpath:attributes"],
+        ["xpath=//div[@id='E5cecsuxC11xDO9E3c93lA']/form/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'👎')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1f01842f-2003-4590-adb8-b65bb23c61b5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-in > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-in > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "675c5c16-f588-4900-8e31-aa8a92b15b40",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-in > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-in > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5f364301-4650-48a6-96e3-b60b25105bee",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.leaflet-control-zoom-in > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-in > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c317b0b4-ec86-4218-b7d7-4f91ba7f9a2b",
+      "comment": "",
+      "command": "click",
+      "target": "name=Dislike2",
+      "targets": [
+        ["name=Dislike2", "name"],
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@name='Dislike2']", "xpath:attributes"],
+        ["xpath=//div[@id='6x6rR-SErwOo3xF2AzXVHA']/form/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'👎')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "26a34111-986e-4577-ad64-877089bb698c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-out > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-out > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3ac67a80-e83f-4e05-a949-4e39c69d9833",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-in > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-in > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "09691e29-1aba-4fe0-bf17-046981f33a25",
+      "comment": "",
+      "command": "click",
+      "target": "name=Dislike3",
+      "targets": [
+        ["name=Dislike3", "name"],
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@name='Dislike3']", "xpath:attributes"],
+        ["xpath=//div[@id='VEGvvazGmbukHqZyToVvYw']/form/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'👎')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "a0210583-42b6-4ea3-863f-3a0764e0e8c6",
+    "name": "map_likes_and_dislikes",
+    "commands": [{
+      "id": "d9895f91-586e-4115-a138-e3101feaf275",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "135ea466-111b-48fb-af34-f345cb751230",
+      "comment": "",
+      "command": "click",
+      "target": "name=Like0",
+      "targets": [
+        ["name=Like0", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like0']", "xpath:attributes"],
+        ["xpath=//div[@id='F5n57w6RaOCAB4bivNSs8A']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d9b19b02-307f-4bb6-b1bd-e14494e45d66",
+      "comment": "",
+      "command": "mouseDownAt",
+      "target": "id=choice_map",
+      "targets": [
+        ["id=choice_map", "id"],
+        ["css=#choice_map", "css:finder"],
+        ["xpath=//div[@id='choice_map']", "xpath:attributes"],
+        ["xpath=//div[@id='E5cecsuxC11xDO9E3c93lA']/form/div", "xpath:idRelative"],
+        ["xpath=//form/div", "xpath:position"]
+      ],
+      "value": "185,51.125"
+    }, {
+      "id": "11d669aa-1b5b-4495-a862-df4381c34818",
+      "comment": "",
+      "command": "mouseMoveAt",
+      "target": "id=choice_map",
+      "targets": [
+        ["id=choice_map", "id"],
+        ["css=#choice_map", "css:finder"],
+        ["xpath=//div[@id='choice_map']", "xpath:attributes"],
+        ["xpath=//div[@id='E5cecsuxC11xDO9E3c93lA']/form/div", "xpath:idRelative"],
+        ["xpath=//form/div", "xpath:position"]
+      ],
+      "value": "185,51.125"
+    }, {
+      "id": "895d7fbd-4126-4a14-8bea-2b3a9eb03594",
+      "comment": "",
+      "command": "mouseUpAt",
+      "target": "id=choice_map",
+      "targets": [
+        ["id=choice_map", "id"],
+        ["css=#choice_map", "css:finder"],
+        ["xpath=//div[@id='choice_map']", "xpath:attributes"],
+        ["xpath=//div[@id='E5cecsuxC11xDO9E3c93lA']/form/div", "xpath:idRelative"],
+        ["xpath=//form/div", "xpath:position"]
+      ],
+      "value": "185,51.125"
+    }, {
+      "id": "edcadec7-9c85-481a-b47e-931b1c9497a6",
+      "comment": "",
+      "command": "click",
+      "target": "id=choice_map",
+      "targets": [
+        ["id=choice_map", "id"],
+        ["css=#choice_map", "css:finder"],
+        ["xpath=//div[@id='choice_map']", "xpath:attributes"],
+        ["xpath=//div[@id='E5cecsuxC11xDO9E3c93lA']/form/div", "xpath:idRelative"],
+        ["xpath=//form/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e24ddc85-3379-4233-a8b5-9d32e9a85478",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=−",
+      "targets": [
+        ["linkText=−", "linkText"],
+        ["css=.leaflet-control-zoom-out", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '#')])[2]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c49a77fe-36b1-45e7-8587-8e3aa841d92a",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "linkText=−",
+      "targets": [
+        ["linkText=−", "linkText"],
+        ["css=.leaflet-control-zoom-out", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '#')])[2]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "663f4c56-661c-4b34-872a-9749bd41f6d4",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "linkText=−",
+      "targets": [
+        ["linkText=−", "linkText"],
+        ["css=.leaflet-control-zoom-out", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '#')])[2]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "af52be93-fab2-45a8-ae41-2b0dab8bcab8",
+      "comment": "",
+      "command": "click",
+      "target": "name=Dislike1",
+      "targets": [
+        ["name=Dislike1", "name"],
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@name='Dislike1']", "xpath:attributes"],
+        ["xpath=//div[@id='E5cecsuxC11xDO9E3c93lA']/form/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'👎')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "77df5c9f-0dcd-4a0b-853e-a8b13fcd8084",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-in > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-in > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "31a315a2-18d2-419a-aaf8-1bbdea648f3f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-in > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-in > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "daa8cde9-d213-4a0d-97fc-830d2c10475b",
+      "comment": "",
+      "command": "click",
+      "target": "name=Like2",
+      "targets": [
+        ["name=Like2", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like2']", "xpath:attributes"],
+        ["xpath=//div[@id='6x6rR-SErwOo3xF2AzXVHA']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c2430873-f8d6-4139-b544-4b10a179d90c",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "name=Like3",
+      "targets": [
+        ["name=Like3", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like3']", "xpath:attributes"],
+        ["xpath=//div[@id='VEGvvazGmbukHqZyToVvYw']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "825270d3-8caa-4470-9bc9-3708c2661f91",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "name=Like3",
+      "targets": [
+        ["name=Like3", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like3']", "xpath:attributes"],
+        ["xpath=//div[@id='VEGvvazGmbukHqZyToVvYw']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1358f212-2ded-401d-a501-3cbcbcb4ff60",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-out > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-out > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "55bda477-caed-4902-af32-7fc15efae790",
+      "comment": "",
+      "command": "click",
+      "target": "css=.leaflet-control-zoom-out > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-out > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1f18f2d4-98c2-4f85-9e72-09a25f772cd7",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.leaflet-control-zoom-out > span",
+      "targets": [
+        ["css=.leaflet-control-zoom-out > span", "css:finder"],
+        ["xpath=//div[@id='choice_map']/div[2]/div/div/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'−')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ac9b7bbd-b6be-40e7-8d49-4b1d762acb8b",
+      "comment": "",
+      "command": "click",
+      "target": "name=Dislike3",
+      "targets": [
+        ["name=Dislike3", "name"],
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@name='Dislike3']", "xpath:attributes"],
+        ["xpath=//div[@id='VEGvvazGmbukHqZyToVvYw']/form/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'👎')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "b150cc17-30e1-434b-9fb8-f48f0500c4aa",
+    "name": "picture_all_likes",
+    "commands": [{
+      "id": "8914788b-f043-4b66-a986-fac779781662",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6fb730a3-dd8e-4f6b-8634-ca080640be7b",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > img",
+      "targets": [
+        ["css=a > img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://s3-media3.fl.yelpcdn.com/bphoto/Wnj38IgMDewqwaf7WPbOBA/o.jpg')]", "xpath:img"],
+        ["xpath=//p[@id='poi_choice_map']/a/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win9969",
+      "windowTimeout": 2000
+    }, {
+      "id": "cf935889-6dac-4805-b2e0-c9bcaac9b7eb",
+      "comment": "",
+      "command": "storeWindowHandle",
+      "target": "root",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2947b3d0-f4c4-404d-b9d4-beb295a02ff8",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win9969}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e2c1138f-0edb-4e5e-8d21-7d7bff869102",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d5609751-e18e-49eb-8344-1c95d0052aa4",
+      "comment": "",
+      "command": "click",
+      "target": "name=Like0",
+      "targets": [
+        ["name=Like0", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like0']", "xpath:attributes"],
+        ["xpath=//div[@id='F5n57w6RaOCAB4bivNSs8A']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "818dddee-cc00-49eb-8a77-86b0c33207bb",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > img",
+      "targets": [
+        ["css=a > img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://s3-media2.fl.yelpcdn.com/bphoto/ZoRGh8jWub3iVekqYWTQlA/o.jpg')]", "xpath:img"],
+        ["xpath=//p[@id='poi_choice_map']/a/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win3024",
+      "windowTimeout": 2000
+    }, {
+      "id": "393d4aa4-9644-46bb-adf9-061629398567",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win3024}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "79de9b14-f6c3-43c4-935e-a1bad851f969",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a41c9ddc-c23e-4df9-a495-dc9513428a9e",
+      "comment": "",
+      "command": "click",
+      "target": "name=Like1",
+      "targets": [
+        ["name=Like1", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like1']", "xpath:attributes"],
+        ["xpath=//div[@id='E5cecsuxC11xDO9E3c93lA']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "82f12c7a-8605-4d65-809c-5feec07016a1",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > img",
+      "targets": [
+        ["css=a > img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://s3-media2.fl.yelpcdn.com/bphoto/cOh78R0YG3yW503Z6V7qPg/o.jpg')]", "xpath:img"],
+        ["xpath=//p[@id='poi_choice_map']/a/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win4562",
+      "windowTimeout": 2000
+    }, {
+      "id": "7877edeb-745c-48c9-a34b-3c4a9d2a7b6a",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win4562}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "27f88365-d6d4-4ec5-b668-cb4b237bb923",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a8ce5e7d-0c6d-47ad-ae2b-1e4f48ae4f62",
+      "comment": "",
+      "command": "click",
+      "target": "name=Like2",
+      "targets": [
+        ["name=Like2", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like2']", "xpath:attributes"],
+        ["xpath=//div[@id='6x6rR-SErwOo3xF2AzXVHA']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "47c7a6bb-ff64-4b44-aaa7-540c36b87f09",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > img",
+      "targets": [
+        ["css=a > img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://s3-media4.fl.yelpcdn.com/bphoto/jojmr44rp3kUIHsAjcUUkw/o.jpg')]", "xpath:img"],
+        ["xpath=//p[@id='poi_choice_map']/a/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win9908",
+      "windowTimeout": 2000
+    }, {
+      "id": "45797ae1-765a-4f7f-86d9-169adc044d83",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win9908}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "99414d62-ed09-4633-9c9a-52d8f6521cf7",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "335d54f2-b402-447e-94d7-d318668f6a7e",
+      "comment": "",
+      "command": "click",
+      "target": "name=Like3",
+      "targets": [
+        ["name=Like3", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like3']", "xpath:attributes"],
+        ["xpath=//div[@id='VEGvvazGmbukHqZyToVvYw']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "e613f877-50e9-40f9-b40e-eb7134d85dbc",
+    "name": "picture_all_dislikes",
+    "commands": [{
+      "id": "390e080d-9790-49a1-ab13-77f608c351fc",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a93f1b6a-16e5-4e58-8e96-643e1706669e",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > img",
+      "targets": [
+        ["css=a > img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://s3-media3.fl.yelpcdn.com/bphoto/Wnj38IgMDewqwaf7WPbOBA/o.jpg')]", "xpath:img"],
+        ["xpath=//p[@id='poi_choice_map']/a/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win6632",
+      "windowTimeout": 2000
+    }, {
+      "id": "68e4d19a-7fe1-4868-baaf-27791a81f4b3",
+      "comment": "",
+      "command": "storeWindowHandle",
+      "target": "root",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c8123b38-de9f-46c0-84a0-16fa7b8bcd11",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win6632}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "25035e2d-fba0-43e4-a0bc-e3b82cde1623",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d91b4c1f-3296-4ec6-befa-ed5a7c06a1a8",
+      "comment": "",
+      "command": "click",
+      "target": "name=Dislike0",
+      "targets": [
+        ["name=Dislike0", "name"],
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@name='Dislike0']", "xpath:attributes"],
+        ["xpath=//div[@id='F5n57w6RaOCAB4bivNSs8A']/form/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'👎')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e3519090-f3e0-414e-934f-a569753310ee",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > img",
+      "targets": [
+        ["css=a > img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://s3-media2.fl.yelpcdn.com/bphoto/ZoRGh8jWub3iVekqYWTQlA/o.jpg')]", "xpath:img"],
+        ["xpath=//p[@id='poi_choice_map']/a/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win3884",
+      "windowTimeout": 2000
+    }, {
+      "id": "ca77e91d-2a9b-4554-b31f-8a8c87a2dfe4",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win3884}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6fe63c32-0a94-4508-8bbc-520bc032d8a1",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "986bc130-fe54-4187-a1a5-b5829ec86754",
+      "comment": "",
+      "command": "click",
+      "target": "name=Dislike1",
+      "targets": [
+        ["name=Dislike1", "name"],
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@name='Dislike1']", "xpath:attributes"],
+        ["xpath=//div[@id='E5cecsuxC11xDO9E3c93lA']/form/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'👎')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f1163ed5-13a1-4257-87bb-50e463528a03",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > img",
+      "targets": [
+        ["css=a > img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://s3-media2.fl.yelpcdn.com/bphoto/cOh78R0YG3yW503Z6V7qPg/o.jpg')]", "xpath:img"],
+        ["xpath=//p[@id='poi_choice_map']/a/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win2826",
+      "windowTimeout": 2000
+    }, {
+      "id": "9ca66f11-962f-4aaf-870e-28d2cf3c6835",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win2826}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5943e8b7-d7aa-449e-889e-483e111e7794",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e468fc73-fd39-4a7d-8fda-31d707630ea9",
+      "comment": "",
+      "command": "click",
+      "target": "name=Dislike2",
+      "targets": [
+        ["name=Dislike2", "name"],
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@name='Dislike2']", "xpath:attributes"],
+        ["xpath=//div[@id='6x6rR-SErwOo3xF2AzXVHA']/form/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'👎')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4cf900e8-c670-42ec-89a7-e33348acd0f4",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > img",
+      "targets": [
+        ["css=a > img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://s3-media4.fl.yelpcdn.com/bphoto/jojmr44rp3kUIHsAjcUUkw/o.jpg')]", "xpath:img"],
+        ["xpath=//p[@id='poi_choice_map']/a/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win5701",
+      "windowTimeout": 2000
+    }, {
+      "id": "eef6c444-6b19-4f2b-bc31-b4f57f8291fc",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win5701}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8bfbf013-4a03-4cca-910d-56960fd7ef6b",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e9fdddba-2e03-44a1-ace4-8c2cecdb8ee3",
+      "comment": "",
+      "command": "click",
+      "target": "name=Dislike3",
+      "targets": [
+        ["name=Dislike3", "name"],
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@name='Dislike3']", "xpath:attributes"],
+        ["xpath=//div[@id='VEGvvazGmbukHqZyToVvYw']/form/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'👎')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "566cbfce-4277-4cc1-aed3-9611e226c274",
+    "name": "picture_likes_and_dislikes",
+    "commands": [{
+      "id": "52ad8ca1-2693-4262-a46b-9c745f1b14a8",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6c567897-792b-4a0f-9c7f-89020bd78852",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > img",
+      "targets": [
+        ["css=a > img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://s3-media3.fl.yelpcdn.com/bphoto/Wnj38IgMDewqwaf7WPbOBA/o.jpg')]", "xpath:img"],
+        ["xpath=//p[@id='poi_choice_map']/a/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win7440",
+      "windowTimeout": 2000
+    }, {
+      "id": "c6d6a5ef-b179-4884-a112-1457f25c184a",
+      "comment": "",
+      "command": "storeWindowHandle",
+      "target": "root",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1b65ab13-7d9b-4064-87e2-9af3d9133e51",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win7440}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a2186a3c-9273-49c9-b49f-5a5200dc295b",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8271fe3c-7084-4419-934c-9ae8e20df731",
+      "comment": "",
+      "command": "click",
+      "target": "name=Dislike0",
+      "targets": [
+        ["name=Dislike0", "name"],
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@name='Dislike0']", "xpath:attributes"],
+        ["xpath=//div[@id='F5n57w6RaOCAB4bivNSs8A']/form/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'👎')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8d075b6a-1dab-4370-b2ed-e505e08065be",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > img",
+      "targets": [
+        ["css=a > img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://s3-media2.fl.yelpcdn.com/bphoto/ZoRGh8jWub3iVekqYWTQlA/o.jpg')]", "xpath:img"],
+        ["xpath=//p[@id='poi_choice_map']/a/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win4989",
+      "windowTimeout": 2000
+    }, {
+      "id": "1e83a3c2-613f-49fa-abd5-8d40a91ee27c",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win4989}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c209941d-fdb9-4619-b677-1591a0189c3a",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b1a5b88f-bae1-40a7-9e93-1e496f65d2d0",
+      "comment": "",
+      "command": "click",
+      "target": "name=Like1",
+      "targets": [
+        ["name=Like1", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like1']", "xpath:attributes"],
+        ["xpath=//div[@id='E5cecsuxC11xDO9E3c93lA']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c1ed1ede-8a34-405e-a38a-0f12e91f1026",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > img",
+      "targets": [
+        ["css=a > img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://s3-media2.fl.yelpcdn.com/bphoto/cOh78R0YG3yW503Z6V7qPg/o.jpg')]", "xpath:img"],
+        ["xpath=//p[@id='poi_choice_map']/a/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win6476",
+      "windowTimeout": 2000
+    }, {
+      "id": "7b0e09ef-a3d1-4618-bb42-034b6714ddd4",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win6476}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6a95dc3f-eae5-4a96-869a-28038db5f46b",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "67df36ba-398e-40d6-81ab-1e3c711c9adb",
+      "comment": "",
+      "command": "click",
+      "target": "name=Like2",
+      "targets": [
+        ["name=Like2", "name"],
+        ["css=button:nth-child(1)", "css:finder"],
+        ["xpath=//button[@name='Like2']", "xpath:attributes"],
+        ["xpath=//div[@id='6x6rR-SErwOo3xF2AzXVHA']/form/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'👍')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d69ab83e-49a3-4df1-ae76-c77e0ca10749",
+      "comment": "",
+      "command": "click",
+      "target": "css=a > img",
+      "targets": [
+        ["css=a > img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://s3-media4.fl.yelpcdn.com/bphoto/jojmr44rp3kUIHsAjcUUkw/o.jpg')]", "xpath:img"],
+        ["xpath=//p[@id='poi_choice_map']/a/img", "xpath:idRelative"],
+        ["xpath=//img", "xpath:position"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win3351",
+      "windowTimeout": 2000
+    }, {
+      "id": "683995aa-1479-4428-a9da-41835fbb0470",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win3351}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "96dfb113-98ef-48ba-b1ea-78e0e96a88c1",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6c51a523-3731-4e61-8d2d-d25746c2fd10",
+      "comment": "",
+      "command": "click",
+      "target": "name=Dislike3",
+      "targets": [
+        ["name=Dislike3", "name"],
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@name='Dislike3']", "xpath:attributes"],
+        ["xpath=//div[@id='VEGvvazGmbukHqZyToVvYw']/form/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'👎')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "67dafa40-aaa0-4ec0-a3db-45fbae597f65",
+      "comment": "",
+      "command": "//click",
+      "target": "linkText=Take Points of Interest Survey",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "f05334ec-5afa-42ca-8e1c-7eab9d555ddf",
+    "name": "get_to_test",
+    "commands": [{
+      "id": "b930e767-581f-48ab-9a5b-6793994b9c64",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/login.php",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7dc200c6-d5f6-4a2a-962c-97c9eb2e7001",
+      "comment": "",
+      "command": "click",
+      "target": "name=username",
+      "targets": [
+        ["name=username", "name"],
+        ["css=.form-group:nth-child(1) > .form-control", "css:finder"],
+        ["xpath=//input[@name='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d9186b3f-99d2-4c03-8ef2-055fa4bb3d52",
+      "comment": "",
+      "command": "type",
+      "target": "name=username",
+      "targets": [
+        ["name=username", "name"],
+        ["css=.form-group:nth-child(1) > .form-control", "css:finder"],
+        ["xpath=//input[@name='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "alec"
+    }, {
+      "id": "ab54d08f-0a2c-45ee-8322-dbd18e06e4d9",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.form-group:nth-child(2) > .form-control", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c8552b06-c090-426a-a729-bb2e48f0d8a5",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.form-group:nth-child(2) > .form-control", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "rrrrrr"
+    }, {
+      "id": "3f94b980-5409-45ff-857f-98548aed7860",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "27e1ed83-a221-439c-a882-d80b724bd095",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Take Points of Interest Survey",
+      "targets": [
+        ["linkText=Take Points of Interest Survey", "linkText"],
+        ["css=h3 > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Take Points of Interest Survey')]", "xpath:link"],
+        ["xpath=//div[@id='userInfo']/form/h3/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'poiChoice.php')]", "xpath:href"],
+        ["xpath=//h3/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Take Points of Interest Survey')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "31035d21-b7dc-4837-a023-943cd67d766c",
+      "comment": "",
+      "command": "",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "94a94b25-a599-4717-98a6-ce964939dc0f",
+    "name": "",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:8080/", "http://localhost:8080/TripRecommender/ItineraryRecommender/poiChoice.php", "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php", "http://localhost:8080/TripRecommender/ItineraryRecommender/app/login.php"],
+  "plugins": []
+}

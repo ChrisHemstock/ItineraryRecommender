@@ -8,17 +8,41 @@
     //Also removes all markup within the div #choice
     function getPoiInfo($link, $ids, $pos, $likes) {
         $id = $ids[$pos];
-        $results = $link->query('SELECT name, image_url FROM pois WHERE API_ID = "' . $id . '";')->fetch_all();
-
+        //US 11: Add picture to POI choice
+        $results = $link->query('SELECT name, image_url, rating, url, Lat, Lng  FROM pois WHERE API_ID = "' . $id . '";')->fetch_all();
         foreach ($results as $row) {
             $name = $row[0];
             $image_url = $row[1];
+            $rating = $row[2];
+            $url = $row[3];
+            $Lat = $row[4];
+            $Lng = $row[5];
             echo '<div id="' . $id . '">
-                    <h1 class=' . $id . '>' . $name . '</h1>
+                    <h1 class=' . $id . '>' . $name .': ' . $rating . '&#9734; </h1>
                     <form method="post">
-                        <button type="submit" name="Like' . $pos . '" value="' . $likes . ' ' . $id . '">Like</button>
-                        <button type="submit" name="Dislike' . $pos . '" value="' . $likes . '">Dislike</button>
-                        <img src="'. $image_url . '" alt="'. $image_url . '">
+                        <button type="submit" name="Like' . $pos . '" value="' . $likes . ' ' . $id . '">&#128077;</button>
+                        <button type="submit" name="Dislike' . $pos . '" value="' . $likes . '">&#128078;</button>
+                        <br> <br>
+                        <p id = "poi_choice_map" style="float:right"><a href= ' . $url .' target="_blank" ><img src='. $image_url . ' style="width="300" height="300""></a></p>
+                        <div id="choice_map">
+                        <script>                  
+                        var map = L.map("choice_map",{
+                            center: ['. $Lat . ', '. $Lng . '],
+                            zoom: 15
+                           });
+                        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                            maxZoom: 25,
+                            attribution: "&copy; <a href= http://www.openstreetmap.org/copyright>OpenStreetMap</a>"
+                        }).addTo(map);
+                        setInterval(function () {
+                            map.invalidateSize();
+                         }, 100);
+                        var marker = L.marker([' . $Lat . ', ' . $Lng . ']).addTo(map);
+                        </script>
+                        </div>
+                        <style> 
+                        #choice_map { height: 350px; width: 300px; float:left;}
+                        </style>
                     </form>
                   </div>';
         }
@@ -33,6 +57,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
     <title>POI Survey</title>
 </head>
 <body>
@@ -77,8 +108,6 @@
             var_dump($poi_ids);
             var_dump($likes);
 
-
-        //var_dump($sqlClear);
         foreach ($poi_ids as $poi_id) {
             if ($poi_id != "") {
                 $sql2 = "INSERT INTO likes(userID, POI_ID)

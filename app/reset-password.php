@@ -59,12 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
             }
-
             // Close statement
             mysqli_stmt_close($stmt);
         }
     }
-
     // Close connection
     mysqli_close($link);
 }
@@ -81,7 +79,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         body {
             font: 14px sans-serif;
         }
-
         .wrapper {
             width: 360px;
             padding: 20px;
