@@ -8,17 +8,23 @@
     //Also removes all markup within the div #choice
     function getPoiInfo($link, $ids, $pos, $likes) {
         $id = $ids[$pos];
-        $results = $link->query('SELECT name, image_url, Lat, Lng FROM pois WHERE API_ID = "' . $id . '";')->fetch_all();
+        //US 11: Add picture to POI choice
+        $results = $link->query('SELECT name, image_url, rating, url, Lat, Lng  FROM pois WHERE API_ID = "' . $id . '";')->fetch_all();
         foreach ($results as $row) {
             $name = $row[0];
-            $Lat = $row[2];
-            $Lng = $row[3];
+            $image_url = $row[1];
+            $rating = $row[2];
+            $url = $row[3];
+            $Lat = $row[4];
+            $Lng = $row[5];
             echo '<div id="' . $id . '">
-                    <h1 class=' . $id . '>' . $name . '</h1>
+                    <h1 class=' . $id . '>' . $name .': ' . $rating . '&#9734; </h1>
                     <form method="post">
-                        <button type="submit" name="Like' . $pos . '" value="' . $likes . ' ' . $id . '">Like</button>
-                        <button type="submit" name="Dislike' . $pos . '" value="' . $likes . '">Dislike</button>
-                        <div id="choice_map"></div>
+                        <button type="submit" name="Like' . $pos . '" value="' . $likes . ' ' . $id . '">&#128077;</button>
+                        <button type="submit" name="Dislike' . $pos . '" value="' . $likes . '">&#128078;</button>
+                        <br> <br>
+                        <p id = "poi_choice_map" style="float:right"><a href= ' . $url .' target="_blank" ><img src='. $image_url . ' style="width="300" height="300""></a></p>
+                        <div id="choice_map">
                         <script>                  
                         var map = L.map("choice_map",{
                             center: ['. $Lat . ', '. $Lng . '],
@@ -33,8 +39,9 @@
                          }, 100);
                         var marker = L.marker([' . $Lat . ', ' . $Lng . ']).addTo(map);
                         </script>
+                        </div>
                         <style> 
-                        #choice_map { height: 375px; width: 300px; }
+                        #choice_map { height: 350px; width: 300px; float:left;}
                         </style>
                     </form>
                   </div>';
