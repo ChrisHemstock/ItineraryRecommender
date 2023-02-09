@@ -999,6 +999,7 @@ return array(
     'PharIo\\Version\\VersionConstraintParser' => $vendorDir . '/phar-io/version/src/VersionConstraintParser.php',
     'PharIo\\Version\\VersionConstraintValue' => $vendorDir . '/phar-io/version/src/VersionConstraintValue.php',
     'PharIo\\Version\\VersionNumber' => $vendorDir . '/phar-io/version/src/VersionNumber.php',
+<<<<<<< HEAD
     'PhpParser\\Builder' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder.php',
     'PhpParser\\BuilderFactory' => $vendorDir . '/nikic/php-parser/lib/PhpParser/BuilderFactory.php',
     'PhpParser\\BuilderHelpers' => $vendorDir . '/nikic/php-parser/lib/PhpParser/BuilderHelpers.php',
@@ -1269,6 +1270,8 @@ return array(
     'Psr\\Http\\Message\\UploadedFileInterface' => $vendorDir . '/psr/http-message/src/UploadedFileInterface.php',
     'Psr\\Http\\Message\\UriFactoryInterface' => $vendorDir . '/psr/http-factory/src/UriFactoryInterface.php',
     'Psr\\Http\\Message\\UriInterface' => $vendorDir . '/psr/http-message/src/UriInterface.php',
+=======
+>>>>>>> 4c7ddff4939ebe6770f2be6fa6b3d847a998ea31
     'SebastianBergmann\\CliParser\\AmbiguousOptionException' => $vendorDir . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
     'SebastianBergmann\\CliParser\\Exception' => $vendorDir . '/sebastian/cli-parser/src/exceptions/Exception.php',
     'SebastianBergmann\\CliParser\\OptionDoesNotAllowArgumentException' => $vendorDir . '/sebastian/cli-parser/src/exceptions/OptionDoesNotAllowArgumentException.php',
@@ -1470,6 +1473,7 @@ return array(
     'SebastianBergmann\\Type\\UnknownType' => $vendorDir . '/sebastian/type/src/type/UnknownType.php',
     'SebastianBergmann\\Type\\VoidType' => $vendorDir . '/sebastian/type/src/type/VoidType.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
+<<<<<<< HEAD
     'Symfony\\Component\\Console\\Application' => $vendorDir . '/symfony/console/Application.php',
     'Symfony\\Component\\Console\\Attribute\\AsCommand' => $vendorDir . '/symfony/console/Attribute/AsCommand.php',
     'Symfony\\Component\\Console\\CI\\GithubActionReporter' => $vendorDir . '/symfony/console/CI/GithubActionReporter.php',
@@ -1714,6 +1718,8 @@ return array(
     'TextAnalysis\\Utilities\\Text' => $vendorDir . '/yooper/php-text-analysis/src/Utilities/Text.php',
     'TextAnalysis\\Utilities\\Vowels\\EnglishVowels' => $vendorDir . '/yooper/php-text-analysis/src/Utilities/Vowels/EnglishVowels.php',
     'TextAnalysis\\Utilities\\Vowels\\VowelsAbstractFactory' => $vendorDir . '/yooper/php-text-analysis/src/Utilities/Vowels/VowelsAbstractFactory.php',
+=======
+>>>>>>> 4c7ddff4939ebe6770f2be6fa6b3d847a998ea31
     'TheSeer\\Tokenizer\\Exception' => $vendorDir . '/theseer/tokenizer/src/Exception.php',
     'TheSeer\\Tokenizer\\NamespaceUri' => $vendorDir . '/theseer/tokenizer/src/NamespaceUri.php',
     'TheSeer\\Tokenizer\\NamespaceUriException' => $vendorDir . '/theseer/tokenizer/src/NamespaceUriException.php',
@@ -1722,6 +1728,7 @@ return array(
     'TheSeer\\Tokenizer\\TokenCollectionException' => $vendorDir . '/theseer/tokenizer/src/TokenCollectionException.php',
     'TheSeer\\Tokenizer\\Tokenizer' => $vendorDir . '/theseer/tokenizer/src/Tokenizer.php',
     'TheSeer\\Tokenizer\\XMLSerializer' => $vendorDir . '/theseer/tokenizer/src/XMLSerializer.php',
+<<<<<<< HEAD
     'Wamania\\Snowball\\Danish' => $vendorDir . '/wamania/php-stemmer/src/Danish.php',
     'Wamania\\Snowball\\Dutch' => $vendorDir . '/wamania/php-stemmer/src/Dutch.php',
     'Wamania\\Snowball\\English' => $vendorDir . '/wamania/php-stemmer/src/English.php',
@@ -1738,4 +1745,6 @@ return array(
     'Wamania\\Snowball\\Swedish' => $vendorDir . '/wamania/php-stemmer/src/Swedish.php',
     'Wamania\\Snowball\\Utf8' => $vendorDir . '/wamania/php-stemmer/src/Utf8.php',
     'Yooper\\Nicknames' => $vendorDir . '/yooper/nicknames/src/Nicknames.php',
+=======
+>>>>>>> 4c7ddff4939ebe6770f2be6fa6b3d847a998ea31
 );
