@@ -134,16 +134,13 @@ function getRecommendations($link, $userID) {
     foreach($POI_reviews as $poiReview) {      
       $review = explode(' ', strtolower(preg_replace('/[^A-Za-z\ ]/', '', $poiReview[0])));
       array_shift($review);
-      
-
-
       $allReviews = array_merge($allReviews, $review);
     }
     
     $allReviews = array_unique($allReviews);
     $allReviewTokens = new TokensDocument($allReviews);
     $docs['all'] = $allReviewTokens;
-    //var_dump($docs['all']);
+    //var_dump($allReviews);
     //
     // Get all review tokens in one document per poi
     //
@@ -184,9 +181,11 @@ function getRecommendations($link, $userID) {
     $userProfile = [];
     foreach($allReviews as $word) {
       if($word != '') {
+        //echo $word . ': ' . $userTfidf->getTfIdf($docs['likes'], $word, 3) . '<br>';
         array_push($userProfile, $userTfidf->getTfIdf($docs['likes'], $word, 3));
       }
     }
+    //var_dump($allReviews);
     //var_dump($userProfile);
 
 
@@ -207,8 +206,7 @@ function getRecommendations($link, $userID) {
         }
                                               //review, each word in all
         
-        // var_dump(count($vector));
-        // var_dump(count($userProfile));
+
         
         $similarity = cosineSimilarity($userProfile, $vector);
         //var_dump($similarity);
@@ -220,11 +218,8 @@ function getRecommendations($link, $userID) {
     }
     asort($poisLiked);
     array_pop($poisLiked);
-    //var_dump($docs['all']);
-    // //Prints the recommended POIs
-    // foreach($poisLiked as $key=>$value) {
-    //   echo $key . '=' . $value . '<br>';
-    // }
+
+   // var_dump($poisLiked);
 
     //returns an ordered list of POIs to recommend
     
@@ -238,57 +233,5 @@ function getRecommendations($link, $userID) {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/UFCN0bYdHroPKu6KV5CJqg/reviews?limit=20&sort_by=yelp_sort', [
-//   'headers' => [
-//     'Authorization' => 'Bearer FPHBQC5fbtVpUqt4lQtAmTPXNWzDKblHryRIRIfoL5PYHgLmW109muvBkAqYyscdeNerih_ZQrxs4WGnp-xf4pgyBDbEmO36NlUS8MB6GvgJp52qoqW_nUdvG9uOY3Yx',
-//     'accept' => 'application/json',
-//   ],
-// ]);
-
-// //echo $response->getBody();
-// //$data = $response->getBody();
-// $data = json_decode($response->getBody(), true);
-
-
-// $docs = [];
-// foreach($data["reviews"] as $row) {
-//   $text = strtolower(preg_replace('/[^A-Za-z0-9\- ]/', '', $row['text']));
-//   $tokens = new TokensDocument(tokenize($text));
-//   //$tokens->applyStemmer(new DictionaryStemmer(new EnchantAdapter(), new SnowballStemmer()));
-//   array_push($docs, $tokens);
-//   foreach($tokens->getDocumentData() as $token) {
-//     echo $token . '<br>';
-//   }
-// }
-// $docsCollection = new DocumentArrayCollection($docs);
-// $tfidf = new TfIdf($docsCollection);
-
-// //$chicken = $tfidf->getTfIdf($docs[1], 'Eagle', 3);
-// $chicken = $tfidf->getIdf();
-// foreach($chicken as $chick) {
-//   echo '<br>' . $chick;
-// }
-
-
-// foreach ($data["reviews"] as $row) {
-//   //get the POI details
-//   $review = $row['text'];
-//   echo '<br>' . $review;
-// }
 
 ?>
