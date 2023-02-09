@@ -9,7 +9,7 @@
             include_once __DIR__.'../../../app/includes/functions.php';
             include_once __DIR__.'../../../app/resources/reviewRequest.php';
 
-            define('USER_ID', 30);
+            define('USER_ID', 20);
 
             deleteLikes($link, USER_ID);
 
