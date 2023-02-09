@@ -165,7 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
             ?>
             </select>
             <label for="age">Birth Day:</label>
-            <input type="date" value = <? echo $birthdayCurrent; ?> required="true" id="birthDay" name="birthDay">
+            <input type="date" value = <?php echo $birthdayCurrent; ?> required="true" id="birthDay" name="birthDay">
             <label for="race">Race</label>
             <select name="race" id="race" required>
                 <option selected disabled value></option>

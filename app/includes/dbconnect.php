@@ -4,7 +4,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 
-$database = "TripRecommender";
+$database = "ItineraryRecommender";
 
 // Create a connection 
 $link = mysqli_connect(
