@@ -66,13 +66,6 @@ class ComposerStaticInite9b9137efce611078dd0dda2d3ceacd5
         array (
             'DeepCopy\\' => 9,
         ),
-<<<<<<< HEAD
-=======
-        'A' => 
-        array (
-            'App\\' => 4,
-        ),
->>>>>>> 4c7ddff4939ebe6770f2be6fa6b3d847a998ea31
     );
 
     public static $prefixDirsPsr4 = array (
@@ -149,13 +142,6 @@ class ComposerStaticInite9b9137efce611078dd0dda2d3ceacd5
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
-<<<<<<< HEAD
-=======
-        'App\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/app',
-        ),
->>>>>>> 4c7ddff4939ebe6770f2be6fa6b3d847a998ea31
     );
 
     public static $classMap = array (
@@ -1152,7 +1138,6 @@ class ComposerStaticInite9b9137efce611078dd0dda2d3ceacd5
         'PharIo\\Version\\VersionConstraintParser' => __DIR__ . '/..' . '/phar-io/version/src/VersionConstraintParser.php',
         'PharIo\\Version\\VersionConstraintValue' => __DIR__ . '/..' . '/phar-io/version/src/VersionConstraintValue.php',
         'PharIo\\Version\\VersionNumber' => __DIR__ . '/..' . '/phar-io/version/src/VersionNumber.php',
-<<<<<<< HEAD
         'PhpParser\\Builder' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Builder.php',
         'PhpParser\\BuilderFactory' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/BuilderFactory.php',
         'PhpParser\\BuilderHelpers' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/BuilderHelpers.php',
@@ -1423,8 +1408,6 @@ class ComposerStaticInite9b9137efce611078dd0dda2d3ceacd5
         'Psr\\Http\\Message\\UploadedFileInterface' => __DIR__ . '/..' . '/psr/http-message/src/UploadedFileInterface.php',
         'Psr\\Http\\Message\\UriFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/UriFactoryInterface.php',
         'Psr\\Http\\Message\\UriInterface' => __DIR__ . '/..' . '/psr/http-message/src/UriInterface.php',
-=======
->>>>>>> 4c7ddff4939ebe6770f2be6fa6b3d847a998ea31
         'SebastianBergmann\\CliParser\\AmbiguousOptionException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
         'SebastianBergmann\\CliParser\\Exception' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/Exception.php',
         'SebastianBergmann\\CliParser\\OptionDoesNotAllowArgumentException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/OptionDoesNotAllowArgumentException.php',
@@ -1626,7 +1609,6 @@ class ComposerStaticInite9b9137efce611078dd0dda2d3ceacd5
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/type/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/type/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
-<<<<<<< HEAD
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Attribute\\AsCommand' => __DIR__ . '/..' . '/symfony/console/Attribute/AsCommand.php',
         'Symfony\\Component\\Console\\CI\\GithubActionReporter' => __DIR__ . '/..' . '/symfony/console/CI/GithubActionReporter.php',
@@ -1871,8 +1853,6 @@ class ComposerStaticInite9b9137efce611078dd0dda2d3ceacd5
         'TextAnalysis\\Utilities\\Text' => __DIR__ . '/..' . '/yooper/php-text-analysis/src/Utilities/Text.php',
         'TextAnalysis\\Utilities\\Vowels\\EnglishVowels' => __DIR__ . '/..' . '/yooper/php-text-analysis/src/Utilities/Vowels/EnglishVowels.php',
         'TextAnalysis\\Utilities\\Vowels\\VowelsAbstractFactory' => __DIR__ . '/..' . '/yooper/php-text-analysis/src/Utilities/Vowels/VowelsAbstractFactory.php',
-=======
->>>>>>> 4c7ddff4939ebe6770f2be6fa6b3d847a998ea31
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
         'TheSeer\\Tokenizer\\NamespaceUri' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUri.php',
         'TheSeer\\Tokenizer\\NamespaceUriException' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUriException.php',
@@ -1881,7 +1861,6 @@ class ComposerStaticInite9b9137efce611078dd0dda2d3ceacd5
         'TheSeer\\Tokenizer\\TokenCollectionException' => __DIR__ . '/..' . '/theseer/tokenizer/src/TokenCollectionException.php',
         'TheSeer\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/theseer/tokenizer/src/Tokenizer.php',
         'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
-<<<<<<< HEAD
         'Wamania\\Snowball\\Danish' => __DIR__ . '/..' . '/wamania/php-stemmer/src/Danish.php',
         'Wamania\\Snowball\\Dutch' => __DIR__ . '/..' . '/wamania/php-stemmer/src/Dutch.php',
         'Wamania\\Snowball\\English' => __DIR__ . '/..' . '/wamania/php-stemmer/src/English.php',
@@ -1898,8 +1877,6 @@ class ComposerStaticInite9b9137efce611078dd0dda2d3ceacd5
         'Wamania\\Snowball\\Swedish' => __DIR__ . '/..' . '/wamania/php-stemmer/src/Swedish.php',
         'Wamania\\Snowball\\Utf8' => __DIR__ . '/..' . '/wamania/php-stemmer/src/Utf8.php',
         'Yooper\\Nicknames' => __DIR__ . '/..' . '/yooper/nicknames/src/Nicknames.php',
-=======
->>>>>>> 4c7ddff4939ebe6770f2be6fa6b3d847a998ea31
     );
 
     public static function getInitializer(ClassLoader $loader)

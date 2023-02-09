@@ -1,1 +1,1 @@
-{"version":1,"defects":{"SampleTest::testGetRecommendations":8},"times":{"SampleTest::testGetRecommendations":0.008}}
+{"version":1,"defects":{"SampleTest::testGetRecommendations":8},"times":{"SampleTest::testGetRecommendations":0.025}}
