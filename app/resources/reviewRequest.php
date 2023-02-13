@@ -56,17 +56,24 @@ function getRecommendations($link, $userID, $amount) {
   //
   // gets all the reviews that the user likes into one document
   //
+  $userTimeStart = microtime(true);
+
   $likes = getUserLikes($link, $userID);
   if(count($likes) == 0) {
     $topArray = topPoiJson($link, $amount);
     return $topArray;
   }
   $docs = addDocument($docs, 'likes', $likes);
-    
+  
+  $userTimeEnd = microtime(true);
+  echo('User doc Time: ' . ($userTimeEnd - $userTimeStart) . '     ');
+
   //
   // Get all review tokens in one document
   // Build all review documents
   //
+  $allTimeStart = microtime(true);
+
   $reviewsQuery = $link->query('SELECT reviews, id FROM POIs')->fetch_all();
   $allReviews = [];
   foreach($reviewsQuery as $poiReview) {
@@ -87,6 +94,9 @@ function getRecommendations($link, $userID, $amount) {
   //var_dump($allReviews);
   //var_dump($docs);
 
+  $allTimeEnd = microtime(true);
+  echo('Build all review doc time: ' . ($allTimeEnd - $allTimeStart) . '     ');
+
 
 
   //
@@ -100,6 +110,8 @@ function getRecommendations($link, $userID, $amount) {
   //
   // Creates all the vectors for the POIs and one for the user
   //
+  $vectorTimeStart = microtime(true);
+
   $vectorCollection = [];
   foreach($docs as $key => $values) {
     $vector = makeVector($userTfidf, $allReviews, $values);
@@ -107,6 +119,11 @@ function getRecommendations($link, $userID, $amount) {
   }
   //var_dump($vectorCollection['likes']);
 
+  $vectorTimeEnd = microtime(true);
+  echo('Build all vector time: ' . ($vectorTimeEnd - $vectorTimeStart) . '     ');
+
+
+  $similarityTimeStart = microtime(true);
 
   $poisLiked = [];
   foreach($vectorCollection as $id => $vector) {
@@ -116,6 +133,9 @@ function getRecommendations($link, $userID, $amount) {
   unset($poisLiked['likes']);
   asort($poisLiked);
   $poisLiked = array_reverse($poisLiked, true);
+
+  $similarityTimeEnd = microtime(true);
+  echo('Similarity time: ' . ($similarityTimeEnd - $similarityTimeStart) . '     ');
 
   //var_dump($poisLiked);
 
