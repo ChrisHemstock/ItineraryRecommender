@@ -21,10 +21,9 @@ if(isset($_POST["Submit"])){
     makeRequest();
 }
 function makeRequest(){
-    require_once "../includes/dbconnect.php";
-    session_start();
-require_once('../vendor/autoload.php');
-$client = new \GuzzleHttp\Client();
+require_once "../includes/dbconnect.php";
+  session_start();
+  require_once __DIR__.'/../../vendor/autoload.php';$client = new \GuzzleHttp\Client();
 
 
 $searchTerm = $_POST["searchTerm"];
@@ -36,8 +35,6 @@ $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/search?l
     ],
   ]);
   
-  //echo $response->getBody();
-
 //read the json file contents
 
 $jsondata = $response->getBody();
@@ -57,10 +54,12 @@ foreach ($data["businesses"] as $row) {
   $phone = $row['phone'];
   $API_KEY = $row['id'];
   $image_url = $row['image_url'];
+  $url = $row['url'];
+  $price = $row['price'];
 
   //insert into mysql table
- $sql = "INSERT INTO POIs(name, Category, rating, num_ratings, address, Lng, Lat, phone, API_ID, image_url)
-    VALUES('$name', '$Category', '$rating', '$num_ratings', '$address', '$Lng', '$Lat', '$phone', '$API_KEY', '$image_url')";
+ $sql = "INSERT INTO pois(name, category, rating, num_ratings, address, Lng, Lat, phone, API_ID, image_url, url, price)
+    VALUES('$name', '$Category', '$rating', '$num_ratings', '$address', '$Lng', '$Lat', '$phone', '$API_KEY', '$image_url', '$url', '$price')";
   if ($link->query($sql) === TRUE) {
     $created = true;
     $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/' . $API_KEY . '/reviews?limit=20&sort_by=yelp_sort', [
@@ -83,16 +82,15 @@ foreach ($data["businesses"] as $row) {
       if ($link->query($sql) === TRUE) {
         echo "New record created successfully";
       } else {
-        echo "Error: " . $sql . "<br>" . $link->error;
+        echo "Error: " . $sql . "<br>" . mysqli_error($link);
       }
   } else {
       $created = false;
-    //echo "Error: " . $sql . "<br>" . $link->error;
   }
 }
 
 }
-
+//var_dump(mysqli_error($link));
 if($created = true){
     echo "<h2> POIs successfully added! </h2>";
 }

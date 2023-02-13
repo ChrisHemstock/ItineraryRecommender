@@ -17,11 +17,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     exit;
 }
 
-
-
-
 $row = "false";
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 
@@ -46,41 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
                 . mysqli_error($link);
             echo $userID;
         }
-        // // if current values are set, clear data
-        // if (mysqli_query($link, $getInterestInfo)) {
-        //     $clearData = "DELETE FROM interests WHERE userID = '$userID'";
-        //     if (mysqli_query($link, $clearData)) {
-        //         $userDataCleared = true;
-        //     } else {
-        //         echo "ERROR: Hush! Sorry $clearData. "
-        //             . mysqli_error($clearData);
-        //         echo $userID;
-        //     }
-
-        // } else {
-        //     echo "ERROR: Hush! Sorry $getInterestInfo. "
-        //         . mysqli_error($link);
-        // }
-
-        // // insert or update interests
-        // if (isset($_POST['interests'])) {
-        //     foreach ($_POST['interests'] as $key => $value) {
-        //         $description = $value;
-        //         $value = 1;
-        //         $sql2 = "INSERT INTO interests(userID, description, value)
-        //     VALUES ('$userID','$description', '$value') 
-        //     ON DUPLICATE KEY UPDATE 
-        //     description = '$description', value = '$value'";
-        //         $stmt = $sql2;
-        //         if (mysqli_query($link, $sql2)) {
-        //             $interestDataUpdated = true;
-        //         } else {
-        //             echo "ERROR: Hush! Sorry $sql2. "
-        //                 . mysqli_error($link);
-        //         }
-        //     }
-
-        // }
     }
     if ($userDataUpdated == true) {
         echo "<h3> Your Profile has been updated! </h3>";
@@ -120,10 +81,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
         <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
     </p>
 
-    <?
+    <?php
     //Get current user data
-    $getUserInfo = 
-    "SELECT * FROM users WHERE id = '$userID';";
+    $getUserInfo = "SELECT * FROM users WHERE id = '$userID';";
+    $link->query("SELECT * FROM users WHERE id = '$userID'")->fetch_all();
      if(mysqli_query($link, $getUserInfo)){
         $response = @mysqli_query($link, $getUserInfo);
         while($row = mysqli_fetch_array($response)){
@@ -134,8 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 
         }
     }else{
-        echo "ERROR: Hush! Sorry $getUserInfo. "
-            . mysqli_error($getUserInfo);
+        echo "ERROR: Hush! Sorry $getUserInfo. " . mysqli_error($getUserInfo);
     }
 
     ?>
@@ -146,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
             <label for="gender">Gender</label>
             <select name="gender" id="gender" required>
                 <option selected disabled value=""></option>
-                <?
+                <?php
                         if($genderCurrent == 'male'){
                             echo "<option selected value='male'>Male</option>";
                         }else{
@@ -165,11 +125,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
             ?>
             </select>
             <label for="age">Birth Day:</label>
-            <input type="date" value = <? echo $birthdayCurrent; ?> required="true" id="birthDay" name="birthDay">
+            <input type="date" value = <?php echo $birthdayCurrent; ?> required="true" id="birthDay" name="birthDay">
             <label for="race">Race</label>
             <select name="race" id="race" required>
                 <option selected disabled value></option>
-                <?
+                <?php
             if($raceCurrent == 'americanIndian/alaskaNative'){
                 echo "<option selected value='americanIndian/alaskaNative'>American Indian or Alaska Native</option>";
             }else{
@@ -204,21 +164,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
             ?>
             </select>
             <br>
-
-            <? 
-            //$description;
-            // if(mysqli_query($link, $getInterestInfo)){
-            //     $response = @mysqli_query($link, $getInterestInfo);
-            //     while($row = mysqli_fetch_array($response)){
-            //         $description .= $row['Description'];
-            //     }
-            // }else{
-            //     echo "ERROR: Hush! Sorry $getInterestInfo. "
-            //         . mysqli_error($link);
-            // }
-            
-
-            ?>
             <br>
             <h3> <a href="poiChoice.php">Take Points of Interest Survey</a> </h3>
             <br></br>
