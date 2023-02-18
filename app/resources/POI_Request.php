@@ -16,16 +16,21 @@
 
 
 <?php
+ ini_set("display_errors", "1");
+ ini_set("display_startup_errors", "1");
+ error_reporting(E_ALL);
+ use GuzzleHttp\Client;
+
 
 if(isset($_POST["Submit"])){
-    makeRequest();
+  makeRequest();
 }
 function makeRequest(){
-    require_once "../includes/dbconnect.php";
-    session_start();
-require_once('../vendor/autoload.php');
-$client = new \GuzzleHttp\Client();
-
+  require_once "../includes/dbconnect.php";
+  //require_once "../../vendor/guzzlehttp/guzzle";
+  session_start();
+  $client = new Client();
+  require_once('../../vendor/autoload.php');
 
 $searchTerm = $_POST["searchTerm"];
 
@@ -40,7 +45,7 @@ $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/search?l
 
 $jsondata = $response->getBody();
 
-//convert json object to php associative array
+//convert json object to php associative arrays
 $data = json_decode($jsondata, true);
 
 foreach ($data["businesses"] as $row) {
