@@ -1035,6 +1035,7 @@ return array(
     'SebastianBergmann\\Environment\\Console' => $vendorDir . '/sebastian/environment/src/Console.php',
     'SebastianBergmann\\Environment\\Runtime' => $vendorDir . '/sebastian/environment/src/Runtime.php',
     'SebastianBergmann\\Exporter\\Exporter' => $vendorDir . '/sebastian/exporter/src/Exporter.php',
+    'SebastianBergmann\\FileIterator\\ExcludeIterator' => $vendorDir . '/phpunit/php-file-iterator/src/ExcludeIterator.php',
     'SebastianBergmann\\FileIterator\\Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'SebastianBergmann\\FileIterator\\Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',
     'SebastianBergmann\\FileIterator\\Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
