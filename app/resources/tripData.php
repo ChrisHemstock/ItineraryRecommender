@@ -31,6 +31,8 @@ if (isset($_POST['tripData'])) {
         $POI_ID = $row['poiId'];
         $POI_startTime = $row['startTime'];
         $POI_endTime = $row['endTime'];
+        //$API_ID = $row['api_id'];
+
 
         $sql2 = "INSERT INTO tripPOIs(POI_ID, startTime, endTime, tripID)
           VALUES('$POI_ID', '$POI_startTime', '$POI_endTime', '$tripID')";
@@ -39,6 +41,14 @@ if (isset($_POST['tripData'])) {
         } else {
           echo "Error: " . $sql2 . "<br>" . $link->error;
         }
+
+      //   $sql3 = "INSERT INTO likes(userID, POI_ID)
+      //   VALUES('$userID', '$POI_ID')";
+      // if ($link->query($sql3) === TRUE) {
+      //   echo "added to likes";
+      // } else {
+      //   echo "Error: " . $sql3 . "<br>" . $link->error;
+      // }
       }
       break;
     }
