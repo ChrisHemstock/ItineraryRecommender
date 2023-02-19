@@ -16,63 +16,56 @@
 
 
 <?php
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+error_reporting(E_ERROR | E_PARSE);
 
- error_reporting(E_ERROR | E_PARSE);
+function curlRequest($url){
+  $curl = curl_init();
 
+  curl_setopt_array($curl, [
+    CURLOPT_URL => $url,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "GET",
+    CURLOPT_HTTPHEADER => [
+      "Authorization: Bearer FPHBQC5fbtVpUqt4lQtAmTPXNWzDKblHryRIRIfoL5PYHgLmW109muvBkAqYyscdeNerih_ZQrxs4WGnp-xf4pgyBDbEmO36NlUS8MB6GvgJp52qoqW_nUdvG9uOY3Yx",
+      "accept: application/json"
+    ],
+  ]);
+  
+  $response = curl_exec($curl);
+  $err = curl_error($curl);
+  
+  curl_close($curl);
 
+  if ($err) {
+    echo "cURL Error #:" . $err;
+  }else{
+  return $response;
+}
+}
 
 if(isset($_POST["Submit"])){
   makeRequest();
 }
 function makeRequest(){
   require_once "../includes/dbconnect.php";
-  //require_once "../../vendor/guzzlehttp/guzzle";
   session_start();
   require_once('../../vendor/autoload.php');
-  //   $client = new \GuzzleHttp\Client;
   
 $searchTerm = $_POST["searchTerm"];
-
-$curl = curl_init();
-
-curl_setopt_array($curl, [
-  CURLOPT_URL => 'https://api.yelp.com/v3/businesses/search?location=Indianapolis&term=' . $searchTerm,
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
-  CURLOPT_HTTPHEADER => [
-    "Authorization: Bearer FPHBQC5fbtVpUqt4lQtAmTPXNWzDKblHryRIRIfoL5PYHgLmW109muvBkAqYyscdeNerih_ZQrxs4WGnp-xf4pgyBDbEmO36NlUS8MB6GvgJp52qoqW_nUdvG9uOY3Yx",
-    "accept: application/json"
-  ],
-]);
-
-$response = curl_exec($curl);
-$err = curl_error($curl);
-
-curl_close($curl);
-
-if ($err) {
-  echo "cURL Error #:" . $err;
-} else {
-
-//echo $response;
-
-// $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/search?location=Indianapolis&term=' . $searchTerm, [
-//     'headers' => [
-//       'Authorization' => 'Bearer FPHBQC5fbtVpUqt4lQtAmTPXNWzDKblHryRIRIfoL5PYHgLmW109muvBkAqYyscdeNerih_ZQrxs4WGnp-xf4pgyBDbEmO36NlUS8MB6GvgJp52qoqW_nUdvG9uOY3Yx',
-//       'accept' => 'application/json',
-//     ],
-//   ]);
-  
-// //read the json file contents
+echo "<br>";
 
 
-// //convert json object to php associative array
+$response = curlRequest('https://api.yelp.com/v3/businesses/search?location=Indianapolis&term=' . $searchTerm);
+
+//convert json object to php associative array
  $data = json_decode($response, true);
-
 
 foreach ($data["businesses"] as $row) {
   //get the POI details
@@ -96,36 +89,7 @@ foreach ($data["businesses"] as $row) {
     VALUES('$nameSub', '$Category', '$rating', '$num_ratings', '$address', '$Lng', '$Lat', '$phone', '$API_KEY', '$image_url', '$urlSub', '$price')
     ON DUPLICATE KEY UPDATE rating = '$rating', image_url = '$image_url'";
 
-  if ($link->query($sql) === TRUE) {
-    $created = true;
-    // $response = $client->request('GET', 'https://api.yelp.com/v3/businesses/' . $API_KEY . '/reviews?limit=20&sort_by=yelp_sort', [
-    //   'headers' => [
-    //     'Authorization' => 'Bearer FPHBQC5fbtVpUqt4lQtAmTPXNWzDKblHryRIRIfoL5PYHgLmW109muvBkAqYyscdeNerih_ZQrxs4WGnp-xf4pgyBDbEmO36NlUS8MB6GvgJp52qoqW_nUdvG9uOY3Yx',
-    //     'accept' => 'application/json',
-    //   ],
-    // ]);
-    curl_setopt_array($curl, [
-      CURLOPT_URL => 'https://api.yelp.com/v3/businesses/' . $API_KEY . '/reviews?limit=20&sort_by=yelp_sort',
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => "",
-      CURLOPT_MAXREDIRS => 10,
-      CURLOPT_TIMEOUT => 30,
-      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => "GET",
-      CURLOPT_HTTPHEADER => [
-        "Authorization: Bearer FPHBQC5fbtVpUqt4lQtAmTPXNWzDKblHryRIRIfoL5PYHgLmW109muvBkAqYyscdeNerih_ZQrxs4WGnp-xf4pgyBDbEmO36NlUS8MB6GvgJp52qoqW_nUdvG9uOY3Yx",
-        "accept: application/json"
-      ],
-    ]);
-
-    $response2 = curl_exec($curl);
-    $err = curl_error($curl);
-//echo $response2;
-    curl_close($curl);
-
-    if ($err) {
-  echo "cURL Error #:" . $err;
-    } else {  
+  $response2 = curlRequest('https://api.yelp.com/v3/businesses/' . $API_KEY . '/reviews?limit=20&sort_by=yelp_sort');
     $data2 = json_decode($response2, true);
 
     $review = '';
@@ -135,18 +99,12 @@ foreach ($data["businesses"] as $row) {
       $review .= ' ' . $text;
     }
     
-      //insert into mysql table
      $sql = "UPDATE POIs SET reviews = '$review' WHERE API_ID = '$API_KEY'";
       if ($link->query($sql) === TRUE) {
-        echo $nameSub . " successfully added or updated";
+        echo "<b>" . $nameSub . "</b> successfully added or updated";
         echo "<br>";
       } else {
         echo "Error: " . $sql . "<br>" . $link->error;
-      }
-  }
-} else {
-      $created = false;
-  }
 }
 
 }
