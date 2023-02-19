@@ -7,7 +7,6 @@ set_time_limit(360);
 $userID = $_SESSION["id"];
 $json = createMapPoisJson($link);
 $jsonPoiList = populateSavedPois($link);
-getRecommendations($link, $userID);
 
 ?>
 
