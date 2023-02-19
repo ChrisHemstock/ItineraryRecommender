@@ -4,8 +4,7 @@
         "platform-check": false
     },
     "require": {
-        "yooper/php-text-analysis": "^1.8",
-        "guzzlehttp/guzzle": "^7.5"
+        "yooper/php-text-analysis": "^1.8"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.0"
