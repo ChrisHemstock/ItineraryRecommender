@@ -21,10 +21,9 @@ if(isset($_POST["Submit"])){
     makeRequest();
 }
 function makeRequest(){
-    require_once "../includes/dbconnect.php";
-    session_start();
-require_once('../vendor/autoload.php');
-$client = new \GuzzleHttp\Client();
+require_once "../includes/dbconnect.php";
+  session_start();
+  require_once __DIR__.'/../../vendor/autoload.php';$client = new \GuzzleHttp\Client();
 
 
 $searchTerm = $_POST["searchTerm"];
@@ -59,7 +58,7 @@ foreach ($data["businesses"] as $row) {
   $price = $row['price'];
 
   //insert into mysql table
- $sql = "INSERT INTO POIs(name, Category, rating, num_ratings, address, Lng, Lat, phone, API_ID, image_url, url, price)
+ $sql = "INSERT INTO pois(name, category, rating, num_ratings, address, Lng, Lat, phone, API_ID, image_url, url, price)
     VALUES('$name', '$Category', '$rating', '$num_ratings', '$address', '$Lng', '$Lat', '$phone', '$API_KEY', '$image_url', '$url', '$price')";
   if ($link->query($sql) === TRUE) {
     $created = true;
@@ -83,7 +82,7 @@ foreach ($data["businesses"] as $row) {
       if ($link->query($sql) === TRUE) {
         echo "New record created successfully";
       } else {
-        echo "Error: " . $sql . "<br>" . $link->error;
+        echo "Error: " . $sql . "<br>" . mysqli_error($link);
       }
   } else {
       $created = false;
@@ -91,7 +90,7 @@ foreach ($data["businesses"] as $row) {
 }
 
 }
-
+//var_dump(mysqli_error($link));
 if($created = true){
     echo "<h2> POIs successfully added! </h2>";
 }
