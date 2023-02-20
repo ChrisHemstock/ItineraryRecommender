@@ -48,10 +48,22 @@ function makeVector($tfidf, $allWordsList, $document) {
   return $vector;
 }
 
+function addVector($link, $apiId, $word, $tfidf) {
+  $insert = "INSERT INTO tfidfs(API_ID, word, value) VALUES ('" . $apiId . "','" . $word . "', '" . $tfidf . "') ON DUPLICATE KEY UPDATE value = '" . $tfidf . "'";
+    $stmt = $insert;
+    if (mysqli_query($link, $insert)) {
+        $interestDataUpdated = true;
+    } else {
+        echo "ERROR: Hush! Sorry $insert. "
+            . mysqli_error($link);
+    }
+}
+
 
 function getRecommendations($link, $userID, $amount) {
 
   $docs = [];
+  $userDocs = [];
 
   //
   // gets all the reviews that the user likes into one document
@@ -61,7 +73,8 @@ function getRecommendations($link, $userID, $amount) {
     $topArray = topPoiJson($link, $amount);
     return $topArray;
   }
-  $docs = addDocument($docs, 'likes', $likes);
+  $tokens = new TokensDocument($likes);
+  $userDocs['likes'] = $tokens;
     
   //
   // Get all review tokens in one document
@@ -94,18 +107,27 @@ function getRecommendations($link, $userID, $amount) {
   //
   //
   $docsCollection = new DocumentArrayCollection($docs);
-  $userTfidf = new TfIdf($docsCollection);
+  $tfidf = new TfIdf($docsCollection);
 
 
   //
-  // Creates all the vectors for the POIs and one for the user
+  // Creates all the vectors for the POIs
   //
   $vectorCollection = [];
   foreach($docs as $key => $values) {
-    $vector = makeVector($userTfidf, $allReviews, $values);
+    $vector = makeVector($tfidf, $allReviews, $values);
+    // if (true) {
+    //   foreach($allReviews as $word) {
+    //     addVector($link, $key, $word, $vector[$word]);
+    //   }
+    // }
+    
     $vectorCollection[$key] = $vector;
   }
   //var_dump($vectorCollection['likes']);
+
+  $vector = makeVector($tfidf, $allReviews, $userDocs['likes']);
+  $vectorCollection['likes'] = $vector;
 
 
   $poisLiked = [];
