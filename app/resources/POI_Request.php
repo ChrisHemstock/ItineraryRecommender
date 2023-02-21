@@ -62,7 +62,7 @@ $searchTerm = $_POST["searchTerm"];
 echo "<br>";
 
 
-$response = curlRequest('https://api.yelp.com/v3/businesses/search?location=Indianapolis&term=' . $searchTerm);
+$response = curlRequest('https://api.yelp.com/v3/businesses/search?location=46203');
 
 //convert json object to php associative array
  $data = json_decode($response, true);

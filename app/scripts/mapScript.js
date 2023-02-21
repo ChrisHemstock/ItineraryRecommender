@@ -7,12 +7,15 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 containerEvent(document.getElementById('poi'))
 let json = JSON.parse(data)
-//console.log(json.data)
 json.data.forEach(poi => {
-    L.marker([poi[0], poi[1]]).on('click', function (e) {
+    const lat = poi[0]
+    const long = poi[1]
+    const api_id = poi[3]
+    const name = poi[6]
+    L.marker([lat, long]).on('click', function (e) {
         //adds an event to the last day on the itinerary
-        addEvent(poi[3], poi[6], getStartTime(), incrementTime(getStartTime(), 30))
-    }).bindPopup(poi[6]).on('mouseover', function (e) {
+        addEvent(api_id, name, getStartTime(), incrementTime(getStartTime(), 30))
+    }).bindPopup(name).on('mouseover', function (e) {
         this.openPopup();
     }).on('mouseout', function (e) {
         this.closePopup();

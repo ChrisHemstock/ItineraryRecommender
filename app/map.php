@@ -8,6 +8,7 @@ $userID = $_SESSION["id"];
 $json = createMapPoisJson($link);
 $jsonPoiList = populateSavedPois($link);
 
+
 ?>
 
 <!DOCTYPE html>

@@ -2,6 +2,7 @@
 require_once "../includes/dbconnect.php";
 session_start();
 
+
 //condition based on if trip data has been set
 if (isset($_POST['tripData'])) {
   $data = $_POST['tripData'];
@@ -28,14 +29,15 @@ if (isset($_POST['tripData'])) {
       //add all the pois in the json back to the database
       foreach ($data['pois'] as $row) {
         //get the POI details
-        $POI_ID = $row['poiId'];
+        $API_ID = $row['apiId'];
         $POI_startTime = $row['startTime'];
         $POI_endTime = $row['endTime'];
         //$API_ID = $row['api_id'];
 
 
-        $sql2 = "INSERT INTO tripPOIs(POI_ID, startTime, endTime, tripID)
-          VALUES('$POI_ID', '$POI_startTime', '$POI_endTime', '$tripID')";
+        $sql2 = "INSERT INTO tripPOIs(API_ID, startTime, endTime, tripID)
+          VALUES('$API_ID', '$POI_startTime', '$POI_endTime', '$tripID')";
+          //var_dump($sql2);
         if ($link->query($sql2) === TRUE) {
           echo "New record created successfully";
         } else {

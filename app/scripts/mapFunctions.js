@@ -96,7 +96,7 @@ function createItineraryJson() {
     let tripString = `{"tripId": "${window.location.href.split('&')[0].split('=')[1]}", "pois": [ `
     let pois = [...document.getElementsByClassName('draggable')];
     pois.forEach(poi => {
-        tripString += `{"poiId": ${poi.className.split(' ')[1]}, "startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
+        tripString += `{"apiId": ${poi.className.split(' ')[1]}, "startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
     });
     tripString = tripString.slice(0, -1)
     tripString += ']}';
