@@ -89,14 +89,6 @@
 
         //adds the liked poi keys to the database
         if(isset($_POST['Like' . (sizeof($ids) - 1)]) or isset($_POST['Dislike' . (sizeof($ids) - 1)])) {
-            $sqlClear = "DELETE FROM likes WHERE userID = $userID";
-            $stmt = $sqlClear;
-                if (mysqli_query($link, $sqlClear)) {
-                    $interestDataUpdated = true;
-                } else {
-                    echo "ERROR: Hush! Sorry $sqlClear. "
-                        . mysqli_error($link);
-                }
             $start = false;
             if(isset($_POST['Like' . $i])) {
                 $likes = $_POST['Like' . $i];
@@ -104,16 +96,28 @@
                 $likes = $_POST['Dislike' . $i];
             }
 
-            $poi_ids = explode(" ", $likes);
-            var_dump($poi_ids);
-            var_dump($likes);
+            $api_ids = explode(" ", $likes);
+            //var_dump($likes);
 
-        foreach ($poi_ids as $poi_id) {
-            if ($poi_id != "") {
-                $sql2 = "INSERT INTO likes(userID, POI_ID)
-                VALUES ('$userID','$poi_id') 
+        foreach ($api_ids as $api_id) {
+            $sqlClear = "DELETE FROM likes WHERE userID = $userID AND 
+            (API_ID = '$ids[0]'
+            OR API_ID = '$ids[1]'
+            OR API_ID = '$ids[2]' 
+            OR API_ID = '$ids[3]')";
+            var_dump($sqlClear);
+            $stmt = $sqlClear;
+                if (mysqli_query($link, $sqlClear)) {
+                    $interestDataUpdated = true;
+                } else {
+                    echo "ERROR: Hush! Sorry $sqlClear. "
+                        . mysqli_error($link);
+                }
+            if ($api_id != "") {
+                $sql2 = "INSERT INTO likes(userID, API_ID)
+                VALUES ('$userID','$api_id') 
                 ON DUPLICATE KEY UPDATE 
-                POI_ID = '$poi_id'";
+                API_ID = '$api_id'";
                 $stmt = $sql2;
                 if (mysqli_query($link, $sql2)) {
                     $interestDataUpdated = true;

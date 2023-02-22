@@ -1,12 +1,10 @@
 <?php
 require_once "../includes/dbconnect.php";
 session_start();
-
-
 //condition based on if trip data has been set
 if (isset($_POST['tripData'])) {
   $data = $_POST['tripData'];
-  //var_dump($data);
+  var_dump($data);
   $data = json_decode($data, true);
   $userID = $_SESSION["id"];
   $tripID = $data['tripId'];
@@ -32,25 +30,22 @@ if (isset($_POST['tripData'])) {
         $API_ID = $row['apiId'];
         $POI_startTime = $row['startTime'];
         $POI_endTime = $row['endTime'];
-        //$API_ID = $row['api_id'];
-
 
         $sql2 = "INSERT INTO tripPOIs(API_ID, startTime, endTime, tripID)
           VALUES('$API_ID', '$POI_startTime', '$POI_endTime', '$tripID')";
-          //var_dump($sql2);
         if ($link->query($sql2) === TRUE) {
           echo "New record created successfully";
         } else {
           echo "Error: " . $sql2 . "<br>" . $link->error;
         }
 
-      //   $sql3 = "INSERT INTO likes(userID, POI_ID)
-      //   VALUES('$userID', '$POI_ID')";
-      // if ($link->query($sql3) === TRUE) {
-      //   echo "added to likes";
-      // } else {
-      //   echo "Error: " . $sql3 . "<br>" . $link->error;
-      // }
+        $sql3 = "INSERT INTO likes(userID, API_ID)
+        VALUES('$userID', '$API_ID')";
+      if ($link->query($sql3) === TRUE) {
+        echo "added to likes";
+      } else {
+        echo "Error: " . $sql3 . "<br>" . $link->error;
+      }
       }
       break;
     }

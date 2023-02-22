@@ -7,6 +7,9 @@ set_time_limit(360);
 $userID = $_SESSION["id"];
 $json = createMapPoisJson($link);
 $jsonPoiList = populateSavedPois($link);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 
 ?>
@@ -38,7 +41,7 @@ $jsonPoiList = populateSavedPois($link);
     //creates javascript variables from php variables
     var data = '<?php echo $json; ?>';
     var phpPoi = '<?php echo $jsonPoiList ?>';
-    var recommendations = '<?php echo getRecommendations($link, $userID, 5)?>';
+    //var recommendations = '<?php //echo getRecommendations($link, $userID, 5)?>';
   </script>
 </head>
 
