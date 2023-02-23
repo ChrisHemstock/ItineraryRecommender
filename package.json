@@ -1,0 +1,26 @@
+{
+  "name": "itineraryrecommender",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mapFunctions.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisHemstock/ItineraryRecommender.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChrisHemstock/ItineraryRecommender/issues"
+  },
+  "homepage": "https://github.com/ChrisHemstock/ItineraryRecommender#readme",
+  "devDependencies": {
+    "jest": "^29.4.3"
+  }
+}

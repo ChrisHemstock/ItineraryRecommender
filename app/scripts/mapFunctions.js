@@ -103,7 +103,7 @@ function createItineraryJson() {
     return tripString;
 }
 
-//adds the saved POIs to the itinerary from a json
+// //adds the saved POIs to the itinerary from a json
 // function loadItinerary() {
 //     fetch("test.json")
 //         .then(response => response.json())
@@ -177,28 +177,43 @@ function updateTimes(indexCurrent) {
     }
 }
 
+function sortByValue(json){
+    console.log(json)
+    let sortedArray = [];
+    for(let i in json)
+    {
+        // Push each JSON Object entry in array by [value, key]
+        sortedArray.push([json[i], i]);
+    }
+    return sortedArray.sort().reverse();
+}
+
 //adds the recommendations to the itinerary list
 function displayRecommendations(recommendationList, data) {
-  //console.log(recommendationList)
-  let json = JSON.parse(recommendationList)
-  //console.log(json) // Gives the ids and the recommendation tfidf values
-  let poiIds = Object.keys(json)
-  //console.log(poiIds) // Gives a list of the 10 recommendation ids
+    let json = JSON.parse(recommendationList)
+    let poiRecommendationArray = sortByValue(json) // [[tfidfValue, id], [tfidfValue, id], ...]
+    const recommendationId = 1
 
-  let poiJson = JSON.parse(data)
-  for(let i = 0; i < poiJson.data.length; i++) {
-    //console.log(poiJson.data[i]);
-    for(let j = 0; j < poiIds.length; j++) {
-      if(poiJson.data[i][3] == poiIds[j]) {
-        addEvent(poiIds[j], poiJson.data[i][6], '00:00', '00:30')
-        updateTimes(0)
-      }
+    console.log(poiRecommendationArray) 
+
+    let poiJson = JSON.parse(data) // List of all the Pois
+    const poiId = 3
+    const poiName = 6
+  
+    for(let j = 0; j < poiRecommendationArray.length; j++) {
+        for(let i = 0; i < poiJson.data.length; i++) {
+            if(poiRecommendationArray[j][recommendationId] == poiJson.data[i][poiId]) {
+                addEvent(poiRecommendationArray[j][recommendationId], poiJson.data[i][poiName], '00:00', '00:30')
+                updateTimes(0)
+            }
+        }
     }
-  }
 }
 
 //popup for when the save button is clicked
 function feedback() {
     alert("Trip data Entered!");
     return true;
-  }
+}
+
+module.exports = sortByValue;

@@ -1,5 +1,7 @@
 <?php
     require_once "includes/dbconnect.php";
+    include_once 'resources/reviewRequest.php';
+    require_once(__DIR__ . '\..\vendor\autoload.php');
     session_start();
     $userID = $_SESSION["id"];
 
@@ -127,6 +129,8 @@
                 }
             }
         }
+            $recommender = new Recommender($link);
+            $recommender->update_recommendations(5, $userID);
             header("Location: account.php");
             exit();
         }
