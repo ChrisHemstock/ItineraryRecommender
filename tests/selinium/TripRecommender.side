@@ -2,7 +2,7 @@
   "id": "d3515623-5866-49bc-a8d3-192b5640e2ae",
   "version": "2.0",
   "name": "TripRecommender",
-  "url": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/login.php",
+  "url": "http://localhost:81/ItineraryRecommender/app/poiChoice.php",
   "tests": [{
     "id": "7047d02d-cf74-4c35-b832-376b945c05c7",
     "name": "map_all_likes",
@@ -10,7 +10,7 @@
       "id": "80994fef-03ae-43a5-8ed0-0bf72bdcea72",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php",
+      "target": "http://localhost:81/ItineraryRecommender/app/poiChoice.php",
       "targets": [],
       "value": ""
     }, {
@@ -197,7 +197,7 @@
       "id": "676bfadb-c7a9-4d98-9e27-972625eb21f5",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php",
+      "target": "http://localhost:81/ItineraryRecommender/app/poiChoice.php",
       "targets": [],
       "value": ""
     }, {
@@ -396,7 +396,7 @@
       "id": "d9895f91-586e-4115-a138-e3101feaf275",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php",
+      "target": "http://localhost:81/ItineraryRecommender/app/poiChoice.php",
       "targets": [],
       "value": ""
     }, {
@@ -645,7 +645,7 @@
       "id": "8914788b-f043-4b66-a986-fac779781662",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php",
+      "target": "http://localhost:81/ItineraryRecommender/app/poiChoice.php",
       "targets": [],
       "value": ""
     }, {
@@ -835,7 +835,7 @@
       "id": "390e080d-9790-49a1-ab13-77f608c351fc",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php",
+      "target": "http://localhost:81/ItineraryRecommender/app/poiChoice.php",
       "targets": [],
       "value": ""
     }, {
@@ -1025,7 +1025,7 @@
       "id": "52ad8ca1-2693-4262-a46b-9c745f1b14a8",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php",
+      "target": "http://localhost:81/ItineraryRecommender/app/poiChoice.php",
       "targets": [],
       "value": ""
     }, {
@@ -1222,7 +1222,7 @@
       "id": "b930e767-581f-48ab-9a5b-6793994b9c64",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TripRecommender/ItineraryRecommender/app/login.php",
+      "target": "http://localhost:81/ItineraryRecommender/app/login.php",
       "targets": [],
       "value": ""
     }, {
@@ -1316,6 +1316,6 @@
     "timeout": 300,
     "tests": []
   }],
-  "urls": ["http://localhost:8080/", "http://localhost:8080/TripRecommender/ItineraryRecommender/poiChoice.php", "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php", "http://localhost:8080/TripRecommender/ItineraryRecommender/app/login.php"],
+  "urls": ["http://localhost:8080/", "http://localhost:8080/TripRecommender/ItineraryRecommender/poiChoice.php", "http://localhost:8080/TripRecommender/ItineraryRecommender/app/poiChoice.php", "http://localhost:8080/TripRecommender/ItineraryRecommender/app/login.php", "http://localhost:81/ItineraryRecommender/app/poiChoice.php"],
   "plugins": []
 }

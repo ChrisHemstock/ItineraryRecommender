@@ -3,12 +3,12 @@
     
     class SampleTest extends TestCase { 
         public function test_recommendations_empty_likes() {
-            include_once __DIR__.'/../../app/includes/dbconnect.php';
+            //include_once __DIR__.'/../../app/includes/dbconnect.php';
             include_once __DIR__.'/../../app/includes/functions.php';
             include_once __DIR__.'/../../app/resources/reviewRequest.php';
-            require_once(__DIR__ . '\..\..\vendor\autoload.php');
+            require_once(__DIR__ . '/../../vendor/autoload.php');
 
-            $servername = "localhost";
+            $servername = "localhost:80";
             $username = "root";
             $password = "";
             $database = "TripRecommender";
@@ -39,7 +39,7 @@
             include_once __DIR__.'/../../app/includes/functions.php';
             include_once __DIR__.'/../../app/resources/reviewRequest.php';
 
-            $servername = "localhost";
+            $servername = "localhost:80";
             $username = "root";
             $password = "";
             $database = "TripRecommender";
@@ -70,7 +70,7 @@
             include_once __DIR__.'/../../app/includes/functions.php';
             include_once __DIR__.'/../../app/resources/reviewRequest.php';
 
-            $servername = "localhost";
+            $servername = "localhost:80";
             $username = "root";
             $password = "";
             $database = "TripRecommender";
@@ -100,7 +100,7 @@
             include_once __DIR__.'/../../app/includes/functions.php';
             include_once __DIR__.'/../../app/resources/reviewRequest.php';
 
-            $servername = "localhost";
+            $servername = "localhost:80";
             $username = "root";
             $password = "";
             $database = "TripRecommender";
@@ -130,7 +130,7 @@
         $tripID = "456";
 
         // Establish a database connection
-        $link = new mysqli("localhost", "root", "", "TripRecommender");
+        $link = new mysqli("localhost:80", "root", "", "TripRecommender");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
@@ -165,7 +165,7 @@
         $userID = "20";
 
         // Establish a database connection
-        $link = new mysqli("localhost", "root", "", "TripRecommender");
+        $link = new mysqli("localhost:80", "root", "", "TripRecommender");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
@@ -198,7 +198,7 @@
         $userID = "20";
 
         // Establish a database connection
-        $link = new mysqli("localhost", "root", "", "TripRecommender");
+        $link = new mysqli("localhost:80", "root", "", "TripRecommender");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
@@ -226,7 +226,7 @@
         $tripID = "316116908";
 
         // Establish a database connection
-        $link = new mysqli("localhost", "root", "", "TripRecommender");
+        $link = new mysqli("localhost:80", "root", "", "TripRecommender");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }

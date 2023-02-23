@@ -343,6 +343,8 @@ abstract class TestCase extends Assert implements Reorderable, SelfDescribing, T
      * Returns a string representation of the test case.
      *
      * @throws Exception
+     *
+     * @internal This method is not covered by the backward compatibility promise for PHPUnit
      */
     public function toString(): string
     {
@@ -355,6 +357,9 @@ abstract class TestCase extends Assert implements Reorderable, SelfDescribing, T
         return $buffer . $this->dataSetAsStringWithData();
     }
 
+    /**
+     * @internal This method is not covered by the backward compatibility promise for PHPUnit
+     */
     final public function count(): int
     {
         return 1;
@@ -417,6 +422,9 @@ abstract class TestCase extends Assert implements Reorderable, SelfDescribing, T
         $this->doesNotPerformAssertions = true;
     }
 
+    /**
+     * @internal This method is not covered by the backward compatibility promise for PHPUnit
+     */
     final public function status(): TestStatus
     {
         return $this->status;
@@ -591,11 +599,13 @@ abstract class TestCase extends Assert implements Reorderable, SelfDescribing, T
         clearstatcache();
 
         $hookMethods                       = (new HookMethods)->hookMethods(static::class);
+        $hasMetRequirements                = false;
         $this->numberOfAssertionsPerformed = 0;
         $currentWorkingDirectory           = getcwd();
 
         try {
             $this->checkRequirements();
+            $hasMetRequirements = true;
 
             if ($this->inIsolation) {
                 $this->invokeBeforeClassHookMethods($hookMethods, $emitter);
@@ -618,11 +628,6 @@ abstract class TestCase extends Assert implements Reorderable, SelfDescribing, T
 
             $this->verifyMockObjects();
             $this->invokePostConditionHookMethods($hookMethods, $emitter);
-            $this->invokeAfterTestHookMethods($hookMethods, $emitter);
-
-            if ($this->inIsolation) {
-                $this->invokeAfterClassHookMethods($hookMethods, $emitter);
-            }
 
             $this->status = TestStatus::success();
         } catch (IncompleteTest $e) {
@@ -678,8 +683,26 @@ abstract class TestCase extends Assert implements Reorderable, SelfDescribing, T
 
         $this->mockObjects = [];
 
-        if (isset($_e)) {
-            $this->status = TestStatus::error($_e->getMessage());
+        // Tear down the fixture. An exception raised in tearDown() will be
+        // caught and passed on when no exception was raised before.
+        try {
+            if ($hasMetRequirements) {
+                $this->invokeAfterTestHookMethods($hookMethods, $emitter);
+
+                if ($this->inIsolation) {
+                    $this->invokeAfterClassHookMethods($hookMethods, $emitter);
+                }
+            }
+        } catch (Throwable $exceptionRaisedDuringTearDown) {
+            if (!isset($e)) {
+                $this->status = TestStatus::error($exceptionRaisedDuringTearDown->getMessage());
+                $e            = $exceptionRaisedDuringTearDown;
+
+                $emitter->testErrored(
+                    $this->valueObjectForEvents(),
+                    Event\Code\Throwable::from($exceptionRaisedDuringTearDown)
+                );
+            }
         }
 
         clearstatcache();
