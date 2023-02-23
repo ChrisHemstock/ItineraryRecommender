@@ -29,8 +29,8 @@ function getDragAfterElement(container, y) {
 }
 
 //addEvent adds an Event to the itinerary
-function addEvent(poiId, name, startTime, endTime) {
-    let html = '<li class="draggable ' + poiId + '" draggable="true">' + name +
+function addEvent(api_id, name, startTime, endTime) {
+    let html = '<li class="draggable ' + api_id + '" draggable="true">' + name +
         '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + startTime +
         '"/><input type="time" class="endEvent" title="End Time" value="' + endTime + '" onchange="updateTimes(0)"/></span>' +
         '<span class="close">X</span></li>';
@@ -44,7 +44,7 @@ function addEvent(poiId, name, startTime, endTime) {
 //returns the stat time of the trip
 function getStartTime() {
     if ([...document.querySelectorAll('.draggable:not(.dragging)')].length == 0) {
-        console.log(getItineraryStartTime())
+        // console.log(getItineraryStartTime())
         return getItineraryStartTime()
     } else {
         return [...document.querySelectorAll('.draggable:not(.dragging)')].pop().querySelector('.endEvent').value
@@ -96,7 +96,7 @@ function createItineraryJson() {
     let tripString = `{"tripId": "${window.location.href.split('&')[0].split('=')[1]}", "pois": [ `
     let pois = [...document.getElementsByClassName('draggable')];
     pois.forEach(poi => {
-        tripString += `{"poiId": ${poi.className.split(' ')[1]}, "startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
+        tripString += `{"apiId": "${poi.className.split(' ')[1]}", "startTime": "${poi.querySelector(".startEvent").value}","endTime": "${poi.querySelector(".endEvent").value}"},`;
     });
     tripString = tripString.slice(0, -1)
     tripString += ']}';
