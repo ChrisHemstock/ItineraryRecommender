@@ -37,6 +37,7 @@ $('#save').click(function () {
         data: { 'tripData': tmp },
         success: function (msg) {
             console.log("success")
+            document.location.reload(true)
             //console.log(msg);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {

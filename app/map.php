@@ -2,12 +2,14 @@
 include_once 'includes/functions.php';
 include_once 'includes/dbconnect.php';
 include_once 'resources/reviewRequest.php';
+require_once(__DIR__ . '\..\vendor\autoload.php');
 session_start();
 set_time_limit(360);
 $userID = $_SESSION["id"];
 $json = createMapPoisJson($link);
 $jsonPoiList = populateSavedPois($link);
-
+$recommender = new Recommender($link);
+// $recommender->update_recommendations(5, $userID);
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +39,7 @@ $jsonPoiList = populateSavedPois($link);
     //creates javascript variables from php variables
     var data = '<?php echo $json; ?>';
     var phpPoi = '<?php echo $jsonPoiList ?>';
-    var recommendations = '<?php echo getRecommendations($link, $userID, 5)?>';
+    var recommendations = '<?php echo $recommender->get_recommendations()?>';
   </script>
 </head>
 
