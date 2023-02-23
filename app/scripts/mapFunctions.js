@@ -103,22 +103,22 @@ function createItineraryJson() {
     return tripString;
 }
 
-//adds the saved POIs to the itinerary from a json
-function loadItinerary() {
-    fetch("test.json")
-        .then(response => response.json())
-        .then(data => {
-            data.pois.forEach(poi => {
-                let html = '<li class="draggable" draggable="true" class="' + poi.poiId + '">' + poi.poiName +
-                    '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + poi.startTime + '"/><input type="time" class="endEvent" title="End Time" value="' + poi.endTime + '"/></span>' +
-                    '<span class="close">X</span></li>';
-                document.getElementById('poi').insertAdjacentHTML('beforeend', html);
+// //adds the saved POIs to the itinerary from a json
+// function loadItinerary() {
+//     fetch("test.json")
+//         .then(response => response.json())
+//         .then(data => {
+//             data.pois.forEach(poi => {
+//                 let html = '<li class="draggable" draggable="true" class="' + poi.poiId + '">' + poi.poiName +
+//                     '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + poi.startTime + '"/><input type="time" class="endEvent" title="End Time" value="' + poi.endTime + '"/></span>' +
+//                     '<span class="close">X</span></li>';
+//                 document.getElementById('poi').insertAdjacentHTML('beforeend', html);
 
-                let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
-                addEventEventListeners(newElement)
-            });
-        });
-}
+//                 let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
+//                 addEventEventListeners(newElement)
+//             });
+//         });
+// }
 
 //returns a time in minutes that is the time from startTime to endTime
 function getDuration(startTime, endTime) {

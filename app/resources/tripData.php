@@ -1,5 +1,7 @@
 <?php
 require_once "../includes/dbconnect.php";
+require_once(__DIR__ . '\reviewRequest.php');
+require_once(__DIR__ . '\..\..\vendor\autoload.php');
 session_start();
 
 //condition based on if trip data has been set
@@ -43,6 +45,8 @@ if (isset($_POST['tripData'])) {
       break;
     }
   }
+  $recommender = new Recommender($link);
+  $recommender->update_recommendations(5, $userID);
 } else {
   echo "Noooooooob";
 }
