@@ -1,7 +1,7 @@
 <?php
 require_once "../includes/dbconnect.php";
-require_once(__DIR__ . '\reviewRequest.php');
-require_once(__DIR__ . '\..\..\vendor\autoload.php');
+require_once(__DIR__ . '/reviewRequest.php');
+require_once(__DIR__ . '/../../vendor/autoload.php');
 session_start();
 
 function insertTripPOIs($link, $API_ID, $POI_startTime, $POI_endTime, $tripID){

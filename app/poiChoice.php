@@ -1,7 +1,7 @@
 <?php
     require_once "includes/dbconnect.php";
     include_once 'resources/reviewRequest.php';
-    require_once(__DIR__ . '\..\vendor\autoload.php');
+    require_once(__DIR__ . '/../vendor/autoload.php');
     session_start();
     $userID = $_SESSION["id"];
 
