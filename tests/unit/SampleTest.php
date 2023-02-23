@@ -11,7 +11,7 @@
             $servername = "localhost";
             $username = "root";
             $password = "";
-            $database = "ItineraryRecommender";
+            $database = "TripRecommender";
             // Create a connection 
             $link = mysqli_connect(
                 $servername,
@@ -42,7 +42,7 @@
             $servername = "localhost";
             $username = "root";
             $password = "";
-            $database = "ItineraryRecommender";
+            $database = "TripRecommender";
 
             // Create a connection 
             $link = mysqli_connect(
@@ -62,7 +62,7 @@
             $recommender->update_recommendations(1, USER_ID);
 
             // Tests 1 entry in likes - should return a json with 1 entry with a value of 1
-            $this->assertEquals('{"1248":"1.00000000000000"}', $recommender->get_recommendations(USER_ID));
+            $this->assertEquals('{"kzxpl9HidQVMEuUoRVB7nA":"1.00000000000000"}', $recommender->get_recommendations(USER_ID));
         }
 
         public function test_recommendations_length() {
@@ -73,7 +73,7 @@
             $servername = "localhost";
             $username = "root";
             $password = "";
-            $database = "ItineraryRecommender";
+            $database = "TripRecommender";
 
             $link = mysqli_connect(
                 $servername,
@@ -103,7 +103,7 @@
             $servername = "localhost";
             $username = "root";
             $password = "";
-            $database = "ItineraryRecommender";
+            $database = "TripRecommender";
             // Create a connection 
             $link = mysqli_connect(
                 $servername,
@@ -119,7 +119,7 @@
             $recommender->update_recommendations(0, USER_ID);
 
             //Tests that an empty array string is returned when asked for 0 entries
-            $this->assertEquals($recommender->get_recommendations(USER_ID), '[]');
+            $this->assertEquals(topPoiJson($link, 5), $recommender->get_recommendations(USER_ID));
         }
 
      public function testInsertTripPOIs() {
@@ -130,7 +130,7 @@
         $tripID = "456";
 
         // Establish a database connection
-        $link = new mysqli("localhost:80", "root", "", "TripRecommender");
+        $link = new mysqli("localhost", "root", "", "TripRecommender");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
@@ -165,7 +165,7 @@
         $userID = "20";
 
         // Establish a database connection
-        $link = new mysqli("localhost:80", "root", "", "TripRecommender");
+        $link = new mysqli("localhost", "root", "", "TripRecommender");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
@@ -198,7 +198,7 @@
         $userID = "20";
 
         // Establish a database connection
-        $link = new mysqli("localhost:80", "root", "", "TripRecommender");
+        $link = new mysqli("localhost", "root", "", "TripRecommender");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
@@ -226,7 +226,7 @@
         $tripID = "316116908";
 
         // Establish a database connection
-        $link = new mysqli("localhost:80", "root", "", "TripRecommender");
+        $link = new mysqli("localhost", "root", "", "TripRecommender");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }

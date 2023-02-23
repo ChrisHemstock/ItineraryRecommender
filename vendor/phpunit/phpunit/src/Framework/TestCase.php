@@ -591,19 +591,11 @@ abstract class TestCase extends Assert implements Reorderable, SelfDescribing, T
         clearstatcache();
 
         $hookMethods                       = (new HookMethods)->hookMethods(static::class);
-<<<<<<< HEAD
-=======
-        $hasMetRequirements                = false;
->>>>>>> main
         $this->numberOfAssertionsPerformed = 0;
         $currentWorkingDirectory           = getcwd();
 
         try {
             $this->checkRequirements();
-<<<<<<< HEAD
-=======
-            $hasMetRequirements = true;
->>>>>>> main
 
             if ($this->inIsolation) {
                 $this->invokeBeforeClassHookMethods($hookMethods, $emitter);
@@ -626,14 +618,11 @@ abstract class TestCase extends Assert implements Reorderable, SelfDescribing, T
 
             $this->verifyMockObjects();
             $this->invokePostConditionHookMethods($hookMethods, $emitter);
-<<<<<<< HEAD
             $this->invokeAfterTestHookMethods($hookMethods, $emitter);
 
             if ($this->inIsolation) {
                 $this->invokeAfterClassHookMethods($hookMethods, $emitter);
             }
-=======
->>>>>>> main
 
             $this->status = TestStatus::success();
         } catch (IncompleteTest $e) {
@@ -689,31 +678,8 @@ abstract class TestCase extends Assert implements Reorderable, SelfDescribing, T
 
         $this->mockObjects = [];
 
-<<<<<<< HEAD
         if (isset($_e)) {
             $this->status = TestStatus::error($_e->getMessage());
-=======
-        // Tear down the fixture. An exception raised in tearDown() will be
-        // caught and passed on when no exception was raised before.
-        try {
-            if ($hasMetRequirements) {
-                $this->invokeAfterTestHookMethods($hookMethods, $emitter);
-
-                if ($this->inIsolation) {
-                    $this->invokeAfterClassHookMethods($hookMethods, $emitter);
-                }
-            }
-        } catch (Throwable $exceptionRaisedDuringTearDown) {
-            if (!isset($e)) {
-                $this->status = TestStatus::error($exceptionRaisedDuringTearDown->getMessage());
-                $e            = $exceptionRaisedDuringTearDown;
-
-                $emitter->testErrored(
-                    $this->valueObjectForEvents(),
-                    Event\Code\Throwable::from($exceptionRaisedDuringTearDown)
-                );
-            }
->>>>>>> main
         }
 
         clearstatcache();

@@ -101,7 +101,6 @@
             $api_ids = explode(" ", $likes);
             //var_dump($likes);
 
-        foreach ($api_ids as $api_id) {
             $sqlClear = "DELETE FROM likes WHERE userID = $userID AND 
             (API_ID = '$ids[0]'
             OR API_ID = '$ids[1]'
@@ -109,28 +108,32 @@
             OR API_ID = '$ids[3]')";
             var_dump($sqlClear);
             $stmt = $sqlClear;
-                if (mysqli_query($link, $sqlClear)) {
-                    $interestDataUpdated = true;
-                } else {
-                    echo "ERROR: Hush! Sorry $sqlClear. "
-                        . mysqli_error($link);
-                }
-            if ($api_id != "") {
-                $sql2 = "INSERT INTO likes(userID, API_ID)
-                VALUES ('$userID','$api_id') 
-                ON DUPLICATE KEY UPDATE 
-                API_ID = '$api_id'";
-                $stmt = $sql2;
-                if (mysqli_query($link, $sql2)) {
-                    $interestDataUpdated = true;
-                } else {
-                    echo "ERROR: Hush! Sorry $sql2. "
-                        . mysqli_error($link);
+            if (mysqli_query($link, $sqlClear)) {
+                $interestDataUpdated = true;
+            } else {
+                echo "ERROR: Hush! Sorry $sqlClear. "
+                    . mysqli_error($link);
+            }
+            
+            foreach ($api_ids as $api_id) {
+                
+                
+                if ($api_id != "") {
+                    $sql2 = "INSERT INTO likes(userID, API_ID)
+                    VALUES ('$userID','$api_id') 
+                    ON DUPLICATE KEY UPDATE 
+                    API_ID = '$api_id'";
+                    $stmt = $sql2;
+                    if (mysqli_query($link, $sql2)) {
+                        $interestDataUpdated = true;
+                    } else {
+                        echo "ERROR: Hush! Sorry $sql2. "
+                            . mysqli_error($link);
+                    }
                 }
             }
-        }
-            $recommender = new Recommender($link);
-            $recommender->update_recommendations(5, $userID);
+            // $recommender = new Recommender($link);
+            // $recommender->update_recommendations(5, $userID);
             header("Location: account.php");
             exit();
         }

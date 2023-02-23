@@ -1,6 +1,6 @@
 <?php
 
-$servername = "localhost:80";
+$servername = "localhost";
 $username = "root";
 $password = "";
 $database = "TripRecommender";

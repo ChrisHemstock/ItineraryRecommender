@@ -14,7 +14,6 @@ $jsonPoiList = populateSavedPois($link);
 
 
 $recommender = new Recommender($link);
-// $recommender->update_recommendations(5, $userID);
 ?>
 
 <!DOCTYPE html>

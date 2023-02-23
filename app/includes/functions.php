@@ -80,8 +80,8 @@ function deleteLikes($link, $userID) {
     }
 }
 
-function addLikes($link, $userID, $poiID) {
-    $insert = "INSERT INTO likes(userID, POI_ID) VALUES ('" . $userID . "','" . $poiID . "')";
+function addLikes($link, $userID, $API_ID) {
+    $insert = "INSERT INTO likes(userID, API_ID) VALUES ('" . $userID . "','" . $API_ID . "')";
     $stmt = $insert;
     if (mysqli_query($link, $insert)) {
 
@@ -93,9 +93,9 @@ function addLikes($link, $userID, $poiID) {
 }
 
 function topPoiJson($link, $amount) {
-    $top = $link->query('SELECT id FROM pois ORDER BY num_ratings DESC LIMIT ' . $amount);
+    $top = $link->query('SELECT API_ID FROM pois ORDER BY num_ratings DESC LIMIT ' . $amount);
     foreach ($top as $values) {
-      $topArray[$values['id']] = 1;
+      $topArray[$values['API_ID']] = 1;
     }
     return json_encode($topArray);
 }
