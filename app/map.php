@@ -8,6 +8,11 @@ set_time_limit(360);
 $userID = $_SESSION["id"];
 $json = createMapPoisJson($link);
 $jsonPoiList = populateSavedPois($link);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
+
 $recommender = new Recommender($link);
 // $recommender->update_recommendations(5, $userID);
 ?>
