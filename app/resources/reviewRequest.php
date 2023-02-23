@@ -45,10 +45,10 @@
     }
 
     function top_poi_json($amount) {
-      //USING POI_ID CHANGE TO API_ID
-      $top_pois = $this->link->query('SELECT id FROM pois ORDER BY num_ratings DESC LIMIT ' . $amount);
+      //USING API_ID CHANGE TO API_ID
+      $top_pois = $this->link->query('SELECT API_ID FROM pois ORDER BY num_ratings DESC LIMIT ' . $amount);
       foreach ($top_pois as $values) {
-        $top_array[$values['id']] = 1;
+        $top_array[$values['API_ID']] = 1;
       }
       return json_encode($top_array);
     }
@@ -61,7 +61,7 @@
       //
       // Sets the user_doc which is a TokenDocument(array) of all of the tokens(words) that show up in the reviews of the liked POIs
       //
-      $query = $this->link->query('SELECT reviews FROM likes, pois WHERE userID = ' . $user_id . ' AND pois.API_ID = likes.POI_ID ;')->fetch_all();
+      $query = $this->link->query('SELECT reviews FROM likes, pois WHERE userID = ' . $user_id . ' AND pois.API_ID = likes.API_ID ;')->fetch_all();
       $likes = [];
       if (count($query) > 0) {
         foreach ($query as $poi_review) {
@@ -98,15 +98,15 @@
     }
 
     private function set_all_docs() {
-      $reviews_query = $this->link->query('SELECT reviews, id FROM POIs')->fetch_all();
+      $reviews_query = $this->link->query('SELECT reviews, API_ID FROM POIs')->fetch_all();
       $all_docs = [];
       foreach($reviews_query as $poi_review) {
         $review = $poi_review[0];
-        $poi_id = $poi_review[1];
+        $API_ID = $poi_review[1];
         if($review != Null) {
           $review_array = $this->make_word_array($review);
           //Adds a new vector for the current poi
-          $all_docs = $this->add_document($all_docs, $poi_id, $review_array);
+          $all_docs = $this->add_document($all_docs, $API_ID, $review_array);
         }
       }
       $this->poi_docs = $all_docs;
@@ -137,9 +137,9 @@
       //Good resource on TFIDF
       //https://janav.wordpress.com/2013/10/27/tf-idf-and-cosine-similarity/
       $vector_collection = [];
-      foreach($this->poi_docs as $poi_id => $words_doc) {
+      foreach($this->poi_docs as $API_ID => $words_doc) {
         $vector = $this->make_vector($this->get_tfidif(), $this->get_all_words(), $words_doc);
-        $vector_collection[$poi_id] = $vector;
+        $vector_collection[$API_ID] = $vector;
       }
       $this->poi_vectors = $vector_collection;
     }
@@ -155,9 +155,9 @@
 
     function calc_recommendations($amount) {
       $poi_similarities = [];
-      foreach($this->get_poi_vectors() as $poi_id => $vector) {
+      foreach($this->get_poi_vectors() as $API_ID => $vector) {
         $similarity = $this->cosine_similarity($this->get_user_vector(), $vector);
-        $poi_similarities[$poi_id] = $similarity;
+        $poi_similarities[$API_ID] = $similarity;
       }
       
       asort($poi_similarities);
@@ -190,9 +190,9 @@
       
 
       $recommendations = $this->calc_recommendations($amount);
-      foreach ($recommendations as $poi_id => $value) {
+      foreach ($recommendations as $API_ID => $value) {
         //Insert in the new recommendations
-        $insert_recommend = "INSERT INTO `recommendations`(`API_ID`, `userID`, `value`) VALUES ('$poi_id','$user_id','$value')";
+        $insert_recommend = "INSERT INTO `recommendations`(`API_ID`, `userID`, `value`) VALUES ('$API_ID','$user_id','$value')";
         $stmt = $insert_recommend;
         if (mysqli_query($this->link, $insert_recommend)) {
             $interestDataUpdated = true;
@@ -203,8 +203,8 @@
       }
     }
 
-    function get_recommendations() {
-      $recommend_query = $this->link->query('SELECT API_ID, value FROM recommendations')->fetch_all();
+    function get_recommendations($user_id) {
+      $recommend_query = $this->link->query("SELECT API_ID, value FROM recommendations WHERE userID = $user_id")->fetch_all();
       $poi_similarities = [];
 
       foreach ($recommend_query as $values) {

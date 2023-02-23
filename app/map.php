@@ -14,7 +14,6 @@ $jsonPoiList = populateSavedPois($link);
 
 
 $recommender = new Recommender($link);
-// $recommender->update_recommendations(5, $userID);
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +43,7 @@ $recommender = new Recommender($link);
     //creates javascript variables from php variables
     var data = '<?php echo $json; ?>';
     var phpPoi = '<?php echo $jsonPoiList ?>';
-    var recommendations = '<?php echo $recommender->get_recommendations()?>';
+    var recommendations = '<?php echo $recommender->get_recommendations($userID)?>';
   </script>
 </head>
 

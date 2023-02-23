@@ -7,22 +7,22 @@ session_start();
 function insertTripPOIs($link, $API_ID, $POI_startTime, $POI_endTime, $tripID){
   $sql2 = "INSERT INTO tripPOIs(API_ID, startTime, endTime, tripID)
   VALUES('$API_ID', '$POI_startTime', '$POI_endTime', '$tripID')";
-if ($link->query($sql2) === TRUE) {
-  echo "New record created successfully";
-} else {
-  echo "Error: " . $sql2 . "<br>" . $link->error;
-}
+  if ($link->query($sql2) === TRUE) {
+    echo "New record created successfully";
+  } else {
+    echo "Error: " . $sql2 . "<br>" . $link->error;
+  }
 }
 function insertLikes($link, $userID, $API_ID){
-$sql3 = "INSERT INTO likes(userID, API_ID)
-VALUES('$userID', '$API_ID') ON DUPLICATE KEY UPDATE API_ID = '$API_ID'";
-echo $sql3;
-if ($link->query($sql3) === TRUE) {
-echo "Added to likes";
-$result = true;
-} else {
-echo "Error: " . $sql3 . "<br>" . $link->error;
-}
+  $sql3 = "INSERT INTO likes(userID, API_ID)
+  VALUES('$userID', '$API_ID') ON DUPLICATE KEY UPDATE API_ID = '$API_ID'";
+  echo $sql3;
+  if ($link->query($sql3) === TRUE) {
+    echo "Added to likes";
+    $result = true;
+  } else {
+    echo "Error: " . $sql3 . "<br>" . $link->error;
+  }
 }
 
 function clearPOIs($link, $tripID){
@@ -65,8 +65,8 @@ if (isset($_POST['tripData'])) {
       break;
     }
   }
-  $recommender = new Recommender($link);
-  $recommender->update_recommendations(5, $userID);
+  // $recommender = new Recommender($link);
+  // $recommender->update_recommendations(5, $userID);
 } else {
   echo "Noooooooob";
 }
