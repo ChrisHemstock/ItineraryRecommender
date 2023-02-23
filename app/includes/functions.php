@@ -70,6 +70,7 @@ function deleteLikes($link, $userID) {
     $sqlClear = "DELETE FROM likes WHERE userID = $userID";
     $stmt = $sqlClear;
     if (mysqli_query($link, $sqlClear)) {
+        echo 'Success!';
         $interestDataUpdated = true;
     } else {
         echo "ERROR: Hush! Sorry $sqlClear. "

@@ -203,8 +203,8 @@
       }
     }
 
-    function get_recommendations() {
-      $recommend_query = $this->link->query('SELECT API_ID, value FROM recommendations')->fetch_all();
+    function get_recommendations($user_id) {
+      $recommend_query = $this->link->query("SELECT API_ID, value FROM recommendations WHERE userID = $user_id")->fetch_all();
       $poi_similarities = [];
 
       foreach ($recommend_query as $values) {
