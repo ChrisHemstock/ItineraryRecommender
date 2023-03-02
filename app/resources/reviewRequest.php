@@ -133,7 +133,7 @@
 
     
 
-    private function set_poi_vectors() {
+    private function calc_poi_vectors() {
       //Good resource on TFIDF
       //https://janav.wordpress.com/2013/10/27/tf-idf-and-cosine-similarity/
       $vector_collection = [];
@@ -142,6 +142,41 @@
         $vector_collection[$API_ID] = $vector;
       }
       $this->poi_vectors = $vector_collection;
+      $this->add_poi_vector_database($vector_collection);
+    }
+
+    private function add_poi_vector_database($vector_collection) {
+      //Clear the tfidfs in the database
+      $deleteSQL = "DELETE FROM tfidfs";
+      if ($this->link->query($deleteSQL) === TRUE) {
+        echo "New record deleted successfully";
+      } else {
+        echo "Error: " . $deleteSQL . "<br>" . $this->link->error;
+      }
+
+      foreach ($vector_collection as $api_id => $vector) {
+        foreach ($vector as $word => $tfidf_value) {
+          if($word != 0) {
+            $insert_tfidf = "INSERT INTO `tfidfs`(`API_ID`, `word`, `value`) VALUES ('$api_id','$word','$tfidf_value')";
+            if (mysqli_query($this->link, $insert_tfidf)) {
+              echo "New record inserted successfully";
+            } else {
+              echo "ERROR: Hush! Sorry $insert_tfidf. " . mysqli_error($this->link);
+            }
+          }
+        }
+      }
+    }
+
+    private function build_poi_vectors() {
+      $vector_collection = [];
+      $all_api_ids = $this->link->query('SELECT API_ID FROM POIs')->fetch_all();
+      foreach ($all_api_ids as $api_id) {
+        $api_id = $api_id[0];
+        foreach ($this->all_words as $word) {
+          
+        }
+      }
     }
 
     private function get_poi_vectors() {

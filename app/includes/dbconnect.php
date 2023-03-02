@@ -1,9 +1,9 @@
 <?php
 
-$servername = "localhost:80";
+$servername = "localhost";
 $username = "root";
 $password = "";
-$database = "TripRecommender";
+$database = "triprecommender";
 
 // Create a connection 
 $link = mysqli_connect(
