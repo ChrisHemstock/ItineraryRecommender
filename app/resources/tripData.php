@@ -66,7 +66,7 @@ if (isset($_POST['tripData'])) {
     }
   }
   $recommender = new Recommender($link);
-  $recommender->update_recommendations(5, $userID);
+  $recommender->update_recommendations(6, $userID);
 } else {
   echo "Noooooooob";
 }

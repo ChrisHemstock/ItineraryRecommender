@@ -3,7 +3,9 @@
     include_once 'resources/reviewRequest.php';
     require_once(__DIR__ . '/../vendor/autoload.php');
     session_start();
+    set_time_limit(480);
     $userID = $_SESSION["id"];
+    
 
     //Takes an array of POI IDs and a position and echos the html for that id
     //When the button is clicked the next poi is echoed
@@ -132,8 +134,8 @@
                     }
                 }
             }
-            // $recommender = new Recommender($link);
-            // $recommender->update_recommendations(5, $userID);
+            $recommender = new Recommender($link);
+            $recommender->update_recommendations(6, $userID);
             header("Location: account.php");
             exit();
         }

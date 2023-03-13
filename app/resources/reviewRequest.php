@@ -93,6 +93,15 @@
       $this->all_words = array_unique($all_words);
     }
 
+    private function set_all_words_database() {
+      $words_query = $this->link->query('SELECT DISTINCT word FROM tfidfs')->fetch_all();
+      $all_words = [];
+      foreach ($words_query as $word) {
+        $all_words[] = $word[0]; //push the word to the end of the array
+      }
+      $this->all_words = $all_words;
+    }
+
     private function get_all_words() {
       return $this->all_words;
     }
@@ -145,6 +154,8 @@
       $this->add_poi_vector_database($vector_collection);
     }
 
+    
+
     private function add_poi_vector_database($vector_collection) {
       //Clear the tfidfs in the database
       $deleteSQL = "DELETE FROM tfidfs";
@@ -156,10 +167,10 @@
 
       foreach ($vector_collection as $api_id => $vector) {
         foreach ($vector as $word => $tfidf_value) {
-          if($word != 0) {
+          if($tfidf_value != 0) { //Was originaly $word instead of  $tfidf_value
             $insert_tfidf = "INSERT INTO `tfidfs`(`API_ID`, `word`, `value`) VALUES ('$api_id','$word','$tfidf_value')";
             if (mysqli_query($this->link, $insert_tfidf)) {
-              echo "New record inserted successfully";
+              //echo "New record inserted successfully";
             } else {
               echo "ERROR: Hush! Sorry $insert_tfidf. " . mysqli_error($this->link);
             }
@@ -168,15 +179,23 @@
       }
     }
 
-    private function build_poi_vectors() {
+    private function set_poi_vectors() {
       $vector_collection = [];
       $all_api_ids = $this->link->query('SELECT API_ID FROM POIs')->fetch_all();
       foreach ($all_api_ids as $api_id) {
         $api_id = $api_id[0];
-        foreach ($this->all_words as $word) {
-          
+        $all_tfidfs = $this->link->query('SELECT word, value FROM tfidfs WHERE API_ID = "' . $api_id . '"');
+        $vector = [];
+        foreach ($this->get_all_words() as $word) {
+          $vector[$word] = 0;
         }
+        foreach ($all_tfidfs as $tfidf) {
+          $vector[$tfidf['word']] = $tfidf['value'];
+        }
+        $vector_collection[$api_id] = $vector;
       }
+      //[api_id -> [word -> tfidf, word - > tfidf, ...], api_id - > [...], ...]
+      $this->poi_vectors = $vector_collection;
     }
 
     private function get_poi_vectors() {
@@ -217,9 +236,12 @@
       if(count($this->get_user_doc()->toArray()) == 0) {
         return;
       }
-      $this->set_all_words();
+      //$this->set_all_words();
+      $this->set_all_words_database();
       $this->set_all_docs();
       $this->set_user_vector();
+
+      //$this->calc_poi_vectors();
       $this->set_poi_vectors();
 
       
