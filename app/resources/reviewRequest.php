@@ -221,5 +221,5 @@
       //returns a list of POIs to recommend
       return json_encode($poi_similarities);
     }
-  }
+  } 
 ?>

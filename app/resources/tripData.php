@@ -1,5 +1,5 @@
 <?php
-require_once "../includes/dbconnect.php";
+require_once (__DIR__ . "/../includes/dbconnect.php");
 require_once(__DIR__ . '/reviewRequest.php');
 require_once(__DIR__ . '/../../vendor/autoload.php');
 session_start();
@@ -9,7 +9,7 @@ function insertTripPOIs($link, $API_ID, $POI_startTime, $POI_endTime, $tripID){
   VALUES('$API_ID', '$POI_startTime', '$POI_endTime', '$tripID')";
   if ($link->query($sql2) === TRUE) {
     echo "New record created successfully";
-  } else {
+  } else { 
     echo "Error: " . $sql2 . "<br>" . $link->error;
   }
 }
@@ -65,8 +65,8 @@ if (isset($_POST['tripData'])) {
       break;
     }
   }
-  // $recommender = new Recommender($link);
-  // $recommender->update_recommendations(5, $userID);
+   $recommender = new Recommender($link);
+   $recommender->update_recommendations(5, $userID);
 } else {
   echo "Noooooooob";
 }
