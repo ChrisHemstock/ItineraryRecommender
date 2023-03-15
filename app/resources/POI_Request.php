@@ -62,7 +62,7 @@ $searchTerm = $_POST["searchTerm"];
 echo "<br>";
 
 
-$response = curlRequest('https://api.yelp.com/v3/businesses/search?location=46203');
+$response = curlRequest('https://api.yelp.com/v3/businesses/search?location=indianapolis&offset=999&limit=50');
 
 //convert json object to php associative array
  $data = json_decode($response, true);
@@ -85,13 +85,15 @@ foreach ($data["businesses"] as $row) {
   $price = $row['price'];
 
   //insert into mysql table
- $sql = "INSERT INTO POIs(name, Category, rating, num_ratings, address, Lng, Lat, phone, API_ID, image_url, url, price)
+ $sql1 = "INSERT INTO POIs(name, Category, rating, num_ratings, address, Lng, Lat, phone, API_ID, image_url, url, price)
     VALUES('$nameSub', '$Category', '$rating', '$num_ratings', '$address', '$Lng', '$Lat', '$phone', '$API_KEY', '$image_url', '$urlSub', '$price')
     ON DUPLICATE KEY UPDATE rating = '$rating', image_url = '$image_url'";
 
-  $response2 = curlRequest('https://api.yelp.com/v3/businesses/' . $API_KEY . '/reviews?limit=20&sort_by=yelp_sort');
+  if($link->query($sql1) === TRUE){
+    echo "<b>" . $nameSub . "</b> successfully added or updated";
+  $response2 = curlRequest('https://api.yelp.com/v3/businesses/' . $API_KEY . '/reviews?limit=50&sort_by=yelp_sort');
     $data2 = json_decode($response2, true);
-
+   // var_dump($sql);
     $review = '';
 
     foreach($data2["reviews"] as $row) {
@@ -101,12 +103,12 @@ foreach ($data["businesses"] as $row) {
     
      $sql = "UPDATE POIs SET reviews = '$review' WHERE API_ID = '$API_KEY'";
       if ($link->query($sql) === TRUE) {
-        echo "<b>" . $nameSub . "</b> successfully added or updated";
+        echo "<b>" . $nameSub . "</b> reviews successfully added or updated";
         echo "<br>";
       } else {
         echo "Error: " . $sql . "<br>" . $link->error;
 }
-
+  }
 }
 }
 

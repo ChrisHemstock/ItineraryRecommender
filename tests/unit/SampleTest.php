@@ -123,6 +123,7 @@
         }
 
      public function testInsertTripPOIs() {
+        include_once __DIR__.'/../../app/resources/tripData.php';
         // Initialize the variables needed for the query
         $API_ID = "TEST";
         $POI_startTime = "10:00:00";

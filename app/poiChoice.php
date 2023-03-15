@@ -134,8 +134,8 @@
                     }
                 }
             }
-            $recommender = new Recommender($link);
-            $recommender->update_recommendations(6, $userID);
+             $recommender = new Recommender($link);
+             $recommender->update_recommendations(5, $userID);
             header("Location: account.php");
             exit();
         }
