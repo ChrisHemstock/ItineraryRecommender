@@ -35,6 +35,20 @@ function clearPOIs($link, $tripID){
       }
 }
 
+function save($link, $data, $userID, $tripID) {
+  clearPOIs($link, $tripID);
+  //add all the pois in the json back to the database
+  foreach ($data['pois'] as $row) {
+    //get the POI details
+    $API_ID = $row['apiId'];
+    $POI_startTime = $row['startTime'];
+    $POI_endTime = $row['endTime'];
+
+    insertTripPOIs($link, $API_ID, $POI_startTime, $POI_endTime, $tripID);
+    insertLikes($link, $userID, $API_ID);
+  }
+}
+
 
 //condition based on if trip data has been set
 if (isset($_POST['tripData'])) {
@@ -49,24 +63,13 @@ if (isset($_POST['tripData'])) {
   foreach ($trips as $trip) {
     //if the trip is the desired trip then do stuff
     if ($trip[0] == $tripID) {
-
-      clearPOIs($link, $tripID);
-      //add all the pois in the json back to the database
-      foreach ($data['pois'] as $row) {
-        //get the POI details
-        $API_ID = $row['apiId'];
-        $POI_startTime = $row['startTime'];
-        $POI_endTime = $row['endTime'];
-
-        insertTripPOIs($link, $API_ID, $POI_startTime, $POI_endTime, $tripID);
-        insertLikes($link, $userID, $API_ID);
-
-      }
+      save($link, $data, $userID, $tripID);
+      $recommender = new Recommender($link);
+      $recommender->update_recommendations(6, $userID);
       break;
     }
   }
-  $recommender = new Recommender($link);
-  $recommender->update_recommendations(6, $userID);
+  
 } else {
   echo "Noooooooob";
 }

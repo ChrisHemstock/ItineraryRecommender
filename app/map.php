@@ -14,7 +14,7 @@ error_reporting(E_ALL);
 
 
 $recommender = new Recommender($link);
-$recommender->update_recommendations(6, $userID)
+// $recommender->update_recommendations(6, $userID)
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +53,7 @@ $recommender->update_recommendations(6, $userID)
   <div id="itinerary">
     <?php echo "<h2>". $_GET['name'] ."</h2>";?>
     <ul id="poi" data-starttime='00:00'></ul>
-    <input type="submit" value="Save" id="save" onclick="//return feedback();" />
+    <input type="submit" value="Save" id="save" onclick="return feedback();" />
     <input type="button" value = "Make Recommendations" onclick="return displayRecommendations(recommendations, data);"/>
   </div>
   <div id="map"></div>

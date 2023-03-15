@@ -236,33 +236,14 @@
       if(count($this->get_user_doc()->toArray()) == 0) {
         return;
       }
-      //$this->set_all_words();
-        $start_time = microtime(true);
+      //$this->set_all_words(); //Uncomment me to fill out the tfidf table, If you do uncomment me comment out $this->set_all_words_database();
       $this->set_all_words_database();
-        $end_time = microtime(true);
-        echo '<pre>' . var_dump(" Execution time of set_all_words_database = ".($end_time - $start_time)." sec") . '</pre>';
-        $start_time = microtime(true);
       $this->set_all_docs();
-        $end_time = microtime(true);
-        echo '<pre>' . var_dump(" Execution time of set_all_docs = ".($end_time - $start_time)." sec") . '</pre>';
-        $start_time = microtime(true);
       $this->set_user_vector();
-        $end_time = microtime(true);
-        echo '<pre>' . var_dump(" Execution time of set_user_vector = ".($end_time - $start_time)." sec") . '</pre>';
-        $start_time = microtime(true);
-
-      //$this->calc_poi_vectors();
+      //$this->calc_poi_vectors(); //Uncomment me to fill out the tfidf table, If you do uncomment me comment out $this->set_poi_vectors();
       $this->set_poi_vectors();
-        $end_time = microtime(true);
-        echo '<pre>' . var_dump(" Execution time of set_poi_vectors = ".($end_time - $start_time)." sec") . '</pre>';
-        $start_time = microtime(true);
-
-      
 
       $recommendations = $this->calc_recommendations($amount);
-
-        $end_time = microtime(true);
-        echo '<pre>' . var_dump(" Execution time of calc_recommendations = ".($end_time - $start_time)." sec") . '</pre>';
 
       foreach ($recommendations as $API_ID => $value) {
         //Insert in the new recommendations
