@@ -14,6 +14,7 @@ error_reporting(E_ALL);
 
 
 $recommender = new Recommender($link);
+// $recommender->update_recommendations(6, $userID)
 ?>
 
 <!DOCTYPE html>
