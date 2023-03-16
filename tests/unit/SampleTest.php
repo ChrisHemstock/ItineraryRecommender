@@ -1,29 +1,52 @@
 <?php
     use \PHPUnit\Framework\TestCase as TestCase;
     
-    class SampleTest extends TestCase { 
+    class SampleTest extends TestCase {      
+
+        public function test_vector_calc_vs_database() {
+            include_once __DIR__.'/../../app/includes/functions.php';
+            include_once __DIR__.'/../../app/resources/reviewRequest.php';
+
+            // Establish a database connection
+            $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+            if ($link->connect_error) {
+                die("Connection failed: " . $link->connect_error);
+            }
+
+            $recommender = new Recommender($link);
+            $recommender->set_all_words();
+            $recommender->set_all_docs();
+            $recommender->calc_poi_vectors();
+            $calc_vectors = $recommender->get_poi_vectors();
+
+            foreach ($calc_vectors as $api => $vector) {
+                $calc_vectors[$api] = array_map(function($a){return round($a, 4);}, $vector);
+            }
+
+            $recommender_database = new Recommender($link);
+            $recommender_database->set_all_words_database();
+            $recommender_database->set_poi_vectors();
+            $database_vectors = $recommender_database->get_poi_vectors();
+
+            foreach ($database_vectors as $api => $vector) {
+                $database_vectors[$api] = array_map(function($a){return round($a, 4);}, $vector);
+            }
+
+            $this->assertEquals($calc_vectors, $database_vectors);
+        }
+
         public function test_recommendations_empty_likes() {
-            //include_once __DIR__.'/../../app/includes/dbconnect.php';
             include_once __DIR__.'/../../app/includes/functions.php';
             include_once __DIR__.'/../../app/resources/reviewRequest.php';
             require_once(__DIR__ . '/../../vendor/autoload.php');
 
-            $servername = "localhost:80";
-            $username = "root";
-            $password = "";
-            $database = "TripRecommender";
-            // Create a connection 
-            $link = mysqli_connect(
-                $servername,
-                $username,
-                $password,
-                $database
-            );
-            if ($link == false) {
-                die("Error" . mysqli_connect_error());
+            // Establish a database connection
+            $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+            if ($link->connect_error) {
+                die("Connection failed: " . $link->connect_error);
             }
 
-            define('USER_ID', 20);
+            define('USER_ID', 1);
 
             deleteLikes($link, USER_ID);
 
@@ -35,25 +58,13 @@
         }
 
         public function test_recommendations_one_likes() {
-            include_once __DIR__.'/../../app/includes/dbconnect.php';
             include_once __DIR__.'/../../app/includes/functions.php';
             include_once __DIR__.'/../../app/resources/reviewRequest.php';
 
-            $servername = "localhost:80";
-            $username = "root";
-            $password = "";
-            $database = "TripRecommender";
-
-            // Create a connection 
-            $link = mysqli_connect(
-                $servername,
-                $username,
-                $password,
-                $database
-            );
-
-            if ($link == false) {
-                die("Error" . mysqli_connect_error());
+            // Establish a database connection
+            $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+            if ($link->connect_error) {
+                die("Connection failed: " . $link->connect_error);
             }
 
             addLikes($link, USER_ID, 'kzxpl9HidQVMEuUoRVB7nA'); // Victory Field
@@ -66,24 +77,13 @@
         }
 
         public function test_recommendations_length() {
-            include_once __DIR__.'/../../app/includes/dbconnect.php';
             include_once __DIR__.'/../../app/includes/functions.php';
             include_once __DIR__.'/../../app/resources/reviewRequest.php';
 
-            $servername = "localhost:80";
-            $username = "root";
-            $password = "";
-            $database = "TripRecommender";
-
-            $link = mysqli_connect(
-                $servername,
-                $username,
-                $password,
-                $database
-            );
-
-            if ($link == false) {
-                die("Error" . mysqli_connect_error());
+            // Establish a database connection
+            $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+            if ($link->connect_error) {
+                die("Connection failed: " . $link->connect_error);
             }
 
             $recommender = new Recommender($link);
@@ -96,23 +96,13 @@
 
 
         public function test_recommendations_zero_amount() {
-            include_once __DIR__.'/../../app/includes/dbconnect.php';
             include_once __DIR__.'/../../app/includes/functions.php';
             include_once __DIR__.'/../../app/resources/reviewRequest.php';
 
-            $servername = "localhost:80";
-            $username = "root";
-            $password = "";
-            $database = "TripRecommender";
-            // Create a connection 
-            $link = mysqli_connect(
-                $servername,
-                $username,
-                $password,
-                $database
-            );
-            if ($link == false) {
-                die("Error" . mysqli_connect_error());
+            // Establish a database connection
+            $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+            if ($link->connect_error) {
+                die("Connection failed: " . $link->connect_error);
             }
 
             $recommender = new Recommender($link);
@@ -120,6 +110,26 @@
 
             //Tests that an empty array string is returned when asked for 0 entries
             $this->assertEquals(topPoiJson($link, 5), $recommender->get_recommendations(USER_ID));
+        }
+
+        public function test_all_words_database() {
+            include_once __DIR__.'/../../app/includes/functions.php';
+            include_once __DIR__.'/../../app/resources/reviewRequest.php';
+
+            // Establish a database connection
+            $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+            if ($link->connect_error) {
+                die("Connection failed: " . $link->connect_error);
+            }
+
+            $recommender_database = new Recommender($link);
+            $recommender_database->set_all_words_database();
+
+            $recommender = new Recommender($link);
+            $recommender->set_all_words();
+
+            //Tests that an empty array string is returned when asked for 0 entries
+            $this->assertEquals($recommender->get_all_words(), $recommender_database->get_all_words());
         }
 
      public function testInsertTripPOIs() {
@@ -131,7 +141,7 @@
         $tripID = "456";
 
         // Establish a database connection
-        $link = new mysqli("localhost:80", "root", "", "TripRecommender");
+        $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
@@ -166,7 +176,7 @@
         $userID = "20";
 
         // Establish a database connection
-        $link = new mysqli("localhost:80", "root", "", "TripRecommender");
+        $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
@@ -199,7 +209,7 @@
         $userID = "20";
 
         // Establish a database connection
-        $link = new mysqli("localhost:80", "root", "", "TripRecommender");
+        $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
@@ -227,7 +237,7 @@
         $tripID = "316116908";
 
         // Establish a database connection
-        $link = new mysqli("localhost:80", "root", "", "TripRecommender");
+        $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
