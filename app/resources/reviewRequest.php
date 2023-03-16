@@ -79,7 +79,7 @@
       return $this->user_doc;
     }
 
-    private function set_all_words() {
+    public function set_all_words() {
       $reviews_query = $this->link->query('SELECT reviews FROM POIs')->fetch_all();
       $all_words = [];
       foreach($reviews_query as $poi_review) {
@@ -90,11 +90,13 @@
         }
       }
       //a big array with one of every word from the reviews.
-      $this->all_words = array_unique($all_words);
+      $all_words = array_unique($all_words);
+      sort($all_words);
+      $this->all_words = $all_words;
     }
 
-    private function set_all_words_database() {
-      $words_query = $this->link->query('SELECT DISTINCT word FROM tfidfs')->fetch_all();
+    public function set_all_words_database() {
+      $words_query = $this->link->query('SELECT DISTINCT word FROM tfidfs ORDER BY word ASC')->fetch_all();
       $all_words = [];
       foreach ($words_query as $word) {
         $all_words[] = $word[0]; //push the word to the end of the array
@@ -102,11 +104,11 @@
       $this->all_words = $all_words;
     }
 
-    private function get_all_words() {
+    public function get_all_words() {
       return $this->all_words;
     }
 
-    private function set_all_docs() {
+    public function set_all_docs() {
       $reviews_query = $this->link->query('SELECT reviews, API_ID FROM POIs')->fetch_all();
       $all_docs = [];
       foreach($reviews_query as $poi_review) {
@@ -142,7 +144,7 @@
 
     
 
-    private function calc_poi_vectors() {
+    public function calc_poi_vectors() {
       //Good resource on TFIDF
       //https://janav.wordpress.com/2013/10/27/tf-idf-and-cosine-similarity/
       $vector_collection = [];
@@ -179,7 +181,7 @@
       }
     }
 
-    private function set_poi_vectors() {
+    public function set_poi_vectors() {
       $vector_collection = [];
       $all_api_ids = $this->link->query('SELECT API_ID FROM POIs')->fetch_all();
       foreach ($all_api_ids as $api_id) {
@@ -187,10 +189,10 @@
         $all_tfidfs = $this->link->query('SELECT word, value FROM tfidfs WHERE API_ID = "' . $api_id . '"');
         $vector = [];
         foreach ($this->get_all_words() as $word) {
-          $vector[$word] = 0;
+          $vector[$word] = 0.0;
         }
         foreach ($all_tfidfs as $tfidf) {
-          $vector[$tfidf['word']] = $tfidf['value'];
+          $vector[$tfidf['word']] = floatval($tfidf['value']);
         }
         $vector_collection[$api_id] = $vector;
       }
@@ -198,7 +200,7 @@
       $this->poi_vectors = $vector_collection;
     }
 
-    private function get_poi_vectors() {
+    public function get_poi_vectors() {
       return $this->poi_vectors;
     }
 
