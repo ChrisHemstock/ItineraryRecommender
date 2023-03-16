@@ -108,7 +108,7 @@
             OR API_ID = '$ids[1]'
             OR API_ID = '$ids[2]' 
             OR API_ID = '$ids[3]')";
-            var_dump($sqlClear);
+            //var_dump($sqlClear);
             $stmt = $sqlClear;
             if (mysqli_query($link, $sqlClear)) {
                 $interestDataUpdated = true;

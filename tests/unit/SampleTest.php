@@ -8,7 +8,7 @@
             include_once __DIR__.'/../../app/resources/reviewRequest.php';
 
             // Establish a database connection
-            $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+            $link = new mysqli("localhost:80", "root", "", "TripRecommenderTest");
             if ($link->connect_error) {
                 die("Connection failed: " . $link->connect_error);
             }
@@ -41,7 +41,7 @@
             require_once(__DIR__ . '/../../vendor/autoload.php');
 
             // Establish a database connection
-            $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+            $link = new mysqli("localhost:80", "root", "", "TripRecommenderTest");
             if ($link->connect_error) {
                 die("Connection failed: " . $link->connect_error);
             }
@@ -62,7 +62,7 @@
             include_once __DIR__.'/../../app/resources/reviewRequest.php';
 
             // Establish a database connection
-            $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+            $link = new mysqli("localhost:80", "root", "", "TripRecommenderTest");
             if ($link->connect_error) {
                 die("Connection failed: " . $link->connect_error);
             }
@@ -81,7 +81,7 @@
             include_once __DIR__.'/../../app/resources/reviewRequest.php';
 
             // Establish a database connection
-            $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+            $link = new mysqli("localhost:80", "root", "", "TripRecommenderTest");
             if ($link->connect_error) {
                 die("Connection failed: " . $link->connect_error);
             }
@@ -100,7 +100,7 @@
             include_once __DIR__.'/../../app/resources/reviewRequest.php';
 
             // Establish a database connection
-            $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+            $link = new mysqli("localhost:80", "root", "", "TripRecommenderTest");
             if ($link->connect_error) {
                 die("Connection failed: " . $link->connect_error);
             }
@@ -117,7 +117,7 @@
             include_once __DIR__.'/../../app/resources/reviewRequest.php';
 
             // Establish a database connection
-            $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+            $link = new mysqli("localhost:80", "root", "", "TripRecommenderTest");
             if ($link->connect_error) {
                 die("Connection failed: " . $link->connect_error);
             }
@@ -141,7 +141,7 @@
         $tripID = "456";
 
         // Establish a database connection
-        $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+        $link = new mysqli("localhost:80", "root", "", "TripRecommenderTest");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
@@ -176,7 +176,7 @@
         $userID = "20";
 
         // Establish a database connection
-        $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+        $link = new mysqli("localhost:80", "root", "", "TripRecommenderTest");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
@@ -209,7 +209,7 @@
         $userID = "20";
 
         // Establish a database connection
-        $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+        $link = new mysqli("localhost:80", "root", "", "TripRecommenderTest");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
@@ -237,7 +237,7 @@
         $tripID = "316116908";
 
         // Establish a database connection
-        $link = new mysqli("localhost", "root", "", "TripRecommenderTest");
+        $link = new mysqli("localhost:80", "root", "", "TripRecommenderTest");
         if ($link->connect_error) {
             die("Connection failed: " . $link->connect_error);
         }
