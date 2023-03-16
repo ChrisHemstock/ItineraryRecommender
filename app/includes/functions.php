@@ -18,7 +18,8 @@ function createMapPoisJson($link)
         $name = $row[6];
         $rating = $row[7];
         $num_ratings = $row[8];
-        $data[] = array($Lat, $Lng, $Category, $api_id, $address, $phone, $name, $rating, $num_ratings);
+        $url = $row[12];
+        $data[] = array($Lat, $Lng, $Category, $api_id, $address, $phone, $name, $rating, $num_ratings, $url);
     }
     return json_encode(array("data" => $data));
 }
@@ -34,7 +35,7 @@ function populateSavedPois($link)
         //var_dump($trip[0]);
         if ($trip[0] == $_GET['trip']) {
             //If it is a valid URL trip id then get all the pois under that trip and populate the poi list
-            $poiList = $link->query('SELECT pois.API_ID, startTime, endTime, name FROM trippois, pois WHERE trippois.API_ID = pois.API_ID and trippois.tripID = ' . $trip[0] . ';')->fetch_all();
+            $poiList = $link->query('SELECT pois.API_ID, startTime, endTime, name, pois.url FROM trippois, pois WHERE trippois.API_ID = pois.API_ID and trippois.tripID = ' . $trip[0] . ';')->fetch_all();
             //var_dump('here');
             $jsonPoiList = json_encode($poiList);
             break;

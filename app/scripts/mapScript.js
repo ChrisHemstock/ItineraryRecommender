@@ -12,9 +12,10 @@ json.data.forEach(poi => {
     const long = poi[1]
     const api_id = poi[3]
     const name = poi[6]
+    const url = poi[9]
     L.marker([lat, long]).on('click', function (e) {
         //adds an event to the last day on the itinerary
-        addEvent(api_id, name, getStartTime(), incrementTime(getStartTime(), 30))
+        addEvent(api_id, name, url, getStartTime(), incrementTime(getStartTime(), 30))
     }).bindPopup(name).on('mouseover', function (e) {
         this.openPopup();
     }).on('mouseout', function (e) {
@@ -26,7 +27,7 @@ json.data.forEach(poi => {
 if (typeof phpPoi !== 'undefined') {
     let jsonPois = JSON.parse(phpPoi)
     jsonPois.forEach(poi => {
-        addEvent(poi[0], poi[3], poi[1], poi[2])
+        addEvent(poi[0], poi[3], poi[4], poi[1], poi[2])
     });
 }
 

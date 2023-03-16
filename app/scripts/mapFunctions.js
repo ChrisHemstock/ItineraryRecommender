@@ -29,11 +29,15 @@ function getDragAfterElement(container, y) {
 }
 
 //addEvent adds an Event to the itinerary
-function addEvent(api_id, name, startTime, endTime) {
-    let html = '<li class="draggable ' + api_id + '" draggable="true">' + name +
-        '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + startTime +
-        '"/><input type="time" class="endEvent" title="End Time" value="' + endTime + '" onchange="updateTimes(0)"/></span>' +
-        '<span class="close">X</span></li>';
+function addEvent(api_id, name, url, startTime, endTime) {
+    let html = '<li class="draggable ' + api_id + '" draggable="true">' +
+    '<a target="_blank" href="' + url + ' ">' + name + '</a>' +
+    '<span class="time">' +
+        '<input type="time" class="startEvent" title="Start Time" value="' + startTime + '"/>' +
+        '<input type="time" class="endEvent" title="End Time" value="' + endTime + '" onchange="updateTimes(0)"/>' +
+    '</span>' +
+    '<span class="close">X</span>' +
+'</li>';
     let poi = document.getElementById('poi')
     poi.insertAdjacentHTML('beforeend', html);
 
@@ -199,11 +203,12 @@ function displayRecommendations(recommendationList, data) {
     let poiJson = JSON.parse(data) // List of all the Pois
     const poiId = 3
     const poiName = 6
+    const url = 9
   
     for(let j = 0; j < poiRecommendationArray.length; j++) {
         for(let i = 0; i < poiJson.data.length; i++) {
             if(poiRecommendationArray[j][recommendationId] == poiJson.data[i][poiId]) {
-                addEvent(poiRecommendationArray[j][recommendationId], poiJson.data[i][poiName], '00:00', '00:30')
+                addEvent(poiRecommendationArray[j][recommendationId], poiJson.data[i][poiName], poiJson.data[i][url], '00:00', '00:30')
                 updateTimes(0)
             }
         }
