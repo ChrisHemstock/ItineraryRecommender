@@ -31,7 +31,7 @@ function getDragAfterElement(container, y) {
 //addEvent adds an Event to the itinerary
 function addEvent(api_id, name, url, startTime, endTime) {
     let html = '<li class="draggable ' + api_id + '" draggable="true">' +
-    '<a target="_blank" href="' + url + ' ">' + name + '</a>' +
+    '<a target="_blank" href="' + url + '">' + name + '</a>' +
     '<span class="time">' +
         '<input type="time" class="startEvent" title="Start Time" value="' + startTime + '"/>' +
         '<input type="time" class="endEvent" title="End Time" value="' + endTime + '" onchange="updateTimes(0)"/>' +
