@@ -3,18 +3,18 @@ include_once 'includes/functions.php';
 include_once 'includes/dbconnect.php';
 include_once 'resources/reviewRequest.php';
 require_once(__DIR__ . '/../vendor/autoload.php');
+
 session_start();
 set_time_limit(360);
-$userID = $_SESSION["id"];
-$json = createMapPoisJson($link);
-$jsonPoiList = populateSavedPois($link);
+
+$user_id = $_SESSION["id"];
+$all_pois_json = createMapPoisJson($link);
+$saved_poi_json = populateSavedPois($link);
+$recommender = new Recommender($link);
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-
-$recommender = new Recommender($link);
-// $recommender->update_recommendations(6, $userID)
 ?>
 
 <!DOCTYPE html>
@@ -42,9 +42,9 @@ $recommender = new Recommender($link);
   
   <script>
     //creates javascript variables from php variables
-    var data = '<?php echo $json; ?>';
-    var phpPoi = '<?php echo $jsonPoiList ?>';
-    var recommendations = '<?php echo $recommender->get_recommendations($userID)?>';
+    var allPoisJson = '<?php echo $all_pois_json; ?>';
+    var savedPoiJson = '<?php echo $saved_poi_json ?>';
+    var recommendations = '<?php echo $recommender->get_recommendations($user_id, 5)?>';
   </script>
 </head>
 
@@ -54,7 +54,7 @@ $recommender = new Recommender($link);
     <?php echo "<h2>". $_GET['name'] ."</h2>";?>
     <ul id="poi" data-starttime='00:00'></ul>
     <input type="submit" value="Save" id="save" onclick="return feedback();" />
-    <input type="button" value = "Make Recommendations" onclick="return displayRecommendations(recommendations, data);"/>
+    <input type="button" value = "Make Recommendations" onclick="return displayRecommendations(recommendations, allPoisJson);"/>
   </div>
   <div id="map"></div>
   <div id="recommendations">

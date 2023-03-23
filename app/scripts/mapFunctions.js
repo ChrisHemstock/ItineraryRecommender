@@ -103,23 +103,6 @@ function createItineraryJson() {
     return tripString;
 }
 
-// //adds the saved POIs to the itinerary from a json
-// function loadItinerary() {
-//     fetch("test.json")
-//         .then(response => response.json())
-//         .then(data => {
-//             data.pois.forEach(poi => {
-//                 let html = '<li class="draggable" draggable="true" class="' + poi.poiId + '">' + poi.poiName +
-//                     '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + poi.startTime + '"/><input type="time" class="endEvent" title="End Time" value="' + poi.endTime + '"/></span>' +
-//                     '<span class="close">X</span></li>';
-//                 document.getElementById('poi').insertAdjacentHTML('beforeend', html);
-
-//                 let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
-//                 addEventEventListeners(newElement)
-//             });
-//         });
-// }
-
 //returns a time in minutes that is the time from startTime to endTime
 function getDuration(startTime, endTime) {
     startTime = startTime.split(':')
@@ -189,14 +172,16 @@ function sortByValue(json){
 }
 
 //adds the recommendations to the itinerary list
-function displayRecommendations(recommendationList, data) {
+function displayRecommendations(recommendationList, poiDataJson) {
+    //get the JSON of all the users recommendations
     let json = JSON.parse(recommendationList)
     let poiRecommendationArray = sortByValue(json) // [[tfidfValue, id], [tfidfValue, id], ...]
     const recommendationId = 1
 
     console.log(poiRecommendationArray) 
 
-    let poiJson = JSON.parse(data) // List of all the Pois
+    //get a list of all the pois (comes from functions.php createMapPoiJson())
+    let poiJson = JSON.parse(poiDataJson) // List of all the Pois
     const poiId = 3
     const poiName = 6
   
