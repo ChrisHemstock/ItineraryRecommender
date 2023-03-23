@@ -186,6 +186,7 @@ function displayRecommendations(recommendationList, allPoisJson) {
     let allPoisList = JSON.parse(allPoisJson) // List of all the Pois
     const poiApiId = 3
     const poiName = 6
+    const url = 9
 
     //get all pois currently in the itinerary
     let itineraryApiList = []
@@ -213,7 +214,7 @@ function displayRecommendations(recommendationList, allPoisJson) {
                     break;
                 }
                 // Here if it isn't saved and its going to be recommended
-                addEvent(poiRecommendationArray[j][recommendationApiId], allPoisList.data[i][poiName], '00:00', '00:30');
+                addEvent(poiRecommendationArray[j][recommendationApiId], allPoisList.data[i][poiName], allPoisList.data[i][url], '00:00', '00:30');
                 updateTimes(0);
                 count++;
                 break;
