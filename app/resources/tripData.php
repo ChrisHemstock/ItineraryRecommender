@@ -65,7 +65,7 @@ if (isset($_POST['tripData'])) {
     if ($trip[0] == $tripID) {
       save($link, $data, $userID, $tripID);
       $recommender = new Recommender($link);
-      $recommender->update_recommendations(5, $userID);
+      $recommender->update_recommendations(15, $userID);
       break;
     }
   }

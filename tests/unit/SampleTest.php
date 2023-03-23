@@ -54,7 +54,7 @@
             $recommender->update_recommendations(5, USER_ID);
             
             // Tests no data in likes - should return a json string with top 5 most rated pois
-            $this->assertEquals(topPoiJson($link, 5), $recommender->get_recommendations(USER_ID));
+            $this->assertEquals(topPoiJson($link, 5), $recommender->get_recommendations(USER_ID, 5));
         }
 
         public function test_recommendations_one_likes() {
@@ -73,7 +73,7 @@
             $recommender->update_recommendations(1, USER_ID);
 
             // Tests 1 entry in likes - should return a json with 1 entry with a value of 1
-            $this->assertEquals('{"kzxpl9HidQVMEuUoRVB7nA":"1.00000000000000"}', $recommender->get_recommendations(USER_ID));
+            $this->assertEquals('{"kzxpl9HidQVMEuUoRVB7nA":"1.00000000000000"}', $recommender->get_recommendations(USER_ID, 5));
         }
 
         public function test_recommendations_length() {
@@ -88,7 +88,7 @@
 
             $recommender = new Recommender($link);
             $recommender->update_recommendations(10, USER_ID);
-            $recommendation_array = json_decode($recommender->get_recommendations(USER_ID), true);
+            $recommendation_array = json_decode($recommender->get_recommendations(USER_ID, 5), true);
 
             //Tests that the proper amount of items are returned in a normal case
             $this->assertEquals(10, count($recommendation_array));
@@ -109,7 +109,7 @@
             $recommender->update_recommendations(0, USER_ID);
 
             //Tests that an empty array string is returned when asked for 0 entries
-            $this->assertEquals(topPoiJson($link, 5), $recommender->get_recommendations(USER_ID));
+            $this->assertEquals(topPoiJson($link, 5), $recommender->get_recommendations(USER_ID, 5));
         }
 
         public function test_all_words_database() {
