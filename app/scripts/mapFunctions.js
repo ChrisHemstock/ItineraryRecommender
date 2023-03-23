@@ -172,32 +172,62 @@ function sortByValue(json){
 }
 
 //adds the recommendations to the itinerary list
-function displayRecommendations(recommendationList, poiDataJson) {
+function displayRecommendations(recommendationList, allPoisJson) {
     //get the JSON of all the users recommendations
-    let json = JSON.parse(recommendationList)
-    let poiRecommendationArray = sortByValue(json) // [[tfidfValue, id], [tfidfValue, id], ...]
-    const recommendationId = 1
-
-    console.log(poiRecommendationArray) 
+    let RecommendedJson = JSON.parse(recommendationList)
+    let poiRecommendationArray = sortByValue(RecommendedJson) // [[tfidfValue, id], [tfidfValue, id], ...]
+    const recommendationApiId = 1
 
     //get a list of all the pois (comes from functions.php createMapPoiJson())
-    let poiJson = JSON.parse(poiDataJson) // List of all the Pois
-    const poiId = 3
+    let allPoisList = JSON.parse(allPoisJson) // List of all the Pois
+    const poiApiId = 3
     const poiName = 6
-  
+
+    //get all pois currently in the itinerary
+    let itineraryApiList = []
+    let itineraryElements = document.getElementById('poi').childNodes
+    itineraryElements.forEach(element => {
+        let classes = element.className;
+        classes = classes.split(" ");
+        const api_id_index = 1
+        itineraryApiList.push(classes[1])
+    });
+
+    count = 0 // Makes sure that only n number of elements are actually displayed
     for(let j = 0; j < poiRecommendationArray.length; j++) {
-        for(let i = 0; i < poiJson.data.length; i++) {
-            if(poiRecommendationArray[j][recommendationId] == poiJson.data[i][poiId]) {
-                addEvent(poiRecommendationArray[j][recommendationId], poiJson.data[i][poiName], '00:00', '00:30')
-                updateTimes(0)
+        for(let i = 0; i < allPoisList.data.length; i++) {
+            if(poiRecommendationArray[j][recommendationApiId] == allPoisList.data[i][poiApiId]) {
+                // Make sure the api_id isn't in the itinerary already
+                let saved = false
+                itineraryApiList.forEach(api_id => {
+                    if(allPoisList.data[i][poiApiId] == api_id) {
+                        saved = true;
+                        return;
+                    }
+                });
+                if(saved == true) {
+                    break;
+                }
+                // Here if it isn't saved and its going to be recommended
+                addEvent(poiRecommendationArray[j][recommendationApiId], allPoisList.data[i][poiName], '00:00', '00:30');
+                updateTimes(0);
+                count++;
+                break;
             }
         }
+        if(count==5) { //change this to a variable later
+            break;
+        }
+    }
+    // Check if there is nothing left to recommend
+    if(count == 0) {
+        feedback("Out of recommendations!")
     }
 }
 
 //popup for when the save button is clicked
-function feedback() {
-    alert("Trip data Entered!");
+function feedback(message) {
+    alert(message);
     return true;
 }
 
