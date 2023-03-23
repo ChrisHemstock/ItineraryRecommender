@@ -113,11 +113,11 @@
       $all_docs = [];
       foreach($reviews_query as $poi_review) {
         $review = $poi_review[0];
-        $API_ID = $poi_review[1];
+        $api_id = $poi_review[1];
         if($review != Null) {
           $review_array = $this->make_word_array($review);
           //Adds a new vector for the current poi
-          $all_docs = $this->add_document($all_docs, $API_ID, $review_array);
+          $all_docs = $this->add_document($all_docs, $api_id, $review_array);
         }
       }
       $this->poi_docs = $all_docs;
@@ -160,11 +160,11 @@
 
     private function add_poi_vector_database($vector_collection) {
       //Clear the tfidfs in the database
-      $deleteSQL = "DELETE FROM tfidfs";
-      if ($this->link->query($deleteSQL) === TRUE) {
+      $delete_sql = "DELETE FROM tfidfs";
+      if ($this->link->query($delete_sql) === TRUE) {
         echo "New record deleted successfully";
       } else {
-        echo "Error: " . $deleteSQL . "<br>" . $this->link->error;
+        echo "Error: " . $delete_sql . "<br>" . $this->link->error;
       }
 
       foreach ($vector_collection as $api_id => $vector) {
@@ -227,11 +227,8 @@
       //Delete all current recommendations for the user
       $delete_recommend = "DELETE FROM `recommendations` WHERE userID = $user_id";
       $stmt = $delete_recommend;
-      if (mysqli_query($this->link, $delete_recommend)) {
-          $deleteDataUpdated = true;
-      } else {
-          echo "ERROR: Hush! Sorry $delete_recommend. "
-              . mysqli_error($this->link);
+      if (!(mysqli_query($this->link, $delete_recommend))) {
+        echo "ERROR: Hush! Sorry $delete_recommend. " . mysqli_error($this->link);
       }
 
       $this->set_user_doc($user_id);
@@ -260,7 +257,7 @@
       }
     }
 
-    function get_recommendations($user_id) {
+    function get_recommendations($user_id, $amount) {
       $recommend_query = $this->link->query("SELECT API_ID, value FROM recommendations WHERE userID = $user_id")->fetch_all();
       $poi_similarities = [];
 
@@ -271,7 +268,7 @@
       }
 
       if(count($poi_similarities) == 0) {
-        $top_json = $this->top_poi_json(5);
+        $top_json = $this->top_poi_json($amount);
         return $top_json;
       }
       
