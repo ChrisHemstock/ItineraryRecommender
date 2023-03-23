@@ -29,11 +29,15 @@ function getDragAfterElement(container, y) {
 }
 
 //addEvent adds an Event to the itinerary
-function addEvent(api_id, name, startTime, endTime) {
-    let html = '<li class="draggable ' + api_id + '" draggable="true">' + name +
-        '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + startTime +
-        '"/><input type="time" class="endEvent" title="End Time" value="' + endTime + '" onchange="updateTimes(0)"/></span>' +
-        '<span class="close">X</span></li>';
+function addEvent(api_id, name, url, startTime, endTime) {
+    let html = '<li class="draggable ' + api_id + '" draggable="true">' +
+    '<a target="_blank" href="' + url + '">' + name + '</a>' +
+    '<span class="time">' +
+        '<input type="time" class="startEvent" title="Start Time" value="' + startTime + '"/>' +
+        '<input type="time" class="endEvent" title="End Time" value="' + endTime + '" onchange="updateTimes(0)"/>' +
+    '</span>' +
+    '<span class="close">X</span>' +
+'</li>';
     let poi = document.getElementById('poi')
     poi.insertAdjacentHTML('beforeend', html);
 
@@ -102,23 +106,6 @@ function createItineraryJson() {
     tripString += ']}';
     return tripString;
 }
-
-// //adds the saved POIs to the itinerary from a json
-// function loadItinerary() {
-//     fetch("test.json")
-//         .then(response => response.json())
-//         .then(data => {
-//             data.pois.forEach(poi => {
-//                 let html = '<li class="draggable" draggable="true" class="' + poi.poiId + '">' + poi.poiName +
-//                     '<span class="time"><input type="time" class="startEvent" title="Start Time" value="' + poi.startTime + '"/><input type="time" class="endEvent" title="End Time" value="' + poi.endTime + '"/></span>' +
-//                     '<span class="close">X</span></li>';
-//                 document.getElementById('poi').insertAdjacentHTML('beforeend', html);
-
-//                 let newElement = [...document.querySelectorAll('.draggable:not(.dragging)')].pop()
-//                 addEventEventListeners(newElement)
-//             });
-//         });
-// }
 
 //returns a time in minutes that is the time from startTime to endTime
 function getDuration(startTime, endTime) {
@@ -189,30 +176,62 @@ function sortByValue(json){
 }
 
 //adds the recommendations to the itinerary list
-function displayRecommendations(recommendationList, data) {
-    let json = JSON.parse(recommendationList)
-    let poiRecommendationArray = sortByValue(json) // [[tfidfValue, id], [tfidfValue, id], ...]
-    const recommendationId = 1
+function displayRecommendations(recommendationList, allPoisJson) {
+    //get the JSON of all the users recommendations
+    let RecommendedJson = JSON.parse(recommendationList)
+    let poiRecommendationArray = sortByValue(RecommendedJson) // [[tfidfValue, id], [tfidfValue, id], ...]
+    const recommendationApiId = 1
 
-    console.log(poiRecommendationArray) 
-
-    let poiJson = JSON.parse(data) // List of all the Pois
-    const poiId = 3
+    //get a list of all the pois (comes from functions.php createMapPoiJson())
+    let allPoisList = JSON.parse(allPoisJson) // List of all the Pois
+    const poiApiId = 3
     const poiName = 6
-  
+
+    //get all pois currently in the itinerary
+    let itineraryApiList = []
+    let itineraryElements = document.getElementById('poi').childNodes
+    itineraryElements.forEach(element => {
+        let classes = element.className;
+        classes = classes.split(" ");
+        const api_id_index = 1
+        itineraryApiList.push(classes[1])
+    });
+
+    count = 0 // Makes sure that only n number of elements are actually displayed
     for(let j = 0; j < poiRecommendationArray.length; j++) {
-        for(let i = 0; i < poiJson.data.length; i++) {
-            if(poiRecommendationArray[j][recommendationId] == poiJson.data[i][poiId]) {
-                addEvent(poiRecommendationArray[j][recommendationId], poiJson.data[i][poiName], '00:00', '00:30')
-                updateTimes(0)
+        for(let i = 0; i < allPoisList.data.length; i++) {
+            if(poiRecommendationArray[j][recommendationApiId] == allPoisList.data[i][poiApiId]) {
+                // Make sure the api_id isn't in the itinerary already
+                let saved = false
+                itineraryApiList.forEach(api_id => {
+                    if(allPoisList.data[i][poiApiId] == api_id) {
+                        saved = true;
+                        return;
+                    }
+                });
+                if(saved == true) {
+                    break;
+                }
+                // Here if it isn't saved and its going to be recommended
+                addEvent(poiRecommendationArray[j][recommendationApiId], allPoisList.data[i][poiName], '00:00', '00:30');
+                updateTimes(0);
+                count++;
+                break;
             }
         }
+        if(count==5) { //change this to a variable later
+            break;
+        }
+    }
+    // Check if there is nothing left to recommend
+    if(count == 0) {
+        feedback("Out of recommendations!")
     }
 }
 
 //popup for when the save button is clicked
-function feedback() {
-    alert("Trip data Entered!");
+function feedback(message) {
+    alert(message);
     return true;
 }
 
