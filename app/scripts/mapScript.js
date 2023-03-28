@@ -13,7 +13,7 @@ json.data.forEach(poi => {
     const api_id = poi[3]
     const name = poi[6]
     const url = poi[9]
-    L.marker([lat, long]).on('click', function (e) {
+    var marker = L.marker([lat, long]).on('click', function (e) {
         //adds an event to the last day on the itinerary
         addEvent(api_id, name, url, getStartTime(), incrementTime(getStartTime(), 30))
     }).bindPopup(name).on('mouseover', function (e) {
@@ -21,7 +21,15 @@ json.data.forEach(poi => {
     }).on('mouseout', function (e) {
         this.closePopup();
     }).addTo(map)
+    let jsonPois = JSON.parse(savedPoiJson)
+    jsonPois.forEach(poi => {
+        if(poi[0] == api_id){
+            marker._icon.style.filter = "hue-rotate(120deg)"
+        }
+    });
+
 });
+lineCoordinate.push()
 
 //Adds the event listeners to the loaded pois in the itinerary
 if (typeof savedPoiJson !== 'undefined') {
