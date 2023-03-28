@@ -4,38 +4,51 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap'
 }).addTo(map);
-
+let lineCoordinate = []
 containerEvent(document.getElementById('poi'))
 let json = JSON.parse(allPoisJson)
 json.data.forEach(poi => {
-    const lat = poi[0]
-    const long = poi[1]
-    const api_id = poi[3]
-    const name = poi[6]
-    const url = poi[9]
-    var marker = L.marker([lat, long]).on('click', function (e) {
+    const LAT = poi[0]
+    const LONG = poi[1]
+    const API_ID = poi[3]
+    const NAME = poi[6]
+    const URL = poi[9]
+    var marker = L.marker([LAT, LONG]).on('click', function (e) {
         //adds an event to the last day on the itinerary
-        addEvent(api_id, name, url, getStartTime(), incrementTime(getStartTime(), 30))
-    }).bindPopup(name).on('mouseover', function (e) {
+        addEvent(API_ID, NAME, URL, getStartTime(), incrementTime(getStartTime(), 30))
+    }).bindPopup(NAME).on('mouseover', function (e) {
         this.openPopup();
     }).on('mouseout', function (e) {
         this.closePopup();
     }).addTo(map)
-    let jsonPois = JSON.parse(savedPoiJson)
-    jsonPois.forEach(poi => {
-        if(poi[0] == api_id){
+    let savedPois = JSON.parse(savedPoiJson)
+    console.log(savedPois)
+    savedPois.forEach(poi => {
+        const SAVED_API_ID = poi[0]
+        const START_TIME = poi[1]
+        const LAT = poi[5]
+        const LONG = poi[6]
+        if(SAVED_API_ID == API_ID){
             marker._icon.style.filter = "hue-rotate(120deg)"
+            lineCoordinate.push([LAT, LONG, START_TIME])
         }
     });
 
 });
-//lineCoordinate.push()
+lineCoordinate.sort((a, b) => a[2].localeCompare(b[2]))
+lineCoordinate = lineCoordinate.map(([first, second]) => [first, second]);
+L.polyline(lineCoordinate, {color: 'red'}).addTo(map);
 
 //Adds the event listeners to the loaded pois in the itinerary
 if (typeof savedPoiJson !== 'undefined') {
-    let jsonPois = JSON.parse(savedPoiJson)
-    jsonPois.forEach(poi => {
-        addEvent(poi[0], poi[3], poi[4], poi[1], poi[2])
+    let savedPois = JSON.parse(savedPoiJson)
+    savedPois.forEach(poi => {
+        const API_ID = poi[0]
+        const NAME = poi[3]
+        const URL = poi[4]
+        const START_TIME = poi[1]
+        const END_TIME = poi[2]
+        addEvent(API_ID, NAME, URL, START_TIME, END_TIME)
     });
 }
 

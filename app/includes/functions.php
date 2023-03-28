@@ -34,7 +34,7 @@ function populateSavedPois($link) {
     foreach ($trips as $trip) {
         if ($trip[0] == $_GET['trip']) {
             //If it is a valid URL trip id then get all the pois under that trip and populate the poi list
-            $poi_list = $link->query('SELECT pois.API_ID, startTime, endTime, name, pois.url FROM trippois, pois WHERE trippois.API_ID = pois.API_ID and trippois.tripID = ' . $trip[0] . ';')->fetch_all();
+            $poi_list = $link->query('SELECT pois.API_ID, startTime, endTime, name, pois.url, pois.lat, pois.lng FROM trippois, pois WHERE trippois.API_ID = pois.API_ID and trippois.tripID = ' . $trip[0] . ';')->fetch_all();
             $json_poi_list = json_encode($poi_list);
             break;
         }
