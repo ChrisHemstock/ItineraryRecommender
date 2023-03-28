@@ -29,7 +29,7 @@ json.data.forEach(poi => {
     });
 
 });
-lineCoordinate.push()
+//lineCoordinate.push()
 
 //Adds the event listeners to the loaded pois in the itinerary
 if (typeof savedPoiJson !== 'undefined') {
