@@ -236,4 +236,21 @@ function feedback(message) {
     return true;
 }
 
-module.exports = sortByValue;
+function changeColor(savedPois, marker, apiId) {
+    //console.log(savedPois);
+    for (let poi of savedPois) {
+      const SAVED_API_ID = poi[0]
+      if (SAVED_API_ID == apiId) {
+        marker._icon.style.filter = "hue-rotate(120deg)"
+        //console.log(marker._icon.style.filter);
+        return true
+      }
+    }
+    return false
+  }
+  
+  
+  
+  
+
+module.exports = {sortByValue, changeColor};

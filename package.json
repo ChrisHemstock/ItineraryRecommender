@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/ChrisHemstock/ItineraryRecommender#readme",
   "devDependencies": {
-    "jest": "^29.4.3"
+    "jest": "^29.5.0"
   }
 }
