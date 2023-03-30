@@ -142,6 +142,35 @@ test('doesnt find the coordinate when there is 0 saved pois', () => {
     expect(cord).toStrictEqual([])
 });
 
+//
+// checkPoiSaved (US 19)
+//
+test('check that the poi is saved according to 3 apiIds', () => {
+    let itineraryApiArray = ['123', '456', '789'];
+    let apiId = '789';
+    let saved = scriptFunction.checkPoiSaved(itineraryApiArray, apiId)
+    expect(saved).toBe(true)
+});
 
+test('check that the poi is not saved according to 3 apiIds', () => {
+    let itineraryApiArray = ['123', '456', '789'];
+    let apiId = '769';
+    let saved = scriptFunction.checkPoiSaved(itineraryApiArray, apiId)
+    expect(saved).toBe(false)
+});
+
+test('check that poi is not found when itnineraryArray has no elements', () => {
+    let itineraryApiArray = [];
+    let apiId = '123';
+    let saved = scriptFunction.checkPoiSaved(itineraryApiArray, apiId)
+    expect(saved).toBe(false)
+});
+
+test('check that poi is found when itnineraryArray has 1 elements', () => {
+    let itineraryApiArray = ['123'];
+    let apiId = '123';
+    let saved = scriptFunction.checkPoiSaved(itineraryApiArray, apiId)
+    expect(saved).toBe(true)
+});
   
   

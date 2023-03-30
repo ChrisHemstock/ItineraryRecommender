@@ -54,7 +54,7 @@ error_reporting(E_ALL);
     <?php echo "<h2>". $_GET['name'] ."</h2>";?>
     <ul id="poi" data-starttime='00:00'></ul>
     <input type="submit" value="Save" id="save" onclick="return feedback('Trip data Entered!');" />
-    <input type="button" value = "Make Recommendations" onclick="return displayRecommendations(recommendations, allPoisJson);"/>
+    <input type="button" value = "Make Recommendations" onclick="return displayRecommendations(getRecommendationArray(recommendations, allPoisJson, getItineraryApis(), 5));"/>
   </div>
   <div id="map"></div>
   <div id="recommendations">
