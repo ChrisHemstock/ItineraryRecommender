@@ -175,11 +175,34 @@ function sortByValue(json){
     return sortedArray.sort().reverse();
 }
 
-//adds the recommendations to the itinerary list
-function displayRecommendations(recommendationList, allPoisJson) {
-    //get the JSON of all the users recommendations
-    let RecommendedJson = JSON.parse(recommendationList)
-    let poiRecommendationArray = sortByValue(RecommendedJson) // [[tfidfValue, id], [tfidfValue, id], ...]
+function getItineraryApis() {
+    //get all pois currently in the itinerary
+    let itineraryApiList = []
+    let itineraryElements = document.getElementById('poi').childNodes
+    itineraryElements.forEach(element => {
+        let classes = element.className;
+        classes = classes.split(" ");
+        const apiId = 1
+        itineraryApiList.push(classes[apiId])
+    });
+    return itineraryApiList;
+}
+
+function checkPoiSaved(itineraryPoiArray, apiId) {
+    let saved = false;
+    itineraryPoiArray.forEach(ItineraryApiId => {
+        if(apiId == ItineraryApiId) {
+            saved = true;
+            return;
+        }
+    });
+    return saved;
+}
+
+function getRecommendationArray(recommendationList, allPoisJson, itineraryApiArray, amount) {
+    console.log(recommendationList)
+    let recommendedJson = JSON.parse(recommendationList)
+    let poiRecommendationArray = sortByValue(recommendedJson) // [[tfidfValue, id], [tfidfValue, id], ...]
     const recommendationApiId = 1
 
     //get a list of all the pois (comes from functions.php createMapPoiJson())
@@ -188,46 +211,50 @@ function displayRecommendations(recommendationList, allPoisJson) {
     const poiName = 6
     const url = 9
 
-    //get all pois currently in the itinerary
-    let itineraryApiList = []
-    let itineraryElements = document.getElementById('poi').childNodes
-    itineraryElements.forEach(element => {
-        let classes = element.className;
-        classes = classes.split(" ");
-        const api_id_index = 1
-        itineraryApiList.push(classes[1])
-    });
-
+    let recomendationArray = [];
     count = 0 // Makes sure that only n number of elements are actually displayed
     for(let j = 0; j < poiRecommendationArray.length; j++) {
         for(let i = 0; i < allPoisList.data.length; i++) {
             if(poiRecommendationArray[j][recommendationApiId] == allPoisList.data[i][poiApiId]) {
                 // Make sure the api_id isn't in the itinerary already
-                let saved = false
-                itineraryApiList.forEach(api_id => {
-                    if(allPoisList.data[i][poiApiId] == api_id) {
-                        saved = true;
-                        return;
-                    }
-                });
-                if(saved == true) {
+                if(checkPoiSaved(itineraryApiArray, allPoisList.data[i][poiApiId])) {
                     break;
                 }
                 // Here if it isn't saved and its going to be recommended
-                addEvent(poiRecommendationArray[j][recommendationApiId], allPoisList.data[i][poiName], allPoisList.data[i][url], '00:00', '00:30');
-                updateTimes(0);
+                recomendationArray.push([
+                    poiRecommendationArray[j][recommendationApiId], 
+                    allPoisList.data[i][poiName], 
+                    allPoisList.data[i][url],
+                ])
                 count++;
                 break;
             }
         }
-        if(count==5) { //change this to a variable later
+        if(count==amount) {
             break;
         }
     }
+    return recomendationArray;
+}
+
+
+//adds the recommendations to the itinerary list
+function displayRecommendations(recommendedArray) {
     // Check if there is nothing left to recommend
-    if(count == 0) {
+    if(recommendedArray.length == 0) {
         feedback("Out of recommendations!")
     }
+
+    for (let index = 0; index < recommendedArray.length; index++) {
+        const apiId = recommendedArray[index][0];
+        const name = recommendedArray[index][1];
+        const url = recommendedArray[index][2];
+
+        addEvent(apiId, name, url, '00:00', '00:30');
+        updateTimes(0);
+    }
+    
+    
 }
 
 //popup for when the save button is clicked
@@ -266,4 +293,4 @@ function changeColor(savedPois, marker, apiId) {
   
   
 
-module.exports = {sortByValue, changeColor, getNewCoordinate};
+module.exports = {sortByValue, changeColor, getNewCoordinate, checkPoiSaved, getRecommendationArray};
