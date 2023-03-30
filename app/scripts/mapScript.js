@@ -24,23 +24,11 @@ json.data.forEach(poi => {
     let savedPois = JSON.parse(savedPoiJson)
     let color = changeColor(savedPois, marker, API_ID);
     console.log(color);
-    //getNewCoordinate(savedPois, API_ID);
+    let cord = getNewCoordinate(savedPois, API_ID);
+    if(cord.length != 0) {
+        lineCoordinate.push(cord);
+    }
 });
-
-
-
-function getNewCoordinate(savedPois, apiId) {
-    savedPois.forEach(poi => {
-        const SAVED_API_ID = poi[0]
-        const START_TIME = poi[1]
-        const LAT = poi[5]
-        const LONG = poi[6]
-        if(SAVED_API_ID == apiId){
-            return [LAT, LONG, START_TIME];
-        }
-    });
-    
-}
 
 lineCoordinate.sort((a, b) => a[2].localeCompare(b[2]))
 lineCoordinate = lineCoordinate.map(([first, second]) => [first, second]);

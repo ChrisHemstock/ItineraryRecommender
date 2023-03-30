@@ -247,10 +247,23 @@ function changeColor(savedPois, marker, apiId) {
       }
     }
     return false
-  }
+}
   
-  
+  function getNewCoordinate(savedPois, apiId) {
+    let cord = []
+    savedPois.forEach(poi => {
+        const SAVED_API_ID = poi[0]
+        const START_TIME = poi[1]
+        const LAT = poi[5]
+        const LONG = poi[6]
+        if(SAVED_API_ID == apiId){
+            cord = [LAT, LONG, START_TIME];
+            return;
+        }
+    });
+    return cord;
+}
   
   
 
-module.exports = {sortByValue, changeColor};
+module.exports = {sortByValue, changeColor, getNewCoordinate};
