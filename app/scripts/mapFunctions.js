@@ -143,7 +143,6 @@ function setItineraryStartTime(value) {
 
 //updates the startTime and endTime for every list element from the current index
 function updateTimes(indexCurrent) {
-    //console.log(indexCurrent)
     let list = document.getElementById('poi').childNodes
 
     if (indexCurrent != list.length) {
@@ -154,7 +153,6 @@ function updateTimes(indexCurrent) {
             currentDuration = 30
         }
         if (indexCurrent == 0) {
-            //console.log('startTime: ' + getItineraryStartTime())
             document.getElementById('poi').childNodes[indexCurrent].childNodes[1].firstChild.value = getItineraryStartTime()
         } else {
             document.getElementById('poi').childNodes[indexCurrent].childNodes[1].firstChild.value = document.getElementById('poi').childNodes[indexCurrent - 1].childNodes[1].lastChild.value
@@ -165,7 +163,6 @@ function updateTimes(indexCurrent) {
 }
 
 function sortByValue(json){
-    console.log(json)
     let sortedArray = [];
     for(let i in json)
     {
@@ -182,8 +179,8 @@ function getItineraryApis() {
     itineraryElements.forEach(element => {
         let classes = element.className;
         classes = classes.split(" ");
-        const apiId = 1
-        itineraryApiList.push(classes[apiId])
+        const API_ID = 1
+        itineraryApiList.push(classes[API_ID])
     });
     return itineraryApiList;
 }
@@ -200,31 +197,30 @@ function checkPoiSaved(itineraryPoiArray, apiId) {
 }
 
 function getRecommendationArray(recommendationList, allPoisJson, itineraryApiArray, amount) {
-    console.log(recommendationList)
     let recommendedJson = JSON.parse(recommendationList)
     let poiRecommendationArray = sortByValue(recommendedJson) // [[tfidfValue, id], [tfidfValue, id], ...]
-    const recommendationApiId = 1
+    const RECOMMENDATION_API_ID = 1
 
     //get a list of all the pois (comes from functions.php createMapPoiJson())
     let allPoisList = JSON.parse(allPoisJson) // List of all the Pois
-    const poiApiId = 3
-    const poiName = 6
-    const url = 9
+    const POI_API_ID = 3
+    const POI_NAME = 6
+    const URL = 9
 
     let recomendationArray = [];
     count = 0 // Makes sure that only n number of elements are actually displayed
     for(let j = 0; j < poiRecommendationArray.length; j++) {
         for(let i = 0; i < allPoisList.data.length; i++) {
-            if(poiRecommendationArray[j][recommendationApiId] == allPoisList.data[i][poiApiId]) {
+            if(poiRecommendationArray[j][RECOMMENDATION_API_ID] == allPoisList.data[i][POI_API_ID]) {
                 // Make sure the api_id isn't in the itinerary already
-                if(checkPoiSaved(itineraryApiArray, allPoisList.data[i][poiApiId])) {
+                if(checkPoiSaved(itineraryApiArray, allPoisList.data[i][POI_API_ID])) {
                     break;
                 }
                 // Here if it isn't saved and its going to be recommended
                 recomendationArray.push([
-                    poiRecommendationArray[j][recommendationApiId], 
-                    allPoisList.data[i][poiName], 
-                    allPoisList.data[i][url],
+                    poiRecommendationArray[j][RECOMMENDATION_API_ID], 
+                    allPoisList.data[i][POI_NAME], 
+                    allPoisList.data[i][URL],
                 ])
                 count++;
                 break;
@@ -246,15 +242,13 @@ function displayRecommendations(recommendedArray) {
     }
 
     for (let index = 0; index < recommendedArray.length; index++) {
-        const apiId = recommendedArray[index][0];
-        const name = recommendedArray[index][1];
-        const url = recommendedArray[index][2];
+        const API_ID = recommendedArray[index][0];
+        const NAME = recommendedArray[index][1];
+        const URL = recommendedArray[index][2];
 
-        addEvent(apiId, name, url, '00:00', '00:30');
+        addEvent(API_ID, NAME, URL, '00:00', '00:30');
         updateTimes(0);
     }
-    
-    
 }
 
 //popup for when the save button is clicked
@@ -264,12 +258,10 @@ function feedback(message) {
 }
 
 function changeColor(savedPois, marker, apiId) {
-    //console.log(savedPois);
     for (let poi of savedPois) {
       const SAVED_API_ID = poi[0]
       if (SAVED_API_ID == apiId) {
         marker._icon.style.filter = "hue-rotate(120deg)"
-        //console.log(marker._icon.style.filter);
         return true
       }
     }
