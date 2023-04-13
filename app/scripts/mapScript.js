@@ -23,7 +23,8 @@ json.data.forEach(poi => {
     }).addTo(map)
     let savedPois = JSON.parse(savedPoiJson)
     let color = changeColor(savedPois, marker, API_ID);
-    console.log(color);
+    let colorFirst = changeColorFirst(savedPois, marker, API_ID);
+    console.log(colorFirst);
     let cord = getNewCoordinate(savedPois, API_ID);
     if(cord.length != 0) {
         lineCoordinate.push(cord);
