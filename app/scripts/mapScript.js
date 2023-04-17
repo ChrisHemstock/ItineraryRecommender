@@ -5,6 +5,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(map);
 let lineCoordinate = []
+let markerArray = {};
 containerEvent(document.getElementById('poi'))
 let json = JSON.parse(allPoisJson)
 json.data.forEach(poi => {
@@ -21,14 +22,16 @@ json.data.forEach(poi => {
     }).on('mouseout', function (e) {
         this.closePopup();
     }).addTo(map)
+    markerArray[API_ID] = marker;
     let savedPois = JSON.parse(savedPoiJson)
     let color = changeColor(savedPois, marker, API_ID);
-    console.log(color);
     let cord = getNewCoordinate(savedPois, API_ID);
     if(cord.length != 0) {
         lineCoordinate.push(cord);
     }
 });
+
+
 
 lineCoordinate.sort((a, b) => a[2].localeCompare(b[2]))
 lineCoordinate = lineCoordinate.map(([first, second]) => [first, second]);
@@ -47,9 +50,28 @@ if (typeof savedPoiJson !== 'undefined') {
     });
 }
 
+// $('#showTripOnly').click(function() {
+//     console.log("clicked");
+//     var checkboxValue = $(this).prop('checked');
+//     if(checkboxValue = 'checked'){
+//         removeNontripPOIs(markerArray, savedPois)
+//     }
+// });
+
+let checkbox = document.querySelector("input[id=showTripOnly]");
+
+checkbox.addEventListener('change', function() {
+  if (this.checked) {
+    let savedPois = JSON.parse(savedPoiJson)
+    removeNontripPOIs(markerArray, savedPois);
+  } else {
+    addBackPOIs(markerArray);
+  }
+});
+
+
 $('#save').click(function () {
     var tmp = createItineraryJson()
-   // console.log(temp)
     $.ajax({
         type: 'POST',
         url: 'resources/tripData.php',
@@ -65,3 +87,12 @@ $('#save').click(function () {
     });
     
 });
+
+
+
+
+
+
+
+
+
