@@ -52,14 +52,6 @@ if (typeof savedPoiJson !== 'undefined') {
     });
 }
 
-// $('#showTripOnly').click(function() {
-//     console.log("clicked");
-//     var checkboxValue = $(this).prop('checked');
-//     if(checkboxValue = 'checked'){
-//         removeNontripPOIs(markerArray, savedPois)
-//     }
-// });
-
 let checkbox = document.querySelector("input[id=showTripOnly]");
 
 checkbox.addEventListener('change', function() {

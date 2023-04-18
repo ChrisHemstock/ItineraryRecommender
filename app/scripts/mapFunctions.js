@@ -32,11 +32,12 @@ function getDragAfterElement(container, y) {
 function addEvent(api_id, name, url, startTime, endTime) {
     let html = '<li class="draggable ' + api_id + '" draggable="true">' +
     '<a target="_blank" href="' + url + '">' + name + '</a>' +
+    '<span class="close">X</span>' +
     '<span class="time">' +
         '<input type="time" class="startEvent" title="Start Time" value="' + startTime + '"/>' +
         '<input type="time" class="endEvent" title="End Time" value="' + endTime + '" onchange="updateTimes(0)"/>' +
     '</span>' +
-    '<span class="close">X</span>' +
+    
 '</li>';
     let poi = document.getElementById('poi')
     poi.insertAdjacentHTML('beforeend', html);
@@ -81,8 +82,8 @@ function addEventEventListeners(element) {
         element.classList.remove('dragging')
     })
 
-    element.childNodes[1].firstChild.addEventListener('change', function (e) {
-        setItineraryStartTime(document.getElementById('poi').childNodes[0].childNodes[1].firstChild.value)
+    element.childNodes[2].firstChild.addEventListener('change', function (e) {
+        setItineraryStartTime(document.getElementById('poi').childNodes[0].childNodes[2].firstChild.value)
         updateTimes(0)
     })
 
@@ -134,7 +135,7 @@ function getItineraryStartTime() {
 //sets the start time of the itinerary
 function setItineraryStartTime(value) {
     if (value != undefined) {
-        document.getElementById('poi').dataset.starttime = document.getElementById('poi').firstChild.childNodes[1].firstChild.value
+        document.getElementById('poi').dataset.starttime = document.getElementById('poi').firstChild.childNodes[2].firstChild.value
     } else {
         document.getElementById('poi').dataset.starttime = '00:00'
     }
@@ -146,18 +147,18 @@ function updateTimes(indexCurrent) {
     let list = document.getElementById('poi').childNodes
 
     if (indexCurrent != list.length) {
-        let startTimeInput = document.getElementById('poi').childNodes[indexCurrent].childNodes[1].firstChild.value
-        let endTimeInput = document.getElementById('poi').childNodes[indexCurrent].childNodes[1].lastChild.value
+        let startTimeInput = document.getElementById('poi').childNodes[indexCurrent].childNodes[2].firstChild.value
+        let endTimeInput = document.getElementById('poi').childNodes[indexCurrent].childNodes[2].lastChild.value
         let currentDuration = getDuration(startTimeInput, endTimeInput)
         if (currentDuration < 0) {
             currentDuration = 30
         }
         if (indexCurrent == 0) {
-            document.getElementById('poi').childNodes[indexCurrent].childNodes[1].firstChild.value = getItineraryStartTime()
+            document.getElementById('poi').childNodes[indexCurrent].childNodes[2].firstChild.value = getItineraryStartTime()
         } else {
-            document.getElementById('poi').childNodes[indexCurrent].childNodes[1].firstChild.value = document.getElementById('poi').childNodes[indexCurrent - 1].childNodes[1].lastChild.value
+            document.getElementById('poi').childNodes[indexCurrent].childNodes[2].firstChild.value = document.getElementById('poi').childNodes[indexCurrent - 1].childNodes[2].lastChild.value
         }
-        document.getElementById('poi').childNodes[indexCurrent].childNodes[1].lastChild.value = incrementTime(document.getElementById('poi').childNodes[indexCurrent].childNodes[1].firstChild.value, currentDuration)
+        document.getElementById('poi').childNodes[indexCurrent].childNodes[2].lastChild.value = incrementTime(document.getElementById('poi').childNodes[indexCurrent].childNodes[2].firstChild.value, currentDuration)
         updateTimes(indexCurrent + 1)
     }
 }
@@ -269,11 +270,16 @@ function changeColor(savedPois, marker, apiId) {
 }
 
 function changeColorFirst(savedPois, marker, apiId) {
-      if (savedPois[0][0] == apiId) {
-        marker._icon.style.filter = "hue-rotate(220deg)"
-        return true
-      }
-    return false
+    try {
+        if (savedPois[0][0] == apiId) {
+            marker._icon.style.filter = "hue-rotate(220deg)"
+            return true
+        }
+        return false
+    } catch (error) {
+        return false
+    }
+      
 }
 
 function removeNontripPOIs(markerArray, savedPois) {

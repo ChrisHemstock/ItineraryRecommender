@@ -59,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome</title>
     <link rel="stylesheet" href="styles/style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="styles/nav-style.css">
@@ -72,13 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
 
 <body>
     <?php include 'includes/homebar.php' ?>
-    <h1>Hi, <b>
-            <?php echo htmlspecialchars($_SESSION["username"]); ?>
-        </b>. Here is where you will find account information and settings.</h1>
-    <p>
-        <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
-        <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
-    </p>
+    
 
     <?php
     //Get current user data
@@ -98,9 +93,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
     }
 
     ?>
-
+    <br>
     <div id='userInfo'>
+        <h1>Account</h1>
+        <hr>
         <h2>General Info</h2>
+        <p>Name: <?php echo htmlspecialchars($_SESSION["username"]); ?></p>
+        <br>
         <form action="account.php" method="post">
             <label for="gender">Gender</label>
             <select name="gender" id="gender" required>
@@ -121,18 +120,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
                         }else{
                             echo "<option value='noResponse'>Prefer Not To Answer</option>";
                         }
-            ?>
+                        ?>
             </select>
-            <label for="age">Birth Day:</label>
+            <br>
+            <br>
+            <label for="birthDay">Birth Day:</label>
             <input type="date" value = <?php echo $birthdayCurrent; ?> required="true" id="birthDay" name="birthDay">
+            <br>
+            <br>
             <label for="race">Race</label>
             <select name="race" id="race" required>
                 <option selected disabled value></option>
                 <?php
             if($raceCurrent == 'americanIndian/alaskaNative'){
-                echo "<option selected value='americanIndian/alaskaNative'>American Indian or Alaska Native</option>";
+                echo "<option selected value='americanIndian/alaskaNative'>American Indian/Native</option>";
             }else{
-                echo "<option value='americanIndian/alaskaNative'>American Indian or Alaska Native</option>";
+                echo "<option value='americanIndian/alaskaNative'>American Indian/Native</option>";
             }
             if($raceCurrent == 'asian'){
                 echo "<option selected value='asian'>Asian</option>";
@@ -145,9 +148,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
                 echo "<option value='black'>Black or African American</option>";
             }
             if($raceCurrent == 'pacificIslander'){
-                echo "<option selected value='pacificIslander'>Native Hawaiian or Other Pacific Islander</option>";
+                echo "<option selected value='pacificIslander'>Pacific Islander</option>";
             }else{
-                echo "<option value='pacificIslander'>Native Hawaiian or Other Pacific Islander</option>";
+                echo "<option value='pacificIslander'>Pacific Islander</option>";
             }
             if($raceCurrent == 'white'){
                 echo "<option selected value='white'>White</option>";
@@ -164,14 +167,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
             </select>
             <br>
             <br>
-            <h3> <a href="poiChoice.php">Take Points of Interest Survey</a> </h3>
-            <br></br>
             <input type="submit" value="Submit">
-
+            <br>
+            <br>
+            <hr>
+            <br>
+            
         </form>
-
+        <h2>Survey For Better Recommendations</h2>
+        <h3> <a href="poiChoice.php">Click to Take Points of Interest Survey</a> </h3>
+        <br>
+        <br>
+        <hr>
+        <br>
+        <br>
+        <h3><a href="reset-password.php" class="btn btn-warning">Reset Your Password</a></h3>
+        <br>
+        <br>
+        <hr>
+        <br>
+        <br>
 
     </div>
+    <br>
+    <br>
+</div><!-- This div ends the nav bar  -->
 </body>
 
 </html>

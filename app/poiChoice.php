@@ -27,8 +27,8 @@
                         <button type="submit" name="Like' . $pos . '" value="' . $likes . ' ' . $id . '">&#128077;</button>
                         <button type="submit" name="Dislike' . $pos . '" value="' . $likes . '">&#128078;</button>
                         <br> <br>
-                        <p id = "poi_choice_map" style="float:right"><a href= ' . $url .' target="_blank" ><img src='. $image_url . ' style="width="300" height="300""></a></p>
-                        <div id="choice_map">
+                        <p id = "poi_choice_map"><a href= ' . $url .' target="_blank" ><img src='. $image_url . '></a></p><!--
+                        --><div id="choice_map"></div>
                         <script>                  
                         var map = L.map("choice_map",{
                             center: ['. $Lat . ', '. $Lng . '],
@@ -43,10 +43,7 @@
                          }, 100);
                         var marker = L.marker([' . $Lat . ', ' . $Lng . ']).addTo(map);
                         </script>
-                        </div>
-                        <style> 
-                        #choice_map { height: 350px; width: 300px; float:left;}
-                        </style>
+                        
                     </form>
                   </div>';
         }
@@ -64,6 +61,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
      crossorigin=""/>
+     <link rel="stylesheet" href="styles/nav-style.css">
      <!-- Make sure you put this AFTER Leaflet's CSS -->
  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
@@ -71,6 +69,8 @@
     <title>POI Survey</title>
 </head>
 <body>
+    <br>
+    <br>
     <div id="choice">
     <?php
         $ids = ['F5n57w6RaOCAB4bivNSs8A', 'E5cecsuxC11xDO9E3c93lA', '6x6rR-SErwOo3xF2AzXVHA', 'VEGvvazGmbukHqZyToVvYw'];
@@ -147,5 +147,7 @@
     ?>
     
     </div>
+    <br>
+    <br>
 </body>
 </html>
