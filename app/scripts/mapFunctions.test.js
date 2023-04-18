@@ -122,6 +122,26 @@ test('Changes the color of the marker among 1 poi', () => {
     expect(result).toBe(true);
 });
 
+test('Changes the color of the first marker when the API id matches', () => {
+    const savedPois = [
+      ['123', 'some data'],
+      ['456', 'some other data'],
+      ['789', 'even more data'],
+    ];
+    const marker = {
+      _icon: {
+        style: {},
+      },
+    };
+    const apiId = '123';
+  
+    const result = scriptFunction.changeColorFirst(savedPois, marker, apiId);
+  
+    expect(marker._icon.style.filter).toBe('hue-rotate(220deg)');
+    expect(result).toBe(true);
+  });
+  
+
 //
 // getNewCoordinate Tests (US 21)
 //

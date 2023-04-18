@@ -326,4 +326,4 @@ function removeNontripPOIs(markerArray, savedPois) {
   
   
 
-module.exports = {sortByValue, changeColor, getNewCoordinate, checkPoiSaved, getRecommendationArray, removeNontripPOIs};
+module.exports = {sortByValue, changeColor, changeColorFirst,getNewCoordinate, checkPoiSaved, getRecommendationArray, removeNontripPOIs};
