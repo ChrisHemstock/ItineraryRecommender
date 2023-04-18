@@ -275,6 +275,39 @@ function changeColorFirst(savedPois, marker, apiId) {
       }
     return false
 }
+
+function removeNontripPOIs(markerArray, savedPois) {
+    const allPoisArray = Object.keys(markerArray);
+    for (let poi of allPoisArray) {
+      let hideMarker = true;
+      for (let savedPoi of savedPois) {
+        const savedPoiId = savedPoi[0];
+        if (poi === savedPoiId) {
+          hideMarker = false;
+          break;
+        }
+      }
+      if (hideMarker) {
+        const marker = markerArray[poi];
+        marker._icon.style.display = "none";
+        marker._shadow.style.display = "none";
+
+      }
+    }
+  }
+
+
+  function addBackPOIs(markerArray) {
+    const allPoisArray = Object.keys(markerArray);
+    for (let poi of allPoisArray) {
+        const marker = markerArray[poi];
+        marker._icon.style.display = "";
+        marker._shadow.style.display = "";
+    }
+  }
+  
+  
+  
   
   function getNewCoordinate(savedPois, apiId) {
     let cord = []
@@ -293,4 +326,4 @@ function changeColorFirst(savedPois, marker, apiId) {
   
   
 
-module.exports = {sortByValue, changeColor, getNewCoordinate, checkPoiSaved, getRecommendationArray};
+module.exports = {sortByValue, changeColor, getNewCoordinate, checkPoiSaved, getRecommendationArray, removeNontripPOIs};
