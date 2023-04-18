@@ -275,6 +275,7 @@ function changeColorFirst(savedPois, marker, apiId) {
       }
     return false
 }
+
 function removeNontripPOIs(markerArray, savedPois) {
     const allPoisArray = Object.keys(markerArray);
     for (let poi of allPoisArray) {
@@ -325,4 +326,4 @@ function removeNontripPOIs(markerArray, savedPois) {
   
   
 
-module.exports = {sortByValue, changeColor, getNewCoordinate, checkPoiSaved, getRecommendationArray, removeNontripPOIs};
+module.exports = {sortByValue, changeColor, changeColorFirst,getNewCoordinate, checkPoiSaved, getRecommendationArray, removeNontripPOIs};
