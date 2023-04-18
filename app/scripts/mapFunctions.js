@@ -268,6 +268,14 @@ function changeColor(savedPois, marker, apiId) {
     return false
 }
 
+function changeColorFirst(savedPois, marker, apiId) {
+      if (savedPois[0][0] == apiId) {
+        marker._icon.style.filter = "hue-rotate(220deg)"
+        return true
+      }
+    return false
+}
+
 function removeNontripPOIs(markerArray, savedPois) {
     const allPoisArray = Object.keys(markerArray);
     for (let poi of allPoisArray) {
