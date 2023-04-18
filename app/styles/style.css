@@ -132,6 +132,7 @@ li.dragging {
     padding: 0rem;
     border-radius: 10px;
     box-shadow: 5px 10px 10px black;
+    z-index: 0;
 }
 
 @media only screen and (max-width: 1500px) { 
@@ -151,8 +152,7 @@ li.dragging {
     }
 
     #itinerary input{
-        width:2.8rem;
-
+        width:30%;
     }
 
     #itinerary ::-webkit-calendar-picker-indicator {
@@ -161,15 +161,16 @@ li.dragging {
 
     #map {
         width: 90%;
+        margin-top: 3rem;
         margin-left: 0;
     }
 }
 
-@media only screen and (max-width: 1080px) { 
+/* @media only screen and (max-width: 1080px) { 
     #itinerary a{
         font-size: .5rem;
     }
-}
+} */
 
 
 
