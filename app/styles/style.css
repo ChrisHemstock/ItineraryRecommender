@@ -1,5 +1,10 @@
 body {
     text-align: center;
+    background-color: rgb(19,57,77);
+    background-image: url('../img/Blue_Map_Background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .close {
@@ -11,25 +16,6 @@ body {
 
 .close:hover {
     color: red;
-}
-
-/* Home Bar styles */
-li.homeBar {
-    display: inline;
-}
-
-li.homeBar a {
-    display: inline-block;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    color: black;
-    background-color: lightblue;
-    border-radius: 5px;
-}
-
-li.homeBar a:hover {
-    background-color: rgb(191, 227, 239);
 }
 
 /* map.html styles */

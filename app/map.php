@@ -38,6 +38,9 @@ error_reporting(E_ALL);
   <script src="scripts/mapFunctions.js"></script>
   <script src="scripts/mapScript.js" defer></script>
 
+  <link rel="stylesheet" href="styles/nav-style.css">
+  <script src="scripts/nav-script.js" defer></script>
+
   <title>Trip Recommender</title>
   
   <script>

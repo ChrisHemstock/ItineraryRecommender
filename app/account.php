@@ -51,9 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
     }
 
 }
-
-
-
 ?>
 
 
@@ -64,6 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST)) {
     <meta charset="UTF-8">
     <title>Welcome</title>
     <link rel="stylesheet" href="styles/style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="styles/nav-style.css">
+    <script src="scripts/nav-script.js" defer></script>
 </head>
 <script>
     if (window.history.replaceState) {

@@ -24,6 +24,8 @@ foreach ($results as $row) {
   <link rel="stylesheet" href="styles/style.css" />
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="scripts/tripScript.js" defer></script>
+  <link rel="stylesheet" href="styles/nav-style.css">
+  <script src="scripts/nav-script.js" defer></script>
   <title>Trips</title>
 </head>
 
