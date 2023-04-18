@@ -115,13 +115,18 @@ ul#poi li:hover {
     background-color: #385f81;
 }
 
+ul#poi li span {
+    float: right;
+    margin-right: 0;
+    width: max-content;
+}
+
 li.dragging {
     color: gray;
 }
 
 .time {
     float: right;
-    margin-right: 2rem;
 }
 
 #map {
@@ -166,11 +171,18 @@ li.dragging {
     }
 }
 
-/* @media only screen and (max-width: 1080px) { 
-    #itinerary a{
+@media only screen and (max-width: 500px) { 
+    #itinerary>input{
+        font-weight:unset;
+    }
+    #poi a {
         font-size: .5rem;
     }
-} */
+
+    #itinerary>label{
+        font-weight:unset;
+    }
+}
 
 
 
