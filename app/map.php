@@ -38,6 +38,9 @@ error_reporting(E_ALL);
   <script src="scripts/mapFunctions.js"></script>
   <script src="scripts/mapScript.js" defer></script>
 
+  <link rel="stylesheet" href="styles/nav-style.css">
+  <script src="scripts/nav-script.js" defer></script>
+
   <title>Trip Recommender</title>
   
   <script>
@@ -50,18 +53,26 @@ error_reporting(E_ALL);
 
 <body>
   <?php include 'includes/homebar.php' ?>
-  <div id="itinerary">
-    <?php echo "<h2>". $_GET['name'] ."</h2>";?>
-    <ul id="poi" data-starttime='00:00'></ul>
-    <input type="submit" value="Save" id="save" onclick="return feedback('Trip data Entered!');" />
-    <input type="button" value = "Make Recommendations" onclick="return displayRecommendations(getRecommendationArray(recommendations, allPoisJson, getItineraryApis(), 5));"/>
-    <label for="showTripOnly">Show Trip Only</label><input type="checkbox" name = "Show Trip Only" id = "showTripOnly"/>
+  <div id="map-page">
 
-  </div>
-  <div id="map"></div>
+  
+  <h1><?php echo $_GET['name'];?></h1>
+  <div id="itinerary">
+    
+    <input type="submit" value="Save" id="save" onclick="return feedback('Trip data Entered!');" /><!-- 
+    --><input type="button" value = "Make Recommendations" onclick="return displayRecommendations(getRecommendationArray(recommendations, allPoisJson, getItineraryApis(), 5));"/><!-- 
+    --><label for="showTripOnly">Show Trip Only<input type="checkbox" name = "Show Trip Only" id = "showTripOnly"/></label><!-- 
+    --><ul id="poi" data-starttime='00:00'></ul>
+
+  </div> <!--
+--><div id="map"></div>
   <div id="recommendations">
       <ul id="poiRecommendations"></ul>
   </div>
+  <br>
+  <br>
+  </div>
+  </div><!-- This div ends the nav bar  -->
 </body>
 
 </html>

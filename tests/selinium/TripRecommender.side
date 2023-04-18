@@ -1288,15 +1288,15 @@
       "id": "27e1ed83-a221-439c-a882-d80b724bd095",
       "comment": "",
       "command": "click",
-      "target": "linkText=Take Points of Interest Survey",
+      "target": "linkText=Click to Take Points of Interest Survey",
       "targets": [
-        ["linkText=Take Points of Interest Survey", "linkText"],
-        ["css=h3 > a", "css:finder"],
-        ["xpath=//a[contains(text(),'Take Points of Interest Survey')]", "xpath:link"],
-        ["xpath=//div[@id='userInfo']/form/h3/a", "xpath:idRelative"],
+        ["linkText=Click to Take Points of Interest Survey", "linkText"],
+        ["css=h3:nth-child(8) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Click to Take Points of Interest Survey')]", "xpath:link"],
+        ["xpath=//div[@id='userInfo']/h3/a", "xpath:idRelative"],
         ["xpath=//a[contains(@href, 'poiChoice.php')]", "xpath:href"],
         ["xpath=//h3/a", "xpath:position"],
-        ["xpath=//a[contains(.,'Take Points of Interest Survey')]", "xpath:innerText"]
+        ["xpath=//a[contains(.,'Click to Take Points of Interest Survey')]", "xpath:innerText"]
       ],
       "value": ""
     }, {

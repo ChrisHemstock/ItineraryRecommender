@@ -24,20 +24,24 @@ foreach ($results as $row) {
   <link rel="stylesheet" href="styles/style.css" />
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="scripts/tripScript.js" defer></script>
+  <link rel="stylesheet" href="styles/nav-style.css">
+  <script src="scripts/nav-script.js" defer></script>
   <title>Trips</title>
 </head>
 
 <body>
   <?php include 'includes/homebar.php' ?>
+  <br>
   <div id="trips">
     <h1>Saved Trips</h1>
+    <br>
+    <br>
     <ul>
       <?php
       //Loop through trip data
       foreach ($data as $row) {
         echo '<li>
-                    <a href="map.php?trip=' . $row[0] . '&name=' . $row[2] . '">' . $row[2] . '</a>
-                    <span class="close ' . $row[0] . '">X</span>
+                    <a href="map.php?trip=' . $row[0] . '&name=' . $row[2] . '">' . $row[2] . '</a><span class="close ' . $row[0] . '">X</span>
                   </li>';
       }
       ?>
@@ -57,13 +61,16 @@ foreach ($results as $row) {
       }
     }
     ?>
-
+    <br>
+    <br>
     <form method="post">
       <input required type="text" name="tripName" placeholder="Trip Name">
       <input type="submit" name="createTrip" class="button" value="Create Trip" />
     </form>
   </div>
-
+  <br>
+  <br>
+</div><!-- This div ends the nav bar  -->
 </body>
 
 </html>
