@@ -55,6 +55,8 @@ error_reporting(E_ALL);
     <ul id="poi" data-starttime='00:00'></ul>
     <input type="submit" value="Save" id="save" onclick="return feedback('Trip data Entered!');" />
     <input type="button" value = "Make Recommendations" onclick="return displayRecommendations(getRecommendationArray(recommendations, allPoisJson, getItineraryApis(), 5));"/>
+    <label for="showTripOnly">Show Trip Only</label><input type="checkbox" name = "Show Trip Only" id = "showTripOnly"/>
+
   </div>
   <div id="map"></div>
   <div id="recommendations">

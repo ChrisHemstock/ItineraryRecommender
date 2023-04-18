@@ -1,5 +1,5 @@
-//const { json } = require('stream/consumers')
 const scriptFunction = require('./mapFunctions')
+
 
 //
 // sortByValue Tests (US 14)
@@ -52,6 +52,27 @@ test('Changes the color of the marker among 3 pois', () => {
     expect(marker._icon.style.filter).toBe('hue-rotate(120deg)');
     expect(result).toBe(true);
 });
+
+test('Hides non-saved POIs in the marker array', () => {
+    const markerArray = {
+      poi1: { _icon: { style: { display: "block" } }, _shadow: { style: { display: "block" } } },
+      poi2: { _icon: { style: { display: "block" } }, _shadow: { style: { display: "block" } } },
+      poi3: { _icon: { style: { display: "block" } }, _shadow: { style: { display: "block" } } },
+      poi4: { _icon: { style: { display: "block" } }, _shadow: { style: { display: "block" } } }
+    };
+    const savedPois = [["poi1"], ["poi3"]];
+    
+    scriptFunction.removeNontripPOIs(markerArray, savedPois);
+    
+    expect(markerArray.poi1._icon.style.display).toBe("block");
+    expect(markerArray.poi1._shadow.style.display).toBe("block");
+    expect(markerArray.poi2._icon.style.display).toBe("none");
+    expect(markerArray.poi2._shadow.style.display).toBe("none");
+    expect(markerArray.poi3._icon.style.display).toBe("block");
+    expect(markerArray.poi3._shadow.style.display).toBe("block");
+    expect(markerArray.poi4._icon.style.display).toBe("none");
+    expect(markerArray.poi4._shadow.style.display).toBe("none");
+  });
 
 test('Doesnt Change the color of the marker among 3 pois', () => {
     let savedPois = [    
