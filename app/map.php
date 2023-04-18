@@ -60,7 +60,7 @@ error_reporting(E_ALL);
   <div id="itinerary">
     
     <input type="submit" value="Save" id="save" onclick="return feedback('Trip data Entered!');" /><!-- 
-    --><input type="button" value = "Make Recommendations" onclick="return displayRecommendations(getRecommendationArray(recommendations, allPoisJson, getItineraryApis(), 5));"/><!-- 
+    --><input type="button" value = "Recommendations" onclick="return displayRecommendations(getRecommendationArray(recommendations, allPoisJson, getItineraryApis(), 5));"/><!-- 
     --><label for="showTripOnly">Show Trip Only<input type="checkbox" name = "Show Trip Only" id = "showTripOnly"/></label><!-- 
     --><ul id="poi" data-starttime='00:00'></ul>
 

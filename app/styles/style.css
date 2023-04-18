@@ -115,13 +115,18 @@ ul#poi li:hover {
     background-color: #385f81;
 }
 
+ul#poi li span {
+    float: right;
+    margin-right: 0;
+    width: max-content;
+}
+
 li.dragging {
     color: gray;
 }
 
 .time {
     float: right;
-    margin-right: 2rem;
 }
 
 #map {
@@ -132,6 +137,7 @@ li.dragging {
     padding: 0rem;
     border-radius: 10px;
     box-shadow: 5px 10px 10px black;
+    z-index: 0;
 }
 
 @media only screen and (max-width: 1500px) { 
@@ -151,8 +157,7 @@ li.dragging {
     }
 
     #itinerary input{
-        width:2.8rem;
-
+        width:30%;
     }
 
     #itinerary ::-webkit-calendar-picker-indicator {
@@ -161,13 +166,21 @@ li.dragging {
 
     #map {
         width: 90%;
+        margin-top: 3rem;
         margin-left: 0;
     }
 }
 
-@media only screen and (max-width: 1080px) { 
-    #itinerary a{
+@media only screen and (max-width: 500px) { 
+    #itinerary>input{
+        font-weight:unset;
+    }
+    #poi a {
         font-size: .5rem;
+    }
+
+    #itinerary>label{
+        font-weight:unset;
     }
 }
 
